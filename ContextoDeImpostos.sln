@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testes", "Testes", "{C023AE71-305B-43A8-A70B-0EA5401BD2A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestesDeImpostos", "TestesDeImpostos\TestesDeImpostos.csproj", "{AA26A952-3734-47EF-9567-BFB14FC71797}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modelo de Domínio", "Modelo de Domínio", "{1086DA81-F4E2-40D7-982F-E5FBB46D3E1D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domínio Básico", "Domínio Básico", "{6C5497B5-EFF3-424A-9656-ABDEBA069EF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impostos", "Domínio Básico\Impostos\Impostos.csproj", "{7EB2B82A-6C4C-4848-BF15-8289349C8088}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA26A952-3734-47EF-9567-BFB14FC71797}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA26A952-3734-47EF-9567-BFB14FC71797}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA26A952-3734-47EF-9567-BFB14FC71797}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA26A952-3734-47EF-9567-BFB14FC71797}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EB2B82A-6C4C-4848-BF15-8289349C8088}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EB2B82A-6C4C-4848-BF15-8289349C8088}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EB2B82A-6C4C-4848-BF15-8289349C8088}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EB2B82A-6C4C-4848-BF15-8289349C8088}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AA26A952-3734-47EF-9567-BFB14FC71797} = {C023AE71-305B-43A8-A70B-0EA5401BD2A1}
+		{6C5497B5-EFF3-424A-9656-ABDEBA069EF4} = {1086DA81-F4E2-40D7-982F-E5FBB46D3E1D}
+		{7EB2B82A-6C4C-4848-BF15-8289349C8088} = {6C5497B5-EFF3-424A-9656-ABDEBA069EF4}
+	EndGlobalSection
+EndGlobal

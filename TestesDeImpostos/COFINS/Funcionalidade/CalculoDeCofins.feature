@@ -8,7 +8,11 @@
 	A funcionalidade descrita tem como base fórmula matemática para obtenção do valor de COFINS a ser cobrado.
 	O valor de COFINS a ser cobrado é apurado a partir da multiplicação do valor base da operação pela alíquota fixa de 7,6%.
 
-Cenário: Calculando o valor de COFINS
-	Dado que uma operação financeira, onde há incidência de COFINS, tem valor de R$ 2491,32
+Esquema do Cenário: Calculando o valor de COFINS
+	Dado que uma operação financeira, onde há incidência de COFINS, tem valor de R$ <Valor da Operação>
 	Quando for calculado o valor de COFINS a ser cobrado
-	Entao o valor de COFINS a ser cobrado deve ser igual a R$ 189,34
+	Entao o valor de COFINS a ser cobrado deve ser igual a R$ <COFINS Calculado>
+
+Exemplos: 
+| Valor da Operação | COFINS Calculado |
+| 2491,32           | 189,34           |

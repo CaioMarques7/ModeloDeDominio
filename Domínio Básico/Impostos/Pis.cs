@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Impostos
+namespace ContextoDeImpostos
 {
     /// <summary>
     /// Definição do imposto de Programas de Integração Social e de Formação do Patrimônio do Servidor Público.

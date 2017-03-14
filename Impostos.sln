@@ -7,11 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testes", "Testes", "{C023AE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestesDeImpostos", "TestesDeImpostos\TestesDeImpostos.csproj", "{AA26A952-3734-47EF-9567-BFB14FC71797}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modelo de Domínio", "Modelo de Domínio", "{1086DA81-F4E2-40D7-982F-E5FBB46D3E1D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sub-Domínios", "Sub-Domínios", "{1086DA81-F4E2-40D7-982F-E5FBB46D3E1D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domínio Básico", "Domínio Básico", "{6C5497B5-EFF3-424A-9656-ABDEBA069EF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Impostos", "Domínio Básico\Impostos\Impostos.csproj", "{7EB2B82A-6C4C-4848-BF15-8289349C8088}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContextoDeImpostos", "Domínio Básico\Impostos\ContextoDeImpostos.csproj", "{7EB2B82A-6C4C-4848-BF15-8289349C8088}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

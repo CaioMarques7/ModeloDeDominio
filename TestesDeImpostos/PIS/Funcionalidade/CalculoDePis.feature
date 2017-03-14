@@ -8,7 +8,11 @@
 	A funcionalidade descrita tem como base fórmula matemática para obtenção do valor de PIS a ser cobrado.
 	O valor de PIS a ser cobrado é apurado a partir da multiplicação do valor base da operação pela alíquota fixa de 1,65%.
 
-Cenário: Calculando o valor de PIS
-	Dado que uma operação financeira, onde há incidência de PIS, tem valor de R$ 2491,32
+Esquema do Cenário: Calculando o valor de PIS
+	Dado que uma operação financeira, onde há incidência de PIS, tem valor de R$ <Valor da Operação>
 	Quando for calculado o valor de PIS a ser cobrado
-	Entao o valor de PIS a ser cobrado deve ser igual a R$ 41,11
+	Entao o valor de PIS a ser cobrado deve ser igual a R$ <PIS Calculado>
+
+Exemplos: 
+| Valor da Operação | PIS Calculado |
+| 2491,32           | 41,11         |

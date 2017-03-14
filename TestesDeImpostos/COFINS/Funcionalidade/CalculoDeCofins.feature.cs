@@ -72,18 +72,18 @@ namespace TestesDeImpostos.COFINS.Funcionalidade
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Calculando o valor de COFINS")]
-        public virtual void CalculandoOValorDeCOFINS()
+        [NUnit.Framework.TestCaseAttribute("2491,32", "189,34", new string[0])]
+        public virtual void CalculandoOValorDeCOFINS(string valorDaOperacao, string cOFINSCalculado, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculando o valor de COFINS", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculando o valor de COFINS", exampleTags);
 #line 11
 this.ScenarioSetup(scenarioInfo);
 #line 12
- testRunner.Given("que uma operação financeira, onde há incidência de COFINS, tem valor de R$ 2491,3" +
-                    "2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given(string.Format("que uma operação financeira, onde há incidência de COFINS, tem valor de R$ {0}", valorDaOperacao), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line 13
  testRunner.When("for calculado o valor de COFINS a ser cobrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line 14
- testRunner.Then("o valor de COFINS a ser cobrado deve ser igual a R$ 189,34", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
+ testRunner.Then(string.Format("o valor de COFINS a ser cobrado deve ser igual a R$ {0}", cOFINSCalculado), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
 #line hidden
             this.ScenarioCleanup();
         }

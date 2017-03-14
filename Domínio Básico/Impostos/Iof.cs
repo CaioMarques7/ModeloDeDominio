@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Impostos
+namespace ContextoDeImpostos
 {
     /// <summary>
     /// Definição de Imposto sobre Operações Financeiras

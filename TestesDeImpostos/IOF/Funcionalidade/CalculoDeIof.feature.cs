@@ -78,22 +78,24 @@ namespace TestesDeImpostos.IOF.Funcionalidade
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Calculando o valor de IOF")]
-        public virtual void CalculandoOValorDeIOF()
+        [NUnit.Framework.DescriptionAttribute("Cálculo de IOF")]
+        [NUnit.Framework.TestCaseAttribute("2491,32", "105", "1,31", "951,19", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("413,47", "57", "0,5", "34,57", new string[0])]
+        public virtual void CalculoDeIOF(string valorDaOperacao, string prazo, string taxa, string iOFCalculado, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculando o valor de IOF", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Cálculo de IOF", exampleTags);
 #line 18
 this.ScenarioSetup(scenarioInfo);
 #line 19
- testRunner.Given("que uma operação financeira, onde há incidência de IOF, tem valor de R$ 2491,32", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given(string.Format("que uma operação financeira, onde há incidência de IOF, tem valor de R$ {0}", valorDaOperacao), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line 20
- testRunner.And("que essa operação tem prazo de 105 dias", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.And(string.Format("que essa operação tem prazo de {0} dias", prazo), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line 21
- testRunner.And("que a taxa de IOF é de 1,31%", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.And(string.Format("que a taxa de IOF é de {0}%", taxa), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line 22
  testRunner.When("for calculado o valor de IOF a ser cobrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line 23
- testRunner.Then("o valor de IOF a ser cobrado deve ser igual a R$ 951,19", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
+ testRunner.Then(string.Format("o valor de IOF a ser cobrado deve ser igual a R$ {0}", iOFCalculado), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -72,17 +72,18 @@ namespace TestesDeImpostos.PIS.Funcionalidade
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Calculando o valor de PIS")]
-        public virtual void CalculandoOValorDePIS()
+        [NUnit.Framework.TestCaseAttribute("2491,32", "41,11", new string[0])]
+        public virtual void CalculandoOValorDePIS(string valorDaOperacao, string pISCalculado, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculando o valor de PIS", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculando o valor de PIS", exampleTags);
 #line 11
 this.ScenarioSetup(scenarioInfo);
 #line 12
- testRunner.Given("que uma operação financeira, onde há incidência de PIS, tem valor de R$ 2491,32", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given(string.Format("que uma operação financeira, onde há incidência de PIS, tem valor de R$ {0}", valorDaOperacao), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line 13
  testRunner.When("for calculado o valor de PIS a ser cobrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line 14
- testRunner.Then("o valor de PIS a ser cobrado deve ser igual a R$ 41,11", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
+ testRunner.Then(string.Format("o valor de PIS a ser cobrado deve ser igual a R$ {0}", pISCalculado), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
 #line hidden
             this.ScenarioCleanup();
         }

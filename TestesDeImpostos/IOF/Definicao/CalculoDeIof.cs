@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Impostos;
+using ContextoDeImpostos;
 using System;
 using TechTalk.SpecFlow;
 

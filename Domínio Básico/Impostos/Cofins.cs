@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Impostos
+namespace ContextoDeImpostos
 {
     /// <summary>
     /// Definição de imposto de Contribuição para o Financiamento da Seguridade Social.

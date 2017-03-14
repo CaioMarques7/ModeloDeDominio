@@ -1,4 +1,4 @@
-﻿namespace Impostos
+﻿namespace ContextoDeImpostos
 {
     /// <summary>
     /// Interface para definição de imposto.

@@ -109,12 +109,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Domínio Básico\Impostos\Impostos.csproj">
-      <Project>{7EB2B82A-6C4C-4848-BF15-8289349C8088}</Project>
-      <Name>Impostos</Name>
+    <ProjectReference Include="..\Domínio Básico\Impostos\ContextoDeImpostos.csproj">
+      <Project>{7eb2b82a-6c4c-4848-bf15-8289349c8088}</Project>
+      <Name>ContextoDeImpostos</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

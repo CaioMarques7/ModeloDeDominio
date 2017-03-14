@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using ContextoDeImpostos;
+using ContextoDeImpostos.Impostos;
 using TechTalk.SpecFlow;
 
 namespace TestesDeImpostos.PIS.Definicao
@@ -19,7 +19,8 @@ namespace TestesDeImpostos.PIS.Definicao
         public void QuandoForCalculadoOValorDePis()
         {
             var pis = new Pis(_valorDaOperacao);
-            _valorDePisCalculado = pis.CalcularValorDeImposto();
+            pis.CalcularValorDeImposto();
+            _valorDePisCalculado = pis.ValorApurado;
         }
 
         [Then(@"o valor de PIS a ser cobrado deve ser igual a R\$ (.*)")]

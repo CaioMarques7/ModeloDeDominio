@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using ContextoDeImpostos;
+using ContextoDeImpostos.Impostos;
 using System;
 using TechTalk.SpecFlow;
 
@@ -35,7 +35,8 @@ namespace TestesDeImpostos.IOF.Definicao
             Console.WriteLine(@"Calculando o IOF...");
 
             var iof = new Iof(_valorDaOperacao, _taxaDeIof, _prazoDaOperacao);
-            _valorDeIofCalculado = iof.CalcularValorDeImposto();
+            iof.CalcularValorDeImposto();
+            _valorDeIofCalculado = iof.ValorApurado;
         }
 
         [Then(@"o valor de IOF a ser cobrado deve ser igual a R\$ (.*)")]

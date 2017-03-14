@@ -5,7 +5,15 @@
     /// </summary>
     public interface IImposto
     {
+        /// <summary>
+        /// Valor de imposto a ser cobrado.
+        /// </summary>
+        decimal ValorApurado { get; }
 
+        /// <summary>
+        /// Calcula o valor de imposto a ser cobrado.
+        /// </summary>
+        void CalcularValorDeImposto();
     }
 
     /// <summary>
@@ -13,10 +21,6 @@
     /// </summary>
     public interface IImposto<T> : IImposto where T : struct, IImposto
     {
-        /// <summary>
-        /// Calcula o valor de imposto a ser cobrado.
-        /// </summary>
-        /// <returns>Valor de imposto a ser cobrado.</returns>
-        decimal CalcularValorDeImposto();
+        
     }
 }

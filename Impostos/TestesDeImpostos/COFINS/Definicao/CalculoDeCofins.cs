@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using ContextoDeImpostos;
+using ContextoDeImpostos.Impostos;
 using TechTalk.SpecFlow;
 
 namespace TestesDeImpostos.COFINS.Definicao
@@ -19,7 +19,8 @@ namespace TestesDeImpostos.COFINS.Definicao
         public void QuandoForCalculadoOValorDeCofins()
         {
             var cofins = new Cofins(_valorDaOperacao);
-            _valorDeCofinsCalculado = cofins.CalcularValorDeImposto();
+            cofins.CalcularValorDeImposto();
+            _valorDeCofinsCalculado = cofins.ValorApurado;
         }
 
         [Then(@"o valor de COFINS a ser cobrado deve ser igual a R\$ (.*)")]

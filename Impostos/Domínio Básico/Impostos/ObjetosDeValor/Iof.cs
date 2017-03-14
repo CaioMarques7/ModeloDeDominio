@@ -1,12 +1,13 @@
 ﻿using System;
 
-namespace ContextoDeImpostos
+namespace ContextoDeImpostos.Impostos
 {
     /// <summary>
-    /// Definição de Imposto sobre Operações Financeiras
+    /// Definição de Imposto sobre Operações Financeiras.
     /// </summary>
     public struct Iof : IImposto<Iof>
     {
+        private decimal _valorApurado;
         private readonly int _prazoEmDias;
         private const decimal _aliquota = 0.0038m;
         private readonly decimal _valorBase, _taxaDeIof;
@@ -19,18 +20,28 @@ namespace ContextoDeImpostos
         /// <param name="prazoEmDias">Prazo da operação, em dias.</param>
         public Iof(decimal valorBase, decimal taxaDeIof, int prazoEmDias)
         {
+            _valorApurado = 0m;
             _valorBase = valorBase;
             _taxaDeIof = taxaDeIof;
             _prazoEmDias = prazoEmDias;
         }
 
         /// <summary>
+        /// Valor de imposto a ser cobrado.
+        /// </summary>
+        public decimal ValorApurado => _valorApurado;
+
+        /// <summary>
         /// Calcula o valor de imposto a ser cobrado.
         /// </summary>
-        /// <returns>Valor de imposto a ser cobrado.</returns>
-        public decimal CalcularValorDeImposto()
+        public void CalcularValorDeImposto()
         {
-            return Math.Round(IofNoPeriodo + IofAdicional, 2);
+            _valorApurado = Math.Round(IofNoPeriodo + IofAdicional, 2);
+        }
+
+        public override string ToString()
+        {
+            return "IOF - Imposto sobre Operações Financeiras";
         }
 
         private decimal TaxaDiaria => Math.Round(_taxaDeIof / 365, 4);

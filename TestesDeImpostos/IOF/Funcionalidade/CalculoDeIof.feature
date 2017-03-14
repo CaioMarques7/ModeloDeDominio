@@ -16,8 +16,8 @@
 	Passo 5: Some o valor de IOF no período com o valor de IOF adicional. Dessa forma será obtido o valor de IOF a ser cobrado.
 
 Cenário: Calculando o valor de IOF
-	Dado que uma operação financeira tem valor de R$ 2491,32
+	Dado que uma operação financeira, onde há incidência de IOF, tem valor de R$ 2491,32
 	E que essa operação tem prazo de 105 dias
 	E que a taxa de IOF é de 1,31%
 	Quando for calculado o valor de IOF a ser cobrado
-	Entao o valor deve ser igual a R$ 951,19
+	Entao o valor de IOF a ser cobrado deve ser igual a R$ 951,19

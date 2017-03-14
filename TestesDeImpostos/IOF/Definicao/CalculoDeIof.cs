@@ -1,9 +1,6 @@
 ﻿using FluentAssertions;
 using Impostos;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using TechTalk.SpecFlow;
 
 namespace TestesDeImpostos.IOF.Definicao
@@ -14,7 +11,7 @@ namespace TestesDeImpostos.IOF.Definicao
         private int _prazoDaOperacao;
         private decimal _valorDaOperacao, _taxaDeIof, _valorDeIofCalculado;
 
-        [Given(@"que uma operação financeira tem valor de R\$ (.*)")]
+        [Given(@"que uma operação financeira, onde há incidência de IOF, tem valor de R\$ (.*)")]
         public void DadaUmaOperacaoFinanceiraDeValor(decimal valorDaOperacao)
         {
             _valorDaOperacao = valorDaOperacao;
@@ -41,7 +38,7 @@ namespace TestesDeImpostos.IOF.Definicao
             _valorDeIofCalculado = iof.CalcularValorDeImposto();
         }
 
-        [Then(@"o valor deve ser igual a R\$ (.*)")]
+        [Then(@"o valor de IOF a ser cobrado deve ser igual a R\$ (.*)")]
         public void OValorDeveSer(decimal valorDeIofCalculado)
         {
             _valorDeIofCalculado.Should().Be(valorDeIofCalculado);

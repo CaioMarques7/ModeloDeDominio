@@ -18,8 +18,8 @@ namespace TestesDeImpostos.COFINS.Funcionalidade
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Cálculo de COFINS")]
-    public partial class CalculoDeCOFINSFeature
+    [NUnit.Framework.DescriptionAttribute("Cálculo de COFINS - (Contribuição para o Financiamento da Seguridade Social)")]
+    public partial class CalculoDeCOFINS_ContribuicaoParaOFinanciamentoDaSeguridadeSocialFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -31,7 +31,7 @@ namespace TestesDeImpostos.COFINS.Funcionalidade
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-BR"), "Cálculo de COFINS", @"	Para calcular o valor de COFINS de uma operação financeira de qualquer valor
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-BR"), "Cálculo de COFINS - (Contribuição para o Financiamento da Seguridade Social)", @"	Para calcular o valor de COFINS de uma operação financeira de qualquer valor
 	Como parte de cálculos obrigatórios para realização de operação financeira
 	Eu devo informar o valor base da operação em questão e aplicar alíquota de 7,6% sobre o mesmo
 	E obter o valor de COFINS a ser cobrado
@@ -71,18 +71,19 @@ namespace TestesDeImpostos.COFINS.Funcionalidade
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Calculando o valor de PIS")]
-        public virtual void CalculandoOValorDePIS()
+        [NUnit.Framework.DescriptionAttribute("Calculando o valor de COFINS")]
+        public virtual void CalculandoOValorDeCOFINS()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculando o valor de PIS", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculando o valor de COFINS", ((string[])(null)));
 #line 11
 this.ScenarioSetup(scenarioInfo);
 #line 12
- testRunner.Given("que uma operação financeira tem valor de R$ 2491,32", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("que uma operação financeira, onde há incidência de COFINS, tem valor de R$ 2491,3" +
+                    "2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line 13
- testRunner.When("for calculado o valor de PIS a ser cobrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+ testRunner.When("for calculado o valor de COFINS a ser cobrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line 14
- testRunner.Then("o valor deve ser igual a R$ 189,34", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
+ testRunner.Then("o valor de COFINS a ser cobrado deve ser igual a R$ 189,34", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
 #line hidden
             this.ScenarioCleanup();
         }

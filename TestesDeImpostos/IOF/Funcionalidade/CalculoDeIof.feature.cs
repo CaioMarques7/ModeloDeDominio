@@ -85,7 +85,7 @@ namespace TestesDeImpostos.IOF.Funcionalidade
 #line 18
 this.ScenarioSetup(scenarioInfo);
 #line 19
- testRunner.Given("que uma operação financeira tem valor de R$ 2491,32", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("que uma operação financeira, onde há incidência de IOF, tem valor de R$ 2491,32", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line 20
  testRunner.And("que essa operação tem prazo de 105 dias", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line 21
@@ -93,7 +93,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 22
  testRunner.When("for calculado o valor de IOF a ser cobrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line 23
- testRunner.Then("o valor deve ser igual a R$ 951,19", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
+ testRunner.Then("o valor de IOF a ser cobrado deve ser igual a R$ 951,19", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -78,11 +78,11 @@ namespace TestesDeImpostos.PIS.Funcionalidade
 #line 11
 this.ScenarioSetup(scenarioInfo);
 #line 12
- testRunner.Given("que uma operação financeira tem valor de R$ 2491,32", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("que uma operação financeira, onde há incidência de PIS, tem valor de R$ 2491,32", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line 13
  testRunner.When("for calculado o valor de PIS a ser cobrado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line 14
- testRunner.Then("o valor deve ser igual a R$ 41,11", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
+ testRunner.Then("o valor de PIS a ser cobrado deve ser igual a R$ 41,11", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
 #line hidden
             this.ScenarioCleanup();
         }

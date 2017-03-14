@@ -72,6 +72,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="COFINS\Definicao\CalculoDeCofins.cs" />
     <Compile Include="COFINS\Funcionalidade\CalculoDeCofins.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -83,6 +84,7 @@
       <DependentUpon>CalculoDeIof.feature</DependentUpon>
     </Compile>
     <Compile Include="IOF\Definicao\CalculoDeIof.cs" />
+    <Compile Include="PIS\Definicao\CalculoDePis.cs" />
     <Compile Include="PIS\Funcionalidade\CalculoDePis.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -112,10 +114,7 @@
       <Name>Impostos</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="COFINS\Definicao\" />
-    <Folder Include="PIS\Definicao\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

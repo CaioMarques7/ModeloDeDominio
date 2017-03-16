@@ -2,7 +2,7 @@
 using ContextoDeImpostos.Impostos;
 using TechTalk.SpecFlow;
 
-namespace TestesDeImpostos.PIS.Definicao
+namespace TestesDeImpostos.BDD.PIS.Definicao
 {
     [Binding]
     public sealed class CalculoDePis

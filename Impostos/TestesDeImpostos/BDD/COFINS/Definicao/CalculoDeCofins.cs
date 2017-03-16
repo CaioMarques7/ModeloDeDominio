@@ -2,7 +2,7 @@
 using ContextoDeImpostos.Impostos;
 using TechTalk.SpecFlow;
 
-namespace TestesDeImpostos.COFINS.Definicao
+namespace TestesDeImpostos.BDD.COFINS.Definicao
 {
     [Binding]
     public sealed class CalculoDeCofins

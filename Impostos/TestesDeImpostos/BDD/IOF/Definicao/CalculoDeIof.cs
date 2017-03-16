@@ -3,7 +3,7 @@ using ContextoDeImpostos.Impostos;
 using System;
 using TechTalk.SpecFlow;
 
-namespace TestesDeImpostos.IOF.Definicao
+namespace TestesDeImpostos.BDD.IOF.Definicao
 {
     [Binding]
     public sealed class CalculoDeIof

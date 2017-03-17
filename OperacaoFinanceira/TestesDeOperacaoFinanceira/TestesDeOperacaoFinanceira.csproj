@@ -90,6 +90,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Impostos\Domínio Básico\Impostos\ContextoDeImpostos.csproj">
+      <Project>{7eb2b82a-6c4c-4848-bf15-8289349c8088}</Project>
+      <Name>ContextoDeImpostos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domínio Básico\ContextoDeOperacaoFinanceira\ContextoDeOperacaoFinanceira.csproj">
       <Project>{6D2A5AD5-2D0C-40B2-B3A5-9A0521C1958C}</Project>
       <Name>ContextoDeOperacaoFinanceira</Name>

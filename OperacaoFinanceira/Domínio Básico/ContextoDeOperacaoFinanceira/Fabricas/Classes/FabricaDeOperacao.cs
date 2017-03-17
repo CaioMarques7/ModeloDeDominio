@@ -13,10 +13,12 @@ namespace ContextoDeOperacaoFinanceira.Fabricas
         /// Cria uma nova operação.
         /// </summary>
         /// <param name="tipoDeOperacao">Tipo de operação financeira.</param>
+        /// <param name="dataDaOperacao">Data da operação.</param>
+        /// <param name="taxaDeIof">Taxa de IOF.</param>
         /// <returns>Operação criada.</returns>
-        public IOperacao CriarOperacao(TipoDeOperacaoFinanceira tipoDeOperacao)
+        public IOperacao CriarOperacao(TipoDeOperacaoFinanceira tipoDeOperacao, DateTime dataDaOperacao, decimal taxaDeIof)
         {
-            return new Operacao(new FabricaDeParcela(), tipoDeOperacao);
+            return new Operacao(new FabricaDeParcela(), tipoDeOperacao, dataDaOperacao, taxaDeIof);
         }
     }
 }

@@ -1,4 +1,10 @@
-﻿using System;
+﻿using ContextoDeImpostos;
+using ContextoDeImpostos.Impostos;
+using ContextoDeOperacaoFinanceira;
+using ContextoDeOperacaoFinanceira.Agregacoes.Entidades;
+using ContextoDeOperacaoFinanceira.Fabricas;
+using FluentAssertions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,60 +15,68 @@ namespace TestesDeOperacaoFinanceira.BDD.OperacaoFinanceira.Definicao
     [Binding]
     public sealed class OperacaoFinanceira
     {
+        private Table _parcelasDaOperacao;
+        private IOperacao _operacao;
+        private decimal _taxaDeIof;
+        private DateTime _dataDaOperacao;
+        private readonly IFabricaDeOperacao _fabricaDeOperacao = new FabricaDeOperacao();
+
         [Given(@"que as parcelas abaixo fazem parte de uma operação financeira")]
         public void DadoQueAsParcelasFazemParteDeUmaOperacaoFinanceira(Table parcelasDaOperacao)
         {
-            //TODO: implement arrange (precondition) logic
-
-            Console.WriteLine();
+            _parcelasDaOperacao = parcelasDaOperacao;
         }
 
         [Given(@"que a data dessa operação é (.*)")]
         public void EQueADataDessaOperacao(DateTime dataDaOperacao)
         {
-            //TODO: implement arrange (precondition) logic
-
-            Console.WriteLine();
+            _dataDaOperacao = dataDaOperacao;
         }
 
         [Given(@"a taxa de IOF dessa operação é(.*)%")]
         public void EATaxaDeIofE(decimal taxaDeIof)
         {
-            //TODO: implement arrange (precondition) logic
-
-            Console.WriteLine();
+            _taxaDeIof = taxaDeIof;
         }
 
         [When(@"eu calcular os impostos da operação")]
         public void QuandoCalcularOsImpostosDaOperacao()
         {
-            //TODO: implement act (action) logic
+            _operacao = _fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo0, _dataDaOperacao, _taxaDeIof);
+            foreach (var parcela in _parcelasDaOperacao.Rows.Select(row => new { Valor = Convert.ToDecimal(row.ElementAt(0).Value), Vencimento = Convert.ToDateTime(row.ElementAt(1).Value) }))
+                _operacao.IncluirParcela(parcela.Valor, parcela.Vencimento);
 
-            Console.WriteLine();
+            _operacao.CalcularImpostos();
         }
 
         [Then(@"o valor de IOF apurado deve ser de R\$ (.*)")]
         public void EntaoOValorDeIofApuradoDeveSerDe(decimal valorDeIof)
         {
-            //TODO: implement assert (verification) logic
+            var valorApurado = _operacao.Parcelas
+                .Select(parcela => parcela.ImpostosIncidentes.OfType<IImposto<Iof>>().First())
+                .Sum(iof => iof.ValorApurado);
 
-            Console.WriteLine();
+            valorApurado.Should().Be(valorDeIof);
         }
 
         [Then(@"o valor de PIS apurado deve ser de R\$ (.*)")]
         public void EOValorDePisApuradoDeveSerDe(decimal valorDePis)
         {
-            //TODO: implement assert (verification) logic
+            var valorApurado = _operacao.Parcelas
+                .Select(parcela => parcela.ImpostosIncidentes.OfType<IImposto<Pis>>().First())
+                .Sum(iof => iof.ValorApurado);
 
-            Console.WriteLine();
+            valorApurado.Should().Be(valorDePis);
         }
 
         [Then(@"o valor de COFINS apurado deve ser de R\$ (.*)")]
         public void EOValorDeCofinsApuradoDeveSerDe(decimal valorDeCofins)
         {
-            //TODO: implement assert (verification) logic
+            var valorApurado = _operacao.Parcelas
+                .Select(parcela => parcela.ImpostosIncidentes.OfType<IImposto<Cofins>>().First())
+                .Sum(iof => iof.ValorApurado);
 
-            Console.WriteLine();
+            valorApurado.Should().Be(valorDeCofins);
         }
     }
 }

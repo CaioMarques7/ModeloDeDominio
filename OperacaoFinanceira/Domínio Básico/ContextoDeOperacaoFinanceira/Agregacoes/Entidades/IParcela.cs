@@ -18,8 +18,23 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         decimal Valor { get; }
 
         /// <summary>
+        /// Data de vencimento da parcela.
+        /// </summary>
+        DateTime DataDeVencimento { get; }
+
+        /// <summary>
+        /// Prazo da parcela.
+        /// </summary>
+        int Prazo { get; }
+
+        /// <summary>
         /// Coleção de impostos que incidem sobre a parcela.
         /// </summary>
         ICollection<IImposto> ImpostosIncidentes { get; }
+
+        /// <summary>
+        /// Calcula os impostos que incidem sobre a parcela.
+        /// </summary>
+        void CalcularImpostos();
     }
 }

@@ -17,6 +17,16 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         TipoDeOperacaoFinanceira TipoDeOperacao { get; }
 
         /// <summary>
+        /// Data da operação.
+        /// </summary>
+        DateTime DataDaOperacao { get; }
+
+        /// <summary>
+        /// Taxa de IOF.
+        /// </summary>
+        decimal TaxaDeIof { get; }
+
+        /// <summary>
         /// Coleção de parcelas da operação.
         /// </summary>
         ICollection<IParcela> Parcelas{ get; }
@@ -25,6 +35,12 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// Inclui uma nova parcela na operação.
         /// </summary>
         /// <param name="valorDaParcela">Valor da parcela.</param>
-        void IncluirParcela(decimal valorDaParcela);
+        /// <param name="dataDeVencimento">Data de vencimento da parcela.</param>
+        void IncluirParcela(decimal valorDaParcela, DateTime dataDeVencimento);
+
+        /// <summary>
+        /// Calcula os impostos que incidem sobre a operação.
+        /// </summary>
+        void CalcularImpostos();
     }
 }

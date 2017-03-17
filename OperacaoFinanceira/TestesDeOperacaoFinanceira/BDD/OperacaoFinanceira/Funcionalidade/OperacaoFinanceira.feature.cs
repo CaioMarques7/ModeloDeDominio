@@ -83,10 +83,10 @@ namespace TestesDeOperacaoFinanceira.BDD.OperacaoFinanceira.Funcionalidade
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Calculando os impostos que incidem sobre a operação financeira")]
-        [NUnit.Framework.TestCaseAttribute("03/04/2017", "1,5", "0,00", "0,00", "0,00", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("10/09/2017", "0,61", "0,00", "0,00", "0,00", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("01/10/2017", "1,2", "0,00", "0,00", "0,00", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("09/07/2017", "0,24", "0,00", "0,00", "0,00", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("03/04/2017", "1,5", "1460,18", "25,08", "115,53", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("10/09/2017", "0,61", "195,32", "25,08", "115,53", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("01/10/2017", "1,2", "268,36", "25,08", "115,53", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("09/07/2017", "0,24", "150,86", "25,08", "115,53", new string[0])]
         public virtual void CalculandoOsImpostosQueIncidemSobreAOperacaoFinanceira(string dataDaOperacao, string taxaDeIOF, string iOFApurado, string pISApurado, string cOFINSApurado, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculando os impostos que incidem sobre a operação financeira", exampleTags);

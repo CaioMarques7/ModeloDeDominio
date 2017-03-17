@@ -23,7 +23,8 @@ namespace ContextoDeOperacaoFinanceira.Fabricas
         /// </summary>
         /// <param name="operacao">Operação à qual a parcela será vinculada.</param>
         /// <param name="valorDaParcela">Valor da parcela.</param>
-        /// <returns></returns>
-        IParcela CriarParcela(IOperacao operacao, decimal valorDaParcela);
+        /// <param name="dataDeVencimento">Data de vencimento da parcela.</param>
+        /// <returns>Parcela criada.</returns>
+        IParcela CriarParcela(IOperacao operacao, decimal valorDaParcela, DateTime dataDeVencimento);
     }
 }

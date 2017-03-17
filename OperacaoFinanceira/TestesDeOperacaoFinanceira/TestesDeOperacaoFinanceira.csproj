@@ -72,14 +72,28 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="BDD\OperacaoFinanceira\Definicao\OperacaoFinanceira.cs" />
+    <Compile Include="BDD\OperacaoFinanceira\Funcionalidade\OperacaoFinanceira.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OperacaoFinanceira.feature</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TDD\TesteDeOperacao.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="BDD\OperacaoFinanceira\Funcionalidade\OperacaoFinanceira.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>OperacaoFinanceira.feature.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="TDD\" />
+    <ProjectReference Include="..\Domínio Básico\ContextoDeOperacaoFinanceira\ContextoDeOperacaoFinanceira.csproj">
+      <Project>{6D2A5AD5-2D0C-40B2-B3A5-9A0521C1958C}</Project>
+      <Name>ContextoDeOperacaoFinanceira</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

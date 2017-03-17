@@ -7,23 +7,25 @@ using System.Threading.Tasks;
 
 namespace ContextoDeOperacaoFinanceira.Fabricas
 {
-    /// <summary>
-    /// Contrato para classe responsável por encapsular a lógica de criação de parcelas.
-    /// </summary>
-    internal interface IFabricaDeParcela
+    internal class FabricaDeParcela : IFabricaDeParcela
     {
         /// <summary>
         /// Cria uma coleção vazia de parcelas.
         /// </summary>
         /// <returns>Coleção vazia de parcelas.</returns>
-        ICollection<IParcela> CriarColecaoVaziaDeParcelas();
+        public ICollection<IParcela> CriarColecaoVaziaDeParcelas()
+        {
+            return new HashSet<IParcela>();
+        }
 
         /// <summary>
         /// Cria uma parcela para uma operação.
         /// </summary>
         /// <param name="operacao">Operação à qual a parcela será vinculada.</param>
         /// <param name="valorDaParcela">Valor da parcela.</param>
-        /// <returns></returns>
-        IParcela CriarParcela(IOperacao operacao, decimal valorDaParcela);
+        public IParcela CriarParcela(IOperacao operacao, decimal valorDaParcela)
+        {
+            return new Parcela(operacao, valorDaParcela);
+        }
     }
 }

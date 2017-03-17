@@ -44,6 +44,9 @@
     <Compile Include="Agregacoes\Entidades\Classes\Parcela.cs" />
     <Compile Include="Agregacoes\Entidades\IOperacao.cs" />
     <Compile Include="Agregacoes\Entidades\IParcela.cs" />
+    <Compile Include="Fabricas\Classes\FabricaDeOperacao.cs" />
+    <Compile Include="Fabricas\Classes\FabricaDeParcela.cs" />
+    <Compile Include="Fabricas\IFabricaDeOperacao.cs" />
     <Compile Include="Fabricas\IFabricaDeParcela.cs" />
     <Compile Include="ObjetosDeValor\TipoDeOperacaoFinanceira.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

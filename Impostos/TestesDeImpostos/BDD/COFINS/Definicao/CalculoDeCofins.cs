@@ -18,8 +18,11 @@ namespace TestesDeImpostos.BDD.COFINS.Definicao
         [When(@"for calculado o valor de COFINS a ser cobrado")]
         public void QuandoForCalculadoOValorDeCofins()
         {
-            var cofins = new Cofins(_valorDaOperacao);
+            var cofins = new Cofins();
+
+            cofins = (Cofins)cofins.ObterCofins(_valorDaOperacao);
             cofins.CalcularValorDeImposto();
+
             _valorDeCofinsCalculado = cofins.ValorApurado;
         }
 

@@ -18,8 +18,11 @@ namespace TestesDeImpostos.BDD.PIS.Definicao
         [When(@"for calculado o valor de PIS a ser cobrado")]
         public void QuandoForCalculadoOValorDePis()
         {
-            var pis = new Pis(_valorDaOperacao);
+            var pis = new Pis();
+
+            pis = (Pis)pis.ObterPis(_valorDaOperacao);
             pis.CalcularValorDeImposto();
+
             _valorDePisCalculado = pis.ValorApurado;
         }
 

@@ -1,4 +1,5 @@
 ﻿using ContextoDeOperacaoFinanceira.Agregacoes.Entidades;
+using Impostos.Fabricas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,17 @@ namespace ContextoDeOperacaoFinanceira.Fabricas
 {
     internal class FabricaDeOperacao : IFabricaDeOperacao
     {
+        private readonly IFabricaDeParcela _fabricaDeParcela = new FabricaDeParcela();
+        private readonly IFabricaDeImpostos _fabricaDeImpostos;
+
+        /// <summary>
+        /// Cria uma nova instância de <see cref="FabricaDeImpostos"/>.
+        /// </summary>
+        public FabricaDeOperacao(IFabricaDeImpostos fabricaDeImpostos)
+        {
+            _fabricaDeImpostos = fabricaDeImpostos;
+        }
+
         /// <summary>
         /// Cria uma nova operação.
         /// </summary>
@@ -18,7 +30,7 @@ namespace ContextoDeOperacaoFinanceira.Fabricas
         /// <returns>Operação criada.</returns>
         public IOperacao CriarOperacao(TipoDeOperacaoFinanceira tipoDeOperacao, DateTime dataDaOperacao, decimal taxaDeIof)
         {
-            return new Operacao(new FabricaDeParcela(), tipoDeOperacao, dataDaOperacao, taxaDeIof);
+            return new Operacao(_fabricaDeParcela, _fabricaDeImpostos, tipoDeOperacao, dataDaOperacao, taxaDeIof);
         }
     }
 }

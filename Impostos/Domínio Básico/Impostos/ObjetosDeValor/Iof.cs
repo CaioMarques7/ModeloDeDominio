@@ -5,7 +5,7 @@ namespace ContextoDeImpostos.Impostos
     /// <summary>
     /// Definição de Imposto sobre Operações Financeiras.
     /// </summary>
-    public struct Iof : IImposto<Iof>
+    internal struct Iof : IIof, IImposto<Iof>
     {
         private decimal _valorApurado;
         private readonly int _prazoEmDias;
@@ -18,7 +18,7 @@ namespace ContextoDeImpostos.Impostos
         /// <param name="valorBase">Valor base para cálculo do IOF.</param>
         /// <param name="taxaDeIof">Taxa de IOF aplicada na operação financeira.</param>
         /// <param name="prazoEmDias">Prazo da operação, em dias.</param>
-        public Iof(decimal valorBase, decimal taxaDeIof, int prazoEmDias)
+        private Iof(decimal valorBase, decimal taxaDeIof, int prazoEmDias)
         {
             _valorApurado = 0m;
             _valorBase = valorBase;
@@ -37,6 +37,18 @@ namespace ContextoDeImpostos.Impostos
         public void CalcularValorDeImposto()
         {
             _valorApurado = Math.Round(IofNoPeriodo + IofAdicional, 2);
+        }
+
+        /// <summary>
+        /// Cria o objeto responsável por calcular o IOF.
+        /// </summary>
+        /// <param name="valorBase">Valor base para cálculo de IOF.</param>
+        /// <param name="taxaDeIof">Taxa de IOF.</param>
+        /// <param name="prazoEmDias">Prazo para apuração do imposto.</param>
+        /// <returns>Objeto de valor com o cálculo de IOF.</returns>
+        public IIof ObterIof(decimal valorBase, decimal taxaDeIof, int prazoEmDias)
+        {
+            return new Iof(valorBase, taxaDeIof, prazoEmDias);
         }
 
         public override string ToString()

@@ -40,12 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fabricas\Classes\FabricaDeImpostos.cs" />
+    <Compile Include="Fabricas\IFabricaDeImpostos.cs" />
+    <Compile Include="ICofins.cs" />
+    <Compile Include="IIof.cs" />
+    <Compile Include="IPis.cs" />
     <Compile Include="ObjetosDeValor\Cofins.cs" />
     <Compile Include="IImposto.cs" />
     <Compile Include="ObjetosDeValor\Iof.cs" />
     <Compile Include="ObjetosDeValor\Pis.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

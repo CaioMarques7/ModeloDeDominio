@@ -5,7 +5,7 @@ namespace ContextoDeImpostos.Impostos
     /// <summary>
     /// Definição de imposto de Contribuição para o Financiamento da Seguridade Social.
     /// </summary>
-    public struct Cofins : IImposto<Cofins>
+    internal struct Cofins : ICofins, IImposto<Cofins>
     {
         private decimal _valorApurado;
         private readonly decimal _valorBase;
@@ -15,7 +15,7 @@ namespace ContextoDeImpostos.Impostos
         /// Cria uma nova instância de COFINS.
         /// </summary>
         /// <param name="valorBase">Valor base para cálculo de COFINS.</param>
-        public Cofins(decimal valorBase)
+        private Cofins(decimal valorBase)
         {
             _valorApurado = 0m;
             _valorBase = valorBase;
@@ -33,6 +33,16 @@ namespace ContextoDeImpostos.Impostos
         public void CalcularValorDeImposto()
         {
             _valorApurado = Math.Round(_valorBase * _aliquota, 2);
+        }
+
+        /// <summary>
+        /// Cria o objeto responsável por calcular o COFINS.
+        /// </summary>
+        /// <param name="valorBase">Valor base para cálculo de COFINS.</param>
+        /// <returns>Objeto de valor com o cálculo do COFINS.</returns>
+        public ICofins ObterCofins(decimal valorBase)
+        {
+            return new Cofins(valorBase);
         }
 
         public override string ToString()

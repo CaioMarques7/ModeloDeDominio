@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ContextoDeImpostos;
+using Impostos.Fabricas;
+using ContextoDeOperacaoFinanceira.ObjetosDeValor;
 
 namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
 {
@@ -15,18 +17,19 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         private readonly IOperacao _operacao;
 
         /// <summary>
-        /// Cria uma nova instância de parcela.
+        /// Cria uma nova instância de <see cref="Parcela"/>.
         /// </summary>
         /// <param name="operacao">Operação a qual a parcela está vinculada.</param>
         /// <param name="valorDaParcela">Valor da parcela.</param>
         /// <param name="dataDeVencimento">Data de vencimento da parcela.</param>
-        public Parcela(IOperacao operacao, decimal valorDaParcela, DateTime dataDeVencimento)
+        /// <param name="impostos">Impostos por tipo de operação da parcela.</param>
+        public Parcela(IOperacao operacao, decimal valorDaParcela, DateTime dataDeVencimento, ImpostosPorOperacao impostos)
         {
             _operacao = operacao;
 
             Valor = valorDaParcela;
             DataDeVencimento = dataDeVencimento;
-            ImpostosIncidentes = new HashSet<IImposto>();
+            ImpostosIncidentes = impostos.Impostos;
         }
         
         /// <summary>
@@ -54,30 +57,58 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// </summary>
         public void CalcularImpostos()
         {
-            ImpostosIncidentes.Add(CalcularIof());
-            ImpostosIncidentes.Add(CalcularPis());
-            ImpostosIncidentes.Add(CalcularCofins());
+            CalcularIof();
+            CalcularPis();
+            CalcularCofins();
         }
 
-        private ContextoDeImpostos.Impostos.Iof CalcularIof()
+        private T ObterImposto<T>() where T : IImposto
         {
-            var iof = new ContextoDeImpostos.Impostos.Iof(Valor, _operacao.TaxaDeIof, Prazo);
-            iof.CalcularValorDeImposto();
-            return iof;
+            T imposto = ImpostosIncidentes.OfType<T>().FirstOrDefault();
+
+            if (imposto != null)
+                ImpostosIncidentes.Remove(imposto);
+            
+            return imposto;
         }
 
-        private ContextoDeImpostos.Impostos.Pis CalcularPis()
+        private void CalcularIof()
         {
-            var pis = new ContextoDeImpostos.Impostos.Pis(Valor);
-            pis.CalcularValorDeImposto();
-            return pis;
+            var iof = ObterImposto<IIof>();
+
+            if (iof != null)
+            {
+                iof = iof.ObterIof(Valor, _operacao.TaxaDeIof, Prazo);
+                iof.CalcularValorDeImposto();
+
+                ImpostosIncidentes.Add(iof);
+            }
         }
 
-        private ContextoDeImpostos.Impostos.Cofins CalcularCofins()
+        private void CalcularPis()
         {
-            var cofins = new ContextoDeImpostos.Impostos.Cofins(Valor);
-            cofins.CalcularValorDeImposto();
-            return cofins;
+            var pis = ObterImposto<IPis>();
+
+            if (pis != null)
+            {
+                pis = pis.ObterPis(Valor);
+                pis.CalcularValorDeImposto();
+
+                ImpostosIncidentes.Add(pis);
+            }
+        }
+
+        private void CalcularCofins()
+        {
+            var cofins = ObterImposto<ICofins>();
+
+            if (cofins != null)
+            {
+                cofins = cofins.ObterCofins(Valor);
+                cofins.CalcularValorDeImposto();
+
+                ImpostosIncidentes.Add(cofins);
+            }
         }
     }
 }

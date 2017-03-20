@@ -19,7 +19,7 @@ namespace TestesDeOperacaoFinanceira.BDD.OperacaoFinanceira.Definicao
         private IOperacao _operacao;
         private decimal _taxaDeIof;
         private DateTime _dataDaOperacao;
-        private readonly IFabricaDeOperacao _fabricaDeOperacao = new FabricaDeOperacao();
+        private readonly IFabricaDeOperacao _fabricaDeOperacao = new FabricaDeOperacao(new Impostos.Fabricas.FabricaDeImpostos());
 
         [Given(@"que as parcelas abaixo fazem parte de uma operação financeira")]
         public void DadoQueAsParcelasFazemParteDeUmaOperacaoFinanceira(Table parcelasDaOperacao)
@@ -53,7 +53,7 @@ namespace TestesDeOperacaoFinanceira.BDD.OperacaoFinanceira.Definicao
         public void EntaoOValorDeIofApuradoDeveSerDe(decimal valorDeIof)
         {
             var valorApurado = _operacao.Parcelas
-                .Select(parcela => parcela.ImpostosIncidentes.OfType<IImposto<Iof>>().First())
+                .Select(parcela => parcela.ImpostosIncidentes.OfType<IIof>().First())
                 .Sum(iof => iof.ValorApurado);
 
             valorApurado.Should().Be(valorDeIof);
@@ -63,7 +63,7 @@ namespace TestesDeOperacaoFinanceira.BDD.OperacaoFinanceira.Definicao
         public void EOValorDePisApuradoDeveSerDe(decimal valorDePis)
         {
             var valorApurado = _operacao.Parcelas
-                .Select(parcela => parcela.ImpostosIncidentes.OfType<IImposto<Pis>>().First())
+                .Select(parcela => parcela.ImpostosIncidentes.OfType<IPis>().First())
                 .Sum(iof => iof.ValorApurado);
 
             valorApurado.Should().Be(valorDePis);
@@ -73,7 +73,7 @@ namespace TestesDeOperacaoFinanceira.BDD.OperacaoFinanceira.Definicao
         public void EOValorDeCofinsApuradoDeveSerDe(decimal valorDeCofins)
         {
             var valorApurado = _operacao.Parcelas
-                .Select(parcela => parcela.ImpostosIncidentes.OfType<IImposto<Cofins>>().First())
+                .Select(parcela => parcela.ImpostosIncidentes.OfType<ICofins>().First())
                 .Sum(iof => iof.ValorApurado);
 
             valorApurado.Should().Be(valorDeCofins);

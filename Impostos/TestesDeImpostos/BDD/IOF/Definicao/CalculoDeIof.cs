@@ -34,8 +34,11 @@ namespace TestesDeImpostos.BDD.IOF.Definicao
         {
             Console.WriteLine(@"Calculando o IOF...");
 
-            var iof = new Iof(_valorDaOperacao, _taxaDeIof, _prazoDaOperacao);
+            var iof = new Iof();
+
+            iof = (Iof)iof.ObterIof(_valorDaOperacao, _taxaDeIof, _prazoDaOperacao);
             iof.CalcularValorDeImposto();
+
             _valorDeIofCalculado = iof.ValorApurado;
         }
 

@@ -5,7 +5,7 @@ namespace ContextoDeImpostos.Impostos
     /// <summary>
     /// Definição do imposto de Programas de Integração Social e de Formação do Patrimônio do Servidor Público.
     /// </summary>
-    public struct Pis : IImposto<Pis>
+    internal struct Pis : IPis, IImposto<Pis>
     {
         private decimal _valorApurado;
         private readonly decimal _valorBase;
@@ -15,7 +15,7 @@ namespace ContextoDeImpostos.Impostos
         /// Cria uma nova instância de PIS.
         /// </summary>
         /// <param name="valorBase">Valor base para cálculo de PIS.</param>
-        public Pis(decimal valorBase)
+        private Pis(decimal valorBase)
         {
             _valorApurado = 0m;
             _valorBase = valorBase;
@@ -32,6 +32,16 @@ namespace ContextoDeImpostos.Impostos
         public void CalcularValorDeImposto()
         {
             _valorApurado = Math.Round(_valorBase * _aliquota, 2);
+        }
+
+        /// <summary>
+        /// Cria o objeto responsável por calcular o PIS.
+        /// </summary>
+        /// <param name="valorBase">Valor base para cálculo de PIS.</param>
+        /// <returns>Objeto de valor com o cálculo do PIS.</returns>
+        public IPis ObterPis(decimal valorBase)
+        {
+            return new Pis(valorBase);
         }
 
         public override string ToString()

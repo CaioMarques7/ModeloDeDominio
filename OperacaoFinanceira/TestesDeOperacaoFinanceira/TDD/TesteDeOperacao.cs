@@ -10,7 +10,7 @@ namespace TestesDeOperacaoFinanceira.TDD
     [TestFixture]
     public class TesteDeOperacao
     {
-        private readonly IFabricaDeOperacao _fabricaDeOperacao = new FabricaDeOperacao();
+        private readonly IFabricaDeOperacao _fabricaDeOperacao = new FabricaDeOperacao(new Impostos.Fabricas.FabricaDeImpostos());
 
         private IOperacao _operacao;
 

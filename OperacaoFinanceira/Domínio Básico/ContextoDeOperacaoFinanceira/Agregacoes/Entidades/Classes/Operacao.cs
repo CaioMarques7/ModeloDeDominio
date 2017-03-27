@@ -1,5 +1,6 @@
 ﻿using ContextoDeOperacaoFinanceira.Fabricas;
 using ContextoDeOperacaoFinanceira.ObjetosDeValor;
+using DominioGenerico;
 using Impostos.Fabricas;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
     /// <summary>
     /// Classe de definição de operação financeira.
     /// </summary>
-    internal class Operacao : IOperacao
+    internal class Operacao : Entidade, IOperacao
     {
         private readonly IFabricaDeParcela _fabricaDeParcela;
         private readonly IFabricaDeImpostos _fabricaDeImpostos;
@@ -69,7 +70,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// <summary>
         /// Coleção de parcelas da operação.
         /// </summary>
-        public ICollection<IParcela> Parcelas { get; }
+        public IEnumerable<IParcela> Parcelas { get; }
 
         /// <summary>
         /// Inclui uma nova parcela na operação.
@@ -78,7 +79,9 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// <param name="dataDeVencimento">Data de vencimento da parcela.</param>
         public void IncluirParcela(decimal valorDaParcela, DateTime dataDeVencimento)
         {
-            Parcelas.Add(_fabricaDeParcela.CriarParcela(this, valorDaParcela, dataDeVencimento, new ImpostosPorOperacao(_fabricaDeImpostos, TipoDeOperacao)));
+            var parcelas = Parcelas as ICollection<IParcela>;
+
+            parcelas.Add(_fabricaDeParcela.CriarParcela(this, valorDaParcela, dataDeVencimento, new ImpostosPorOperacao(_fabricaDeImpostos, TipoDeOperacao)));
         }
 
         /// <summary>

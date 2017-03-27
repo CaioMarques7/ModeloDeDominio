@@ -50,7 +50,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// <summary>
         /// Coleção de impostos que incidem sobre a parcela.
         /// </summary>
-        public ICollection<IImposto> ImpostosIncidentes { get; }
+        public IEnumerable<IImposto> ImpostosIncidentes { get; }
 
         /// <summary>
         /// Calcula os impostos que incidem sobre a parcela.
@@ -67,9 +67,21 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
             T imposto = ImpostosIncidentes.OfType<T>().FirstOrDefault();
 
             if (imposto != null)
-                ImpostosIncidentes.Remove(imposto);
+                RemoverImposto(imposto);
             
             return imposto;
+        }
+
+        private void AdicionarImposto<T>(T imposto) where T : IImposto
+        {
+            var impostos = ImpostosIncidentes as ICollection<IImposto>;
+            impostos.Add(imposto);
+        }
+
+        private void RemoverImposto<T>(T imposto) where T : IImposto
+        {
+            var impostos = ImpostosIncidentes as ICollection<IImposto>;
+            impostos.Remove(imposto);
         }
 
         private void CalcularIof()
@@ -81,7 +93,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
                 iof = iof.ObterIof(Valor, _operacao.TaxaDeIof, Prazo);
                 iof.CalcularValorDeImposto();
 
-                ImpostosIncidentes.Add(iof);
+                AdicionarImposto(iof);
             }
         }
 
@@ -94,7 +106,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
                 pis = pis.ObterPis(Valor);
                 pis.CalcularValorDeImposto();
 
-                ImpostosIncidentes.Add(pis);
+                AdicionarImposto(pis);
             }
         }
 
@@ -107,7 +119,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
                 cofins = cofins.ObterCofins(Valor);
                 cofins.CalcularValorDeImposto();
 
-                ImpostosIncidentes.Add(cofins);
+                AdicionarImposto(cofins);
             }
         }
     }

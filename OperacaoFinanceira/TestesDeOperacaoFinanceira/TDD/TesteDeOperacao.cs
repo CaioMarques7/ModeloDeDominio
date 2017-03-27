@@ -1,9 +1,11 @@
 ﻿using ContextoDeOperacaoFinanceira;
 using ContextoDeOperacaoFinanceira.Agregacoes.Entidades;
 using ContextoDeOperacaoFinanceira.Fabricas;
+using DominioGenerico;
 using FluentAssertions;
 using NUnit.Framework;
 using System;
+using System.Linq;
 
 namespace TestesDeOperacaoFinanceira.TDD
 {
@@ -25,7 +27,7 @@ namespace TestesDeOperacaoFinanceira.TDD
         {
             _operacao.IncluirParcela(540m, DateTime.Today.AddDays(60));
 
-            _operacao.Parcelas.Count.Should().BeGreaterThan(0);
+            _operacao.Parcelas.Count().Should().BeGreaterThan(0);
         }
     }
 }

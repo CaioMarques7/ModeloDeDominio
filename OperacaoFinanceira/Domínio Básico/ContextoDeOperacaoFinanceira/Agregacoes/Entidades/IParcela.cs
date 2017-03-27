@@ -30,7 +30,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// <summary>
         /// Coleção de impostos que incidem sobre a parcela.
         /// </summary>
-        ICollection<IImposto> ImpostosIncidentes { get; }
+        IEnumerable<IImposto> ImpostosIncidentes { get; }
 
         /// <summary>
         /// Calcula os impostos que incidem sobre a parcela.

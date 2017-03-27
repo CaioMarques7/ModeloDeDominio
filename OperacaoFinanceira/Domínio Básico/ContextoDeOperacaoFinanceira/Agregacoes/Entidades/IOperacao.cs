@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DominioGenerico;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +30,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// <summary>
         /// Coleção de parcelas da operação.
         /// </summary>
-        ICollection<IParcela> Parcelas{ get; }
+        IEnumerable<IParcela> Parcelas{ get; }
 
         /// <summary>
         /// Inclui uma nova parcela na operação.

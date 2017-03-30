@@ -12,9 +12,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testes", "Testes", "{16080D57-FB00-4DEF-9B9F-C5A12C4CAFB2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContextoDeImpostos", "Impostos\Domínio Básico\Impostos\ContextoDeImpostos.csproj", "{7EB2B82A-6C4C-4848-BF15-8289349C8088}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EC968E6F-05A5-4480-BAD7-33A5C91F3748} = {EC968E6F-05A5-4480-BAD7-33A5C91F3748}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestesDeImpostos", "Impostos\TestesDeImpostos\TestesDeImpostos.csproj", "{AA26A952-3734-47EF-9567-BFB14FC71797}"
 	ProjectSection(ProjectDependencies) = postProject
+		{EC968E6F-05A5-4480-BAD7-33A5C91F3748} = {EC968E6F-05A5-4480-BAD7-33A5C91F3748}
 		{6D2A5AD5-2D0C-40B2-B3A5-9A0521C1958C} = {6D2A5AD5-2D0C-40B2-B3A5-9A0521C1958C}
 	EndProjectSection
 EndProject

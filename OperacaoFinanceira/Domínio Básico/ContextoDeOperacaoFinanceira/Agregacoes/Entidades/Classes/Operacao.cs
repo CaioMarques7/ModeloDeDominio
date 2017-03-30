@@ -92,5 +92,17 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
             foreach (var parcela in Parcelas)
                 parcela.CalcularImpostos();
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return base.GetHashCode() 
+                    ^ TipoDeOperacao.GetHashCode()
+                    ^ DataDaOperacao.GetHashCode()
+                    ^ TaxaDeIof.GetHashCode()
+                    ^ Parcelas.GetHashCode();
+            }
+        }
     }
 }

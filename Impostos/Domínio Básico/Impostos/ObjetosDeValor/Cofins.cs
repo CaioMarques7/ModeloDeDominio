@@ -5,11 +5,20 @@ namespace ContextoDeImpostos.Impostos
     /// <summary>
     /// Definição de imposto de Contribuição para o Financiamento da Seguridade Social.
     /// </summary>
-    internal struct Cofins : ICofins, IImposto<Cofins>
+    internal class Cofins : ICofins
     {
         private decimal _valorApurado;
         private readonly decimal _valorBase;
         private const decimal _aliquota = 0.076m;
+
+        /// <summary>
+        /// Cria uma nova instância de COFINS.
+        /// </summary>
+        internal Cofins()
+            : this(0m)
+        {
+
+        }
 
         /// <summary>
         /// Cria uma nova instância de COFINS.

@@ -72,34 +72,55 @@ namespace DominioGenerico
         /// <returns>Valor calculado.</returns>
         protected int GetHashCode(int hashCode)
         {
-            unchecked
-            {
-                return hashCode * 397;
-            }
+            return hashCode * 397;
         }
 
         #endregion
 
         #region Métodos Protegidos
 
-        protected static bool AmbosNulos(IEntidade x, IEntidade y)
+        /// <summary>
+        /// Compara dois objetos como operandos e indica se ambos são nulos.
+        /// </summary>
+        /// <param name="operandoEsquerda">Operando da esquerda.</param>
+        /// <param name="operandoDireita">Operando da direita.</param>
+        /// <returns>Verdadeiro se ambos os operandos forem nulos; caso contrário, falso.</returns>
+        protected static bool OperandosNulos(IEntidade operandoEsquerda, IEntidade operandoDireita)
         {
-            return ((x == null) && (y == null));
+            return ((operandoEsquerda == null) && (operandoDireita == null));
         }
 
-        protected static bool ObjetosIguais(IEntidade x, IEntidade y)
+        /// <summary>
+        /// Compara dois objetos como operandos e indica se ambos são iguais.
+        /// </summary>
+        /// <param name="operandoEsquerda">Operando da esquerda.</param>
+        /// <param name="operandoDireita">Operando da direita.</param>
+        /// <returns>Verdadeiro se ambos os operandos forem iguais; caso contrário, falso.</returns>
+        protected static bool OperandosIguais(IEntidade operandoEsquerda, IEntidade operandoDireita)
         {
-            return AmbosNulos(x, y) || (x != null && x.Equals(y));
+            return OperandosNulos(operandoEsquerda, operandoDireita) || (operandoEsquerda != null && operandoEsquerda.Equals(operandoDireita));
         }
 
-        protected static bool ObjetoMaior(IEntidade x, IEntidade y)
+        /// <summary>
+        /// Compara dois objetos como operandos e indica se o da esquerda é maior que o da direita.
+        /// </summary>
+        /// <param name="operandoEsquerda">Operando da esquerda.</param>
+        /// <param name="operandoDireita">Operando da direita.</param>
+        /// <returns>Verdadeiro se o operando da esquerda for maior que o da direita; caso contrário falso.</returns>
+        protected static bool OperandoAEsquerdaMaiorQueOperandoADireita(IEntidade operandoEsquerda, IEntidade operandoDireita)
         {
-            return !AmbosNulos(x, y) || (x != null && x.CompareTo(y) > 0);
+            return !OperandosNulos(operandoEsquerda, operandoDireita) || (operandoEsquerda != null && operandoEsquerda.CompareTo(operandoDireita) > 0);
         }
 
-        protected static bool ObjetoMenor(IEntidade x, IEntidade y)
+        /// <summary>
+        /// Compara dois objetos como operandos e indica se o da esquerda é menor que o da direita.
+        /// </summary>
+        /// <param name="operandoEsquerda">Operando da esquerda.</param>
+        /// <param name="operandoDireita">Operando da direita.</param>
+        /// <returns>Verdadeiro se o operando da esquerda for menor que o da direita; caso contrário falso.</returns>
+        protected static bool OperandoAEsquerdaMenorQueOperandoADireita(IEntidade operandoEsquerda, IEntidade operandoDireita)
         {
-            return !AmbosNulos(x, y) || (x != null && x.CompareTo(y) < 0);
+            return !OperandosNulos(operandoEsquerda, operandoDireita) || (operandoEsquerda != null && operandoEsquerda.CompareTo(operandoDireita) < 0);
         }
 
         #endregion

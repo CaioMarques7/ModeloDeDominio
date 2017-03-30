@@ -15,12 +15,4 @@
         /// </summary>
         void CalcularValorDeImposto();
     }
-
-    /// <summary>
-    /// Interface genérica para definição de imposto.
-    /// </summary>
-    public interface IImposto<T> : IImposto where T : struct, IImposto
-    {
-        
-    }
 }

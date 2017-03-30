@@ -5,11 +5,20 @@ namespace ContextoDeImpostos.Impostos
     /// <summary>
     /// Definição do imposto de Programas de Integração Social e de Formação do Patrimônio do Servidor Público.
     /// </summary>
-    internal struct Pis : IPis, IImposto<Pis>
+    internal class Pis : IPis
     {
         private decimal _valorApurado;
         private readonly decimal _valorBase;
         private const decimal _aliquota = 0.0165m;
+
+        /// <summary>
+        /// Cria uma nova instância de PIS.
+        /// </summary>
+        internal Pis()
+            : this(0m)
+        {
+
+        }
 
         /// <summary>
         /// Cria uma nova instância de PIS.

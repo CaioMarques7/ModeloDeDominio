@@ -5,12 +5,21 @@ namespace ContextoDeImpostos.Impostos
     /// <summary>
     /// Definição de Imposto sobre Operações Financeiras.
     /// </summary>
-    internal struct Iof : IIof, IImposto<Iof>
+    internal class Iof : IIof
     {
         private decimal _valorApurado;
         private readonly int _prazoEmDias;
         private const decimal _aliquota = 0.0038m;
         private readonly decimal _valorBase, _taxaDeIof;
+
+        /// <summary>
+        /// Cria uma nova instância de IOF.
+        /// </summary>
+        internal Iof()
+            : this(0m, 0m, 0)
+        {
+
+        }
 
         /// <summary>
         /// Cria uma nova instância de IOF.

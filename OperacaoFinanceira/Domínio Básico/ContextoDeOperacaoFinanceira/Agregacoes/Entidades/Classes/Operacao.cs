@@ -93,11 +93,15 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
                 parcela.CalcularImpostos();
         }
 
+        /// <summary>
+        /// Função de hash padrão.
+        /// </summary>
+        /// <returns>Inteiro que indica o hash da entidade.</returns>
         public override int GetHashCode()
         {
             unchecked
             {
-                return base.GetHashCode() 
+                return GetHashCode(int.MinValue) 
                     ^ TipoDeOperacao.GetHashCode()
                     ^ DataDaOperacao.GetHashCode()
                     ^ TaxaDeIof.GetHashCode()

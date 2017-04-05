@@ -58,12 +58,8 @@ namespace DominioGenerico
         /// <summary>
         /// Função de hash padrão.
         /// </summary>
-        /// <remarks>Recomendável sobreescrever em entidades derivadas.</remarks>
         /// <returns>Inteiro que indica o hash da entidade.</returns>
-        public override int GetHashCode()
-        {
-            return GetHashCode(int.MinValue);
-        }
+        public abstract override int GetHashCode();
 
         /// <summary>
         /// Função de hash sobrecarregada.

@@ -16,21 +16,18 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
     internal class Operacao : Entidade, IOperacao
     {
         private readonly IFabricaDeParcela _fabricaDeParcela;
-        private readonly IFabricaDeImpostos _fabricaDeImpostos;
 
         /// <summary>
-        /// Cria uma nova instância de operação.
+        /// Cria uma nova instância de <see cref="Operacao"/>.
         /// </summary>
         /// <param name="fabricaDeParcela">Fábrica de parcelas.</param>
-        /// <param name="fabricaDeImpostos">Fábrica de impostos.</param>
-        /// <param name="parcelas">Parcelas da operação.</param>
         /// <param name="tipoDeOperacao">Tipo de operação financeira.</param>
         /// <param name="dataDaOperacao">Data da operação.</param>
         /// <param name="taxaDeIof">Taxa de IOF.</param>
-        public Operacao(IFabricaDeParcela fabricaDeParcela, IFabricaDeImpostos fabricaDeImpostos, ICollection<IParcela> parcelas, TipoDeOperacaoFinanceira tipoDeOperacao, DateTime dataDaOperacao, decimal taxaDeIof)
+        /// <param name="parcelas">Parcelas da operação.</param>
+        public Operacao(IFabricaDeParcela fabricaDeParcela, TipoDeOperacaoFinanceira tipoDeOperacao, DateTime dataDaOperacao, decimal taxaDeIof, ICollection<IParcela> parcelas)
         {
             _fabricaDeParcela = fabricaDeParcela;
-            _fabricaDeImpostos = fabricaDeImpostos;
 
             Parcelas = parcelas;
             TipoDeOperacao = tipoDeOperacao;
@@ -39,15 +36,14 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         }
 
         /// <summary>
-        /// Cria uma nova instância de operação.
+        /// Cria uma nova instância de <see cref="Operacao"/>.
         /// </summary>
         /// <param name="fabricaDeParcela">Fábrica de parcelas.</param>
-        /// <param name="fabricaDeImpostos">Fábrica de impostos.</param>
         /// <param name="tipoDeOperacao">Tipo de operação financeira.</param>
         /// <param name="dataDaOperacao">Data da operação.</param>
         /// <param name="taxaDeIof">Taxa de IOF.</param>
-        public Operacao(IFabricaDeParcela fabricaDeParcela, IFabricaDeImpostos fabricaDeImpostos, TipoDeOperacaoFinanceira tipoDeOperacao, DateTime dataDaOperacao, decimal taxaDeIof)
-            : this(fabricaDeParcela, fabricaDeImpostos, fabricaDeParcela.CriarColecaoVaziaDeParcelas(), tipoDeOperacao, dataDaOperacao, taxaDeIof)
+        public Operacao(IFabricaDeParcela fabricaDeParcela, TipoDeOperacaoFinanceira tipoDeOperacao, DateTime dataDaOperacao, decimal taxaDeIof)
+            : this(fabricaDeParcela, tipoDeOperacao, dataDaOperacao, taxaDeIof, fabricaDeParcela.CriarColecaoVaziaDeParcelas())
         {
             
         }
@@ -81,7 +77,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         {
             var parcelas = Parcelas as ICollection<IParcela>;
 
-            parcelas.Add(_fabricaDeParcela.CriarParcela(this, valorDaParcela, dataDeVencimento, new ImpostosPorOperacao(_fabricaDeImpostos, TipoDeOperacao)));
+            parcelas.Add(_fabricaDeParcela.CriarParcela(this, valorDaParcela, dataDeVencimento));
         }
 
         /// <summary>

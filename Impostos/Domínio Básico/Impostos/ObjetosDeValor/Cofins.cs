@@ -12,7 +12,7 @@ namespace ContextoDeImpostos.Impostos
         private const decimal _aliquota = 0.076m;
 
         /// <summary>
-        /// Cria uma nova instância de COFINS.
+        /// Cria uma nova instância de <see cref="Cofins"/>.
         /// </summary>
         internal Cofins()
             : this(0m)
@@ -21,7 +21,7 @@ namespace ContextoDeImpostos.Impostos
         }
 
         /// <summary>
-        /// Cria uma nova instância de COFINS.
+        /// Cria uma nova instância de <see cref="Cofins"/>.
         /// </summary>
         /// <param name="valorBase">Valor base para cálculo de COFINS.</param>
         private Cofins(decimal valorBase)

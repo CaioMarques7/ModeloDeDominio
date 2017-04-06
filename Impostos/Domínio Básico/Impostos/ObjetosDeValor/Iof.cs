@@ -13,7 +13,7 @@ namespace ContextoDeImpostos.Impostos
         private readonly decimal _valorBase, _taxaDeIof;
 
         /// <summary>
-        /// Cria uma nova instância de IOF.
+        /// Cria uma nova instância de <see cref="Iof"/>.
         /// </summary>
         internal Iof()
             : this(0m, 0m, 0)
@@ -22,7 +22,7 @@ namespace ContextoDeImpostos.Impostos
         }
 
         /// <summary>
-        /// Cria uma nova instância de IOF.
+        /// Cria uma nova instância de <see cref="Iof"/>.
         /// </summary>
         /// <param name="valorBase">Valor base para cálculo do IOF.</param>
         /// <param name="taxaDeIof">Taxa de IOF aplicada na operação financeira.</param>

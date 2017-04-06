@@ -12,7 +12,7 @@ namespace ContextoDeImpostos.Impostos
         private const decimal _aliquota = 0.0165m;
 
         /// <summary>
-        /// Cria uma nova instância de PIS.
+        /// Cria uma nova instância de <see cref="Pis"/>.
         /// </summary>
         internal Pis()
             : this(0m)
@@ -21,7 +21,7 @@ namespace ContextoDeImpostos.Impostos
         }
 
         /// <summary>
-        /// Cria uma nova instância de PIS.
+        /// Cria uma nova instância de <see cref="Pis"/>.
         /// </summary>
         /// <param name="valorBase">Valor base para cálculo de PIS.</param>
         private Pis(decimal valorBase)

@@ -61,29 +61,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
             CalcularPis();
             CalcularCofins();
         }
-
-        private T ObterImposto<T>() where T : IImposto
-        {
-            T imposto = ImpostosIncidentes.OfType<T>().FirstOrDefault();
-
-            if (imposto != null)
-                RemoverImposto(imposto);
-            
-            return imposto;
-        }
-
-        private void AdicionarImposto<T>(T imposto) where T : IImposto
-        {
-            var impostos = ImpostosIncidentes as ICollection<IImposto>;
-            impostos.Add(imposto);
-        }
-
-        private void RemoverImposto<T>(T imposto) where T : IImposto
-        {
-            var impostos = ImpostosIncidentes as ICollection<IImposto>;
-            impostos.Remove(imposto);
-        }
-
+        
         private void CalcularIof()
         {
             var iof = ObterImposto<IIof>();
@@ -121,6 +99,25 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
 
                 AdicionarImposto(cofins);
             }
+        }
+
+        private T ObterImposto<T>() where T : IImposto
+        {
+            T imposto = ImpostosIncidentes.OfType<T>().FirstOrDefault();
+            RemoverImposto(imposto);
+            return imposto;
+        }
+
+        private void AdicionarImposto<T>(T imposto) where T : IImposto
+        {
+            var impostos = ImpostosIncidentes as ICollection<IImposto>;
+            impostos.Add(imposto);
+        }
+
+        private void RemoverImposto<T>(T imposto) where T : IImposto
+        {
+            var impostos = ImpostosIncidentes as ICollection<IImposto>;
+            impostos.Remove(imposto);
         }
     }
 }

@@ -10,15 +10,15 @@ namespace ContextoDeOperacaoFinanceira.Fabricas
 {
     internal class FabricaDeOperacao : IFabricaDeOperacao
     {
-        private readonly IFabricaDeParcela _fabricaDeParcela = new FabricaDeParcela();
-        private readonly IFabricaDeImpostos _fabricaDeImpostos;
+        private readonly IFabricaDeParcela _fabricaDeParcela;
 
         /// <summary>
-        /// Cria uma nova instância de <see cref="FabricaDeImpostos"/>.
+        /// Cria uma nova instância de <see cref="FabricaDeOperacao"/>.
         /// </summary>
+        /// <param name="fabricaDeImpostos">Fábrica de impostos incidentes na operação.</param>
         public FabricaDeOperacao(IFabricaDeImpostos fabricaDeImpostos)
         {
-            _fabricaDeImpostos = fabricaDeImpostos;
+            _fabricaDeParcela = new FabricaDeParcela(fabricaDeImpostos);
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace ContextoDeOperacaoFinanceira.Fabricas
         /// <returns>Operação criada.</returns>
         public IOperacao CriarOperacao(TipoDeOperacaoFinanceira tipoDeOperacao, DateTime dataDaOperacao, decimal taxaDeIof)
         {
-            return new Operacao(_fabricaDeParcela, _fabricaDeImpostos, tipoDeOperacao, dataDaOperacao, taxaDeIof);
+            return new Operacao(_fabricaDeParcela, tipoDeOperacao, dataDaOperacao, taxaDeIof);
         }
     }
 }

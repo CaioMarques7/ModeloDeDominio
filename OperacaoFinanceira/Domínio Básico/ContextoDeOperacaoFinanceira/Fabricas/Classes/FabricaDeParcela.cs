@@ -1,5 +1,6 @@
 ﻿using ContextoDeOperacaoFinanceira.Agregacoes.Entidades;
 using ContextoDeOperacaoFinanceira.ObjetosDeValor;
+using Impostos.Fabricas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,17 @@ namespace ContextoDeOperacaoFinanceira.Fabricas
 {
     internal class FabricaDeParcela : IFabricaDeParcela
     {
+        private readonly IFabricaDeImpostos _fabricaDeImpostos;
+
+        /// <summary>
+        /// Cria uma nova instância de <see cref="FabricaDeParcela"/>.
+        /// </summary>
+        /// <param name="fabricaDeImpostos">Fábrica de impostos incidentes na parcela.</param>
+        public FabricaDeParcela(IFabricaDeImpostos fabricaDeImpostos)
+        {
+            _fabricaDeImpostos = fabricaDeImpostos;
+        }
+
         /// <summary>
         /// Cria uma coleção vazia de parcelas.
         /// </summary>
@@ -25,11 +37,10 @@ namespace ContextoDeOperacaoFinanceira.Fabricas
         /// <param name="operacao">Operação à qual a parcela será vinculada.</param>
         /// <param name="valorDaParcela">Valor da parcela.</param>
         /// <param name="dataDeVencimento">Data de vencimento da parcela.</param>
-        /// <param name="impostos">Impostos incidentes na operação.</param>
         /// <returns>Parcela criada.</returns>
-        public IParcela CriarParcela(IOperacao operacao, decimal valorDaParcela, DateTime dataDeVencimento, ImpostosPorOperacao impostos)
+        public IParcela CriarParcela(IOperacao operacao, decimal valorDaParcela, DateTime dataDeVencimento)
         {
-            return new Parcela(operacao, valorDaParcela, dataDeVencimento, impostos);
+            return new Parcela(operacao, valorDaParcela, dataDeVencimento, new ImpostosPorOperacao(_fabricaDeImpostos, operacao.TipoDeOperacao));
         }
     }
 }

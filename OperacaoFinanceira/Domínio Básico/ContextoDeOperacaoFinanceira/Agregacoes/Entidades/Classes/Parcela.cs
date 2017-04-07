@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 using ContextoDeImpostos;
 using Impostos.Fabricas;
 using ContextoDeOperacaoFinanceira.ObjetosDeValor;
+using DominioGenerico;
 
 namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
 {
     /// <summary>
     /// Classe de definição de parcela de operação financeira.
     /// </summary>
-    internal class Parcela : IParcela
+    internal class Parcela : Entidade, IParcela
     {
         private readonly IOperacao _operacao;
+
+        #region Construtores
 
         /// <summary>
         /// Cria uma nova instância de <see cref="Parcela"/>.
@@ -31,7 +34,11 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
             DataDeVencimento = dataDeVencimento;
             ImpostosIncidentes = impostos.Impostos;
         }
-        
+
+        #endregion
+
+        #region Membros de IParcela
+
         /// <summary>
         /// Valor da Parcela.
         /// </summary>
@@ -60,6 +67,57 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
             CalcularIof();
             CalcularPis();
             CalcularCofins();
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Compara a instância atual com outro objeto do mesmo tipo e retorna um número inteiro que indica se a instância atual precede, segue ou ocorre na mesma posição na ordem de classificação como o outro objeto.
+        /// </summary>
+        /// <param name="entidade">Objeto para comparar com a instância atual.</param>
+        /// <returns>
+        /// Um valor que indica a ordem relativa dos objetos que estão sendo comparados.
+        /// </returns>
+        public override sealed int CompareTo(IEntidade entidade)
+        {
+            var parcela = entidade as IParcela;
+
+            return ((parcela == null) || parcela.DataDeVencimento < DataDeVencimento) ? 1 : Equals(parcela) ? 0 : -1;
+        }
+
+        /// <summary>
+        /// Compara duas entidades e indica se ambas são iguais.
+        /// </summary>
+        /// <param name="entidade">Entidade para comparar com a entidade atual.</param>
+        /// <returns>Verdadeiro se ambas as entidades forem iguais; caso contrário, falso.</returns>
+        public override sealed bool Equals(IEntidade entidade)
+        {
+            var parcela = entidade as Parcela;
+
+            return OperandosIguais(parcela, this) || Equals(parcela);
+        }
+
+        /// <summary>
+        /// Função de hash padrão.
+        /// </summary>
+        /// <returns>Inteiro que indica o hash da entidade.</returns>
+        public override sealed int GetHashCode()
+        {
+            unchecked
+            {
+                return GetHashCode(int.MinValue)
+                    ^ Valor.GetHashCode()
+                    ^ DataDeVencimento.GetHashCode()
+                    ^ Prazo.GetHashCode()
+                    ^ ImpostosIncidentes.GetHashCode();
+            }
+        }
+
+        #region Métodos Privados
+
+        private bool Equals(Parcela parcela)
+        {
+            return parcela._operacao.Equals(_operacao) && parcela.DataDeVencimento.Equals(DataDeVencimento) && parcela.Valor.Equals(Valor);
         }
         
         private void CalcularIof()
@@ -119,5 +177,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
             var impostos = ImpostosIncidentes as ICollection<IImposto>;
             impostos.Remove(imposto);
         }
+
+        #endregion
     }
 }

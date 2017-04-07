@@ -17,6 +17,21 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
     {
         private readonly IFabricaDeParcela _fabricaDeParcela;
 
+        #region Construtores
+
+        /// <summary>
+        /// Cria uma nova instância de <see cref="Operacao"/>.
+        /// </summary>
+        /// <param name="fabricaDeParcela">Fábrica de parcelas.</param>
+        /// <param name="tipoDeOperacao">Tipo de operação financeira.</param>
+        /// <param name="dataDaOperacao">Data da operação.</param>
+        /// <param name="taxaDeIof">Taxa de IOF.</param>
+        public Operacao(IFabricaDeParcela fabricaDeParcela, TipoDeOperacaoFinanceira tipoDeOperacao, DateTime dataDaOperacao, decimal taxaDeIof)
+            : this(fabricaDeParcela, tipoDeOperacao, dataDaOperacao, taxaDeIof, fabricaDeParcela.CriarColecaoVaziaDeParcelas())
+        {
+            
+        }
+
         /// <summary>
         /// Cria uma nova instância de <see cref="Operacao"/>.
         /// </summary>
@@ -35,18 +50,14 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
             TaxaDeIof = taxaDeIof;
         }
 
+        #endregion
+
+        #region Membros de IOperacao
+
         /// <summary>
-        /// Cria uma nova instância de <see cref="Operacao"/>.
+        /// Identificador único da operação.
         /// </summary>
-        /// <param name="fabricaDeParcela">Fábrica de parcelas.</param>
-        /// <param name="tipoDeOperacao">Tipo de operação financeira.</param>
-        /// <param name="dataDaOperacao">Data da operação.</param>
-        /// <param name="taxaDeIof">Taxa de IOF.</param>
-        public Operacao(IFabricaDeParcela fabricaDeParcela, TipoDeOperacaoFinanceira tipoDeOperacao, DateTime dataDaOperacao, decimal taxaDeIof)
-            : this(fabricaDeParcela, tipoDeOperacao, dataDaOperacao, taxaDeIof, fabricaDeParcela.CriarColecaoVaziaDeParcelas())
-        {
-            
-        }
+        public long Id { get; }
 
         /// <summary>
         /// Tipo de operação.
@@ -89,20 +100,61 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
                 parcela.CalcularImpostos();
         }
 
+        #endregion
+
+        #region Membros de IComparable<T>
+
+        /// <summary>
+        /// Compara a instância atual com outro objeto do mesmo tipo e retorna um número inteiro que indica se a instância atual precede, segue ou ocorre na mesma posição na ordem de classificação como o outro objeto.
+        /// </summary>
+        /// <param name="entidade">Objeto para comparar com a instância atual.</param>
+        /// <returns>
+        /// Um valor que indica a ordem relativa dos objetos que estão sendo comparados.
+        /// </returns>
+        public override sealed int CompareTo(IEntidade entidade)
+        {
+            var operacao = entidade as Operacao;
+
+            return ((operacao == null) || operacao.Id < Id) ? 1 : Equals(operacao) ? 0 : -1;
+        }
+
+        #endregion
+
+        #region Membros de IEquatable<T>
+
+        /// <summary>
+        /// Compara duas entidades e indica se ambas são iguais.
+        /// </summary>
+        /// <param name="entidade">Entidade para comparar com a entidade atual.</param>
+        /// <returns>Verdadeiro se ambas as entidades forem iguais; caso contrário, falso.</returns>
+        public override sealed bool Equals(IEntidade entidade)
+        {
+            var operacao = entidade as Operacao;
+
+            return OperandosIguais(operacao, this) || Id.Equals(operacao.Id);
+        }
+
+        #endregion
+
+        #region Membros de Object
+
         /// <summary>
         /// Função de hash padrão.
         /// </summary>
         /// <returns>Inteiro que indica o hash da entidade.</returns>
-        public override int GetHashCode()
+        public override sealed int GetHashCode()
         {
             unchecked
             {
-                return GetHashCode(int.MinValue) 
+                return GetHashCode(int.MinValue)
+                    ^ Id.GetHashCode()
                     ^ TipoDeOperacao.GetHashCode()
                     ^ DataDaOperacao.GetHashCode()
                     ^ TaxaDeIof.GetHashCode()
                     ^ Parcelas.GetHashCode();
             }
         }
+
+        #endregion
     }
 }

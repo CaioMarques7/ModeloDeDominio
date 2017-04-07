@@ -13,6 +13,11 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
     public interface IOperacao
     {
         /// <summary>
+        /// Identificador único da operação.
+        /// </summary>
+        long Id { get; }
+
+        /// <summary>
         /// Tipo de operação.
         /// </summary>
         TipoDeOperacaoFinanceira TipoDeOperacao { get; }

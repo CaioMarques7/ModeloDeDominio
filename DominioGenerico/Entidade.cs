@@ -8,11 +8,6 @@ namespace DominioGenerico
 {
     public abstract class Entidade : IEntidade
     {
-        /// <summary>
-        /// Identificador único da entidade.
-        /// </summary>
-        public long Id { get; }
-
         #region Membros de IComparable<T>
 
         /// <summary>
@@ -22,10 +17,7 @@ namespace DominioGenerico
         /// <returns>
         /// Um valor que indica a ordem relativa dos objetos que estão sendo comparados.
         /// </returns>
-        public int CompareTo(IEntidade entidade)
-        {
-            return ((entidade == null) || entidade.Id < Id) ? 1 : Equals(entidade) ? 0 : -1;
-        }
+        public abstract int CompareTo(IEntidade entidade);
 
         #endregion
 
@@ -36,10 +28,7 @@ namespace DominioGenerico
         /// </summary>
         /// <param name="entidade">Entidade para comparar com a entidade atual.</param>
         /// <returns>Verdadeiro se ambas as entidades forem iguais; caso contrário, falso.</returns>
-        public bool Equals(IEntidade entidade)
-        {
-            return entidade != null && (ReferenceEquals(this, entidade) || Id.Equals(entidade.Id));
-        }
+        public abstract bool Equals(IEntidade entidade);
 
         #endregion
 
@@ -50,7 +39,7 @@ namespace DominioGenerico
         /// </summary>
         /// <param name="obj">Objeto para comparar com a entidade atual.</param>
         /// <returns>Verdadeiro se ambos os objetos forem iguais; caso contrário, falso.</returns>
-        public override bool Equals(object obj)
+        public override sealed bool Equals(object obj)
         {
             return Equals(obj as IEntidade);
         }
@@ -66,9 +55,9 @@ namespace DominioGenerico
         /// </summary>
         /// <param name="hashCode">Valor base para o cálculo</param>
         /// <returns>Valor calculado.</returns>
-        protected int GetHashCode(int hashCode)
+        protected static int GetHashCode(int hashCode)
         {
-            return hashCode * 397;
+            return hashCode * 1024;
         }
 
         #endregion
@@ -94,7 +83,7 @@ namespace DominioGenerico
         /// <returns>Verdadeiro se ambos os operandos forem iguais; caso contrário, falso.</returns>
         protected static bool OperandosIguais(IEntidade operandoEsquerda, IEntidade operandoDireita)
         {
-            return OperandosNulos(operandoEsquerda, operandoDireita) || (operandoEsquerda != null && operandoEsquerda.Equals(operandoDireita));
+            return OperandosNulos(operandoEsquerda, operandoDireita) || ReferenceEquals(operandoEsquerda, operandoDireita);
         }
 
         /// <summary>
@@ -105,7 +94,7 @@ namespace DominioGenerico
         /// <returns>Verdadeiro se o operando da esquerda for maior que o da direita; caso contrário falso.</returns>
         protected static bool OperandoAEsquerdaMaiorQueOperandoADireita(IEntidade operandoEsquerda, IEntidade operandoDireita)
         {
-            return !OperandosNulos(operandoEsquerda, operandoDireita) || (operandoEsquerda != null && operandoEsquerda.CompareTo(operandoDireita) > 0);
+            return !OperandosIguais(operandoEsquerda, operandoDireita) && operandoEsquerda != null && operandoEsquerda.CompareTo(operandoDireita) > 0;
         }
 
         /// <summary>
@@ -116,7 +105,7 @@ namespace DominioGenerico
         /// <returns>Verdadeiro se o operando da esquerda for menor que o da direita; caso contrário falso.</returns>
         protected static bool OperandoAEsquerdaMenorQueOperandoADireita(IEntidade operandoEsquerda, IEntidade operandoDireita)
         {
-            return !OperandosNulos(operandoEsquerda, operandoDireita) || (operandoEsquerda != null && operandoEsquerda.CompareTo(operandoDireita) < 0);
+            return !OperandosIguais(operandoEsquerda, operandoDireita) && operandoEsquerda != null && operandoEsquerda.CompareTo(operandoDireita) < 0;
         }
 
         #endregion
@@ -124,9 +113,6 @@ namespace DominioGenerico
 
     public interface IEntidade : IEquatable<IEntidade>, IComparable<IEntidade>
     {
-        /// <summary>
-        /// Identificador único da entidade.
-        /// </summary>
-        long Id { get; }
+
     }
 }

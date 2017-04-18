@@ -71,6 +71,8 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
 
         #endregion
 
+        #region Membros de IComparable<T>
+
         /// <summary>
         /// Compara a instância atual com outro objeto do mesmo tipo e retorna um número inteiro que indica se a instância atual precede, segue ou ocorre na mesma posição na ordem de classificação como o outro objeto.
         /// </summary>
@@ -85,6 +87,10 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
             return ((parcela == null) || parcela.DataDeVencimento < DataDeVencimento) ? 1 : Equals(parcela) ? 0 : -1;
         }
 
+        #endregion
+
+        #region Membros de IEquatable<T>
+
         /// <summary>
         /// Compara duas entidades e indica se ambas são iguais.
         /// </summary>
@@ -97,21 +103,27 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
             return OperandosIguais(parcela, this) || Equals(parcela);
         }
 
+        #endregion
+
+        #region Membros de Entidade
+
         /// <summary>
-        /// Função de hash padrão.
+        /// Função de hash sobrecarregada.
         /// </summary>
-        /// <returns>Inteiro que indica o hash da entidade.</returns>
-        public override sealed int GetHashCode()
+        /// <param name="hashCode">Valor base para o cálculo</param>
+        /// <returns>Valor calculado.</returns>
+        protected override int GetHashCode(int hashCode)
         {
             unchecked
             {
-                return GetHashCode(int.MinValue)
-                    ^ Valor.GetHashCode()
-                    ^ DataDeVencimento.GetHashCode()
-                    ^ Prazo.GetHashCode()
-                    ^ ImpostosIncidentes.GetHashCode();
+                return (hashCode * hashCodeSalt)
+                    ^ (hashCode * hashCodeSalt ^ Valor.GetHashCode())
+                    ^ (hashCode * hashCodeSalt ^ DataDeVencimento.GetHashCode())
+                    ^ (hashCode * hashCodeSalt ^ Prazo.GetHashCode());
             }
         }
+
+        #endregion
 
         #region Métodos Privados
 

@@ -136,22 +136,22 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
 
         #endregion
 
-        #region Membros de Object
+        #region Membros de Entidade
 
         /// <summary>
-        /// Função de hash padrão.
+        /// Função de hash sobrecarregada.
         /// </summary>
-        /// <returns>Inteiro que indica o hash da entidade.</returns>
-        public override sealed int GetHashCode()
+        /// <param name="hashCode">Valor base para o cálculo</param>
+        /// <returns>Valor calculado.</returns>
+        protected override int GetHashCode(int hashCode)
         {
             unchecked
             {
-                return GetHashCode(int.MinValue)
-                    ^ Id.GetHashCode()
-                    ^ TipoDeOperacao.GetHashCode()
-                    ^ DataDaOperacao.GetHashCode()
-                    ^ TaxaDeIof.GetHashCode()
-                    ^ Parcelas.GetHashCode();
+                return (hashCode * hashCodeSalt)
+                    ^ (hashCode * hashCodeSalt ^ Id.GetHashCode())
+                    ^ (hashCode * hashCodeSalt ^ TipoDeOperacao.GetHashCode())
+                    ^ (hashCode * hashCodeSalt ^ DataDaOperacao.GetHashCode())
+                    ^ (hashCode * hashCodeSalt ^ TaxaDeIof.GetHashCode());
             }
         }
 

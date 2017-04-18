@@ -51,5 +51,16 @@ namespace TestesDeOperacaoFinanceira.TDD
 
             _operacoes.Contains(operacao).Should().BeFalse();
         }
+
+        [Test]
+        public void ImpedirParcelaIgualNaMesmaOperacao()
+        {
+            var operacao = _fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo0, DateTime.Today, 4.374m);
+
+            operacao.IncluirParcela(428.74m, DateTime.Today.AddDays(60));
+            operacao.IncluirParcela(428.74m, DateTime.Today.AddDays(60));
+
+            operacao.Parcelas.Count().Should().Be(1);
+        }
     }
 }

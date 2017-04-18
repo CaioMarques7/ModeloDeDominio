@@ -8,6 +8,11 @@ namespace DominioGenerico
 {
     public abstract class Entidade : IEntidade
     {
+        /// <summary>
+        /// Constante para definir valor base para cálculo do hash dos objetos.
+        /// </summary>
+        protected const int hashCodeSalt = 104723;
+
         #region Membros de IComparable<T>
 
         /// <summary>
@@ -48,18 +53,11 @@ namespace DominioGenerico
         /// Função de hash padrão.
         /// </summary>
         /// <returns>Inteiro que indica o hash da entidade.</returns>
-        public abstract override int GetHashCode();
-
-        /// <summary>
-        /// Função de hash sobrecarregada.
-        /// </summary>
-        /// <param name="hashCode">Valor base para o cálculo</param>
-        /// <returns>Valor calculado.</returns>
-        protected static int GetHashCode(int hashCode)
+        public override sealed int GetHashCode()
         {
-            return hashCode * 1024;
+            return GetHashCode(int.MinValue);
         }
-
+        
         #endregion
 
         #region Métodos Protegidos
@@ -107,6 +105,13 @@ namespace DominioGenerico
         {
             return !OperandosIguais(operandoEsquerda, operandoDireita) && operandoEsquerda != null && operandoEsquerda.CompareTo(operandoDireita) < 0;
         }
+
+        /// <summary>
+        /// Função de hash sobrecarregada.
+        /// </summary>
+        /// <param name="hashCode">Valor base para o cálculo</param>
+        /// <returns>Valor calculado.</returns>
+        protected abstract int GetHashCode(int hashCode);
 
         #endregion
     }

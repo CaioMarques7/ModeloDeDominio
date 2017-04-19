@@ -75,9 +75,7 @@ namespace ContextoDeImpostos.Impostos
         /// <returns>Verdadeiro se ambos os objetos de valor forem iguais; caso contrário, falso.</returns>
         public override sealed bool Equals(IObjetoDeValor objetoDeValor)
         {
-            var pis = objetoDeValor as IPis;
-
-            return pis != null && pis.ValorApurado.Equals(ValorApurado);
+            return Equals(objetoDeValor as Pis);
         }
 
         #endregion
@@ -100,6 +98,15 @@ namespace ContextoDeImpostos.Impostos
         public override sealed string ToString()
         {
             return "PIS - Imposto de Programas de Integração Social e de Formação do Patrimônio do Servidor Público.";
+        }
+
+        #endregion
+
+        #region Membros Privados
+
+        private bool Equals(Pis pis)
+        {
+            return ServicoDeComparacaoDeObjetos.OperandosIguais<IObjetoDeValor>(pis, this) || (pis != null && pis.ValorApurado.Equals(ValorApurado));
         }
 
         #endregion

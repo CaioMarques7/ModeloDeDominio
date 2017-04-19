@@ -129,9 +129,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// <returns>Verdadeiro se ambas as entidades forem iguais; caso contrário, falso.</returns>
         public override sealed bool Equals(IEntidade entidade)
         {
-            var operacao = entidade as Operacao;
-
-            return OperandosIguais(operacao, this) || Id.Equals(operacao.Id);
+            return Equals(entidade as Operacao);
         }
 
         #endregion
@@ -153,6 +151,15 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
                     ^ (hashCode * hashCodeSalt ^ DataDaOperacao.GetHashCode())
                     ^ (hashCode * hashCodeSalt ^ TaxaDeIof.GetHashCode());
             }
+        }
+
+        #endregion
+
+        #region Membros Privados
+
+        private bool Equals(Operacao operacao)
+        {
+            return ServicoDeComparacaoDeObjetos.OperandosIguais<IEntidade>(operacao, this) || (operacao != null && Id.Equals(operacao.Id));
         }
 
         #endregion

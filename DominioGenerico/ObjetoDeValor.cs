@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DominioGenerico.Servicos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,19 @@ namespace DominioGenerico
         /// Constante para definir valor base para cálculo do hash dos objetos.
         /// </summary>
         protected const int hashCodeSalt = 77797;
+        private readonly ServicoDeComparacaoDeObjetos _servicoDeComparacaoDeObjetos;
+
+        #region Construtores
+
+        /// <summary>
+        /// Inicia uma nova instância de <see cref="ObjetoDeValor"/>.
+        /// </summary>
+        protected ObjetoDeValor()
+        {
+            _servicoDeComparacaoDeObjetos = new ServicoDeComparacaoDeObjetos();
+        }
+
+        #endregion
 
         #region Membros de IEquatable<T>
 
@@ -47,12 +61,18 @@ namespace DominioGenerico
 
         #endregion
 
+        #region Membros Protegidos
+
+        protected ServicoDeComparacaoDeObjetos ServicoDeComparacaoDeObjetos => _servicoDeComparacaoDeObjetos;
+
         /// <summary>
         /// Função de hash sobrecarregada.
         /// </summary>
         /// <param name="hashCode">Valor base para o cálculo</param>
         /// <returns>Valor calculado.</returns>
         protected abstract int GetHashCode(int hashCode);
+
+        #endregion
     }
 
     public interface IObjetoDeValor : IEquatable<IObjetoDeValor>

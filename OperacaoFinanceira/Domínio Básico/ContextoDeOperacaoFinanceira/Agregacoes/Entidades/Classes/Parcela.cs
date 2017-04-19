@@ -98,9 +98,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// <returns>Verdadeiro se ambas as entidades forem iguais; caso contrário, falso.</returns>
         public override sealed bool Equals(IEntidade entidade)
         {
-            var parcela = entidade as Parcela;
-
-            return OperandosIguais(parcela, this) || Equals(parcela);
+            return Equals(entidade as Parcela);
         }
 
         #endregion
@@ -130,7 +128,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
 
         private bool Equals(Parcela parcela)
         {
-            return parcela._operacao.Equals(_operacao) && parcela.DataDeVencimento.Equals(DataDeVencimento) && parcela.Valor.Equals(Valor);
+            return ServicoDeComparacaoDeObjetos.OperandosIguais<IEntidade>(parcela, this) || (parcela != null && parcela._operacao.Equals(_operacao) && parcela.DataDeVencimento.Equals(DataDeVencimento) && parcela.Valor.Equals(Valor));
         }
         
         private void CalcularIof()

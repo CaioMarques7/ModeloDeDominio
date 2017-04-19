@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DominioGenerico.Servicos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,19 @@ namespace DominioGenerico
         /// Constante para definir valor base para cálculo do hash dos objetos.
         /// </summary>
         protected const int hashCodeSalt = 104723;
+        private readonly ServicoDeComparacaoDeObjetos _servicoDeComparacaoDeObjetos;
+
+        #region Construtores
+
+        /// <summary>
+        /// Inicia uma nova instância de <see cref="Entidade"/>.
+        /// </summary>
+        protected Entidade()
+        {
+            _servicoDeComparacaoDeObjetos = new ServicoDeComparacaoDeObjetos();
+        }
+
+        #endregion
 
         #region Membros de IComparable<T>
 
@@ -57,54 +71,12 @@ namespace DominioGenerico
         {
             return GetHashCode(int.MinValue);
         }
-        
+
         #endregion
 
-        #region Métodos Protegidos
+        #region Membros Protegidos
 
-        /// <summary>
-        /// Compara dois objetos como operandos e indica se ambos são nulos.
-        /// </summary>
-        /// <param name="operandoEsquerda">Operando da esquerda.</param>
-        /// <param name="operandoDireita">Operando da direita.</param>
-        /// <returns>Verdadeiro se ambos os operandos forem nulos; caso contrário, falso.</returns>
-        protected static bool OperandosNulos(IEntidade operandoEsquerda, IEntidade operandoDireita)
-        {
-            return ((operandoEsquerda == null) && (operandoDireita == null));
-        }
-
-        /// <summary>
-        /// Compara dois objetos como operandos e indica se ambos são iguais.
-        /// </summary>
-        /// <param name="operandoEsquerda">Operando da esquerda.</param>
-        /// <param name="operandoDireita">Operando da direita.</param>
-        /// <returns>Verdadeiro se ambos os operandos forem iguais; caso contrário, falso.</returns>
-        protected static bool OperandosIguais(IEntidade operandoEsquerda, IEntidade operandoDireita)
-        {
-            return OperandosNulos(operandoEsquerda, operandoDireita) || ReferenceEquals(operandoEsquerda, operandoDireita);
-        }
-
-        /// <summary>
-        /// Compara dois objetos como operandos e indica se o da esquerda é maior que o da direita.
-        /// </summary>
-        /// <param name="operandoEsquerda">Operando da esquerda.</param>
-        /// <param name="operandoDireita">Operando da direita.</param>
-        /// <returns>Verdadeiro se o operando da esquerda for maior que o da direita; caso contrário falso.</returns>
-        protected static bool OperandoAEsquerdaMaiorQueOperandoADireita(IEntidade operandoEsquerda, IEntidade operandoDireita)
-        {
-            return !OperandosIguais(operandoEsquerda, operandoDireita) && operandoEsquerda != null && operandoEsquerda.CompareTo(operandoDireita) > 0;
-        }
-
-        /// <summary>
-        /// Compara dois objetos como operandos e indica se o da esquerda é menor que o da direita.
-        /// </summary>
-        /// <param name="operandoEsquerda">Operando da esquerda.</param>
-        /// <param name="operandoDireita">Operando da direita.</param>
-        /// <returns>Verdadeiro se o operando da esquerda for menor que o da direita; caso contrário falso.</returns>
-        protected static bool OperandoAEsquerdaMenorQueOperandoADireita(IEntidade operandoEsquerda, IEntidade operandoDireita)
-        {
-            return !OperandosIguais(operandoEsquerda, operandoDireita) && operandoEsquerda != null && operandoEsquerda.CompareTo(operandoDireita) < 0;
-        }
+        protected ServicoDeComparacaoDeObjetos ServicoDeComparacaoDeObjetos => _servicoDeComparacaoDeObjetos;
 
         /// <summary>
         /// Função de hash sobrecarregada.

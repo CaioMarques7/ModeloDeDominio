@@ -76,9 +76,7 @@ namespace ContextoDeImpostos.Impostos
         /// <returns>Verdadeiro se ambos os objetos de valor forem iguais; caso contrário, falso.</returns>
         public override sealed bool Equals(IObjetoDeValor objetoDeValor)
         {
-            var cofins = objetoDeValor as ICofins;
-
-            return cofins != null && cofins.ValorApurado.Equals(ValorApurado);
+            return Equals(objetoDeValor as Cofins);
         }
 
         #endregion
@@ -102,7 +100,16 @@ namespace ContextoDeImpostos.Impostos
         {
             return "COFINS - Imposto de Contribuição para o Financiamento da Seguridade Social.";
         }
-        
+
+        #endregion
+
+        #region Membros Privados
+
+        private bool Equals(Cofins cofins)
+        {
+            return ServicoDeComparacaoDeObjetos.OperandosIguais<IObjetoDeValor>(cofins, this) || (cofins != null && cofins.ValorApurado.Equals(ValorApurado));
+        }
+
         #endregion
     }
 }

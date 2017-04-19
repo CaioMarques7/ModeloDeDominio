@@ -82,9 +82,7 @@ namespace ContextoDeImpostos.Impostos
         /// <returns>Verdadeiro se ambos os objetos de valor forem iguais; caso contrário, falso.</returns>
         public override sealed bool Equals(IObjetoDeValor objetoDeValor)
         {
-            var iof = objetoDeValor as IIof;
-
-            return iof != null && iof.ValorApurado.Equals(ValorApurado);
+            return Equals(objetoDeValor as Iof);
         }
 
         #endregion
@@ -115,6 +113,8 @@ namespace ContextoDeImpostos.Impostos
 
         #endregion
 
+        #region Membros Privados
+
         private decimal TaxaDiaria => Math.Round(_taxaDeIof / 365, 4);
 
         private decimal TaxaNoPeriodo => TaxaDiaria * _prazoEmDias;
@@ -122,5 +122,12 @@ namespace ContextoDeImpostos.Impostos
         private decimal IofNoPeriodo => TaxaNoPeriodo * _valorBase;
 
         private decimal IofAdicional => _valorBase * _aliquota;
+
+        private bool Equals(Iof iof)
+        {
+            return ServicoDeComparacaoDeObjetos.OperandosIguais<IObjetoDeValor>(iof, this) || (iof != null && iof.ValorApurado.Equals(ValorApurado));
+        }
+
+        #endregion
     }
 }

@@ -1,16 +1,19 @@
-﻿using System;
+﻿using DominioGenerico;
+using System;
 
 namespace ContextoDeImpostos.Impostos
 {
     /// <summary>
     /// Definição de Imposto sobre Operações Financeiras.
     /// </summary>
-    internal class Iof : IIof
+    internal sealed class Iof : IObjetoDeValor, IIof
     {
         private decimal _valorApurado;
         private readonly int _prazoEmDias;
         private const decimal _aliquota = 0.0038m;
         private readonly decimal _valorBase, _taxaDeIof;
+
+        #region Construtores
 
         /// <summary>
         /// Cria uma nova instância de <see cref="Iof"/>.
@@ -35,6 +38,10 @@ namespace ContextoDeImpostos.Impostos
             _prazoEmDias = prazoEmDias;
         }
 
+        #endregion
+
+        #region Membros de IImposto
+
         /// <summary>
         /// Valor de imposto a ser cobrado.
         /// </summary>
@@ -48,6 +55,10 @@ namespace ContextoDeImpostos.Impostos
             _valorApurado = Math.Round(IofNoPeriodo + IofAdicional, 2);
         }
 
+        #endregion
+
+        #region Membros de IIof
+
         /// <summary>
         /// Cria o objeto responsável por calcular o IOF.
         /// </summary>
@@ -60,10 +71,35 @@ namespace ContextoDeImpostos.Impostos
             return new Iof(valorBase, taxaDeIof, prazoEmDias);
         }
 
-        public override string ToString()
+        #endregion
+
+        #region Membros de IObjetoDeValor
+
+        public bool Equals(IObjetoDeValor other)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region Membros de Object
+
+        public override sealed bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override sealed int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override sealed string ToString()
         {
             return "IOF - Imposto sobre Operações Financeiras";
         }
+
+        #endregion
 
         private decimal TaxaDiaria => Math.Round(_taxaDeIof / 365, 4);
 

@@ -1,4 +1,5 @@
 ﻿using ContextoDeImpostos;
+using ContextoDeImpostos.Impostos;
 using Impostos.Fabricas;
 using System;
 using System.Collections.Generic;
@@ -6,23 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContextoDeOperacaoFinanceira.ObjetosDeValor
+namespace ContextoDeOperacaoFinanceira.Servicos
 {
     /// <summary>
     /// Classe responsável por encapsular a lógica de criação de impostos por tipo de operação financeira.
     /// </summary>
-    internal class ImpostosPorOperacao
+    internal class ServicoDeImpostosPorOperacao
     {
         private readonly ICollection<IImposto> _impostos;
         private readonly IFabricaDeImpostos _fabricaDeImpostos;
         private readonly TipoDeOperacaoFinanceira _tipoDeOperacaoFinanceira;
 
         /// <summary>
-        /// Cria uma nova instância de <see cref="ImpostosPorOperacao"/>.
+        /// Cria uma nova instância de <see cref="ServicoDeImpostosPorOperacao"/>.
         /// </summary>
         /// <param name="fabricaDeImpostos">Fábrica de impostos.</param>
         /// <param name="tipoDeOperacaoFinanceira">Tipo de operação financeira.</param>
-        public ImpostosPorOperacao(IFabricaDeImpostos fabricaDeImpostos, TipoDeOperacaoFinanceira tipoDeOperacaoFinanceira)
+        public ServicoDeImpostosPorOperacao(IFabricaDeImpostos fabricaDeImpostos, TipoDeOperacaoFinanceira tipoDeOperacaoFinanceira)
         {
             _impostos = new HashSet<IImposto>();
             _fabricaDeImpostos = fabricaDeImpostos;
@@ -54,21 +55,24 @@ namespace ContextoDeOperacaoFinanceira.ObjetosDeValor
         
         private void ImpostosIncidentesEmOperacaoDeTipo0()
         {
-            _impostos.Add(_fabricaDeImpostos.CriarImposto<IIof>());
-            _impostos.Add(_fabricaDeImpostos.CriarImposto<IPis>());
-            _impostos.Add(_fabricaDeImpostos.CriarImposto<ICofins>());
+            _fabricaDeImpostos
+                .CriarImposto<Iof>(_impostos)
+                .CriarImposto<Pis>(_impostos)
+                .CriarImposto<Cofins>(_impostos);
         }
 
         private void ImpostosIncidentesEmOperacaoDeTipo1()
         {
-            _impostos.Add(_fabricaDeImpostos.CriarImposto<IIof>());
-            _impostos.Add(_fabricaDeImpostos.CriarImposto<IPis>());
+            _fabricaDeImpostos
+                .CriarImposto<Iof>(_impostos)
+                .CriarImposto<Pis>(_impostos);
         }
 
         private void ImpostosIncidentesEmOperacaoDeTipo2()
         {
-            _impostos.Add(_fabricaDeImpostos.CriarImposto<IPis>());
-            _impostos.Add(_fabricaDeImpostos.CriarImposto<ICofins>());
+            _fabricaDeImpostos
+                .CriarImposto<Pis>(_impostos)
+                .CriarImposto<Cofins>(_impostos);
         }
     }
 }

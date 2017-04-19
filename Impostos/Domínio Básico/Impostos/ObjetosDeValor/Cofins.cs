@@ -6,7 +6,7 @@ namespace ContextoDeImpostos.Impostos
     /// <summary>
     /// Definição de imposto de Contribuição para o Financiamento da Seguridade Social.
     /// </summary>
-    internal sealed class Cofins : IObjetoDeValor, ICofins
+    public sealed class Cofins : ObjetoDeValor, ICofins
     {
         private decimal _valorApurado;
         private readonly decimal _valorBase;
@@ -17,7 +17,7 @@ namespace ContextoDeImpostos.Impostos
         /// <summary>
         /// Cria uma nova instância de <see cref="Cofins"/>.
         /// </summary>
-        internal Cofins()
+        public Cofins()
             : this(0m)
         {
 
@@ -67,32 +67,42 @@ namespace ContextoDeImpostos.Impostos
 
         #endregion
 
-        #region Membros de IObjetoDeValor
+        #region Membros de IEquatable<T>
 
-        public bool Equals(IObjetoDeValor other)
+        /// <summary>
+        /// Compara dois objetos de valor e indica se ambos são iguais.
+        /// </summary>
+        /// <param name="objetoDeValor">Objeto de valor para comparar com o objeto de valor atual.</param>
+        /// <returns>Verdadeiro se ambos os objetos de valor forem iguais; caso contrário, falso.</returns>
+        public override sealed bool Equals(IObjetoDeValor objetoDeValor)
         {
-            throw new NotImplementedException();
+            var cofins = objetoDeValor as ICofins;
+
+            return cofins != null && cofins.ValorApurado.Equals(ValorApurado);
+        }
+
+        #endregion
+
+        #region Membros de ObjetoDeValor
+
+        protected override sealed int GetHashCode(int hashCode)
+        {
+            unchecked
+            {
+                return (hashCode * hashCodeSalt)
+                    ^ (hashCode * hashCodeSalt ^ ValorApurado.GetHashCode());
+            }
         }
 
         #endregion
 
         #region Membros de Object
 
-        public override sealed bool Equals(object obj)
-        {
-            return base.Equals(obj);
-        }
-
-        public override sealed int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
-
         public override sealed string ToString()
         {
             return "COFINS - Imposto de Contribuição para o Financiamento da Seguridade Social.";
         }
-
+        
         #endregion
     }
 }

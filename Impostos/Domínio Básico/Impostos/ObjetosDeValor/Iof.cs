@@ -6,7 +6,7 @@ namespace ContextoDeImpostos.Impostos
     /// <summary>
     /// Definição de Imposto sobre Operações Financeiras.
     /// </summary>
-    internal sealed class Iof : IObjetoDeValor, IIof
+    public sealed class Iof : ObjetoDeValor, IIof
     {
         private decimal _valorApurado;
         private readonly int _prazoEmDias;
@@ -18,7 +18,7 @@ namespace ContextoDeImpostos.Impostos
         /// <summary>
         /// Cria uma nova instância de <see cref="Iof"/>.
         /// </summary>
-        internal Iof()
+        public Iof()
             : this(0m, 0m, 0)
         {
 
@@ -73,26 +73,40 @@ namespace ContextoDeImpostos.Impostos
 
         #endregion
 
-        #region Membros de IObjetoDeValor
+        #region Membros de IEquatable<T>
 
-        public bool Equals(IObjetoDeValor other)
+        /// <summary>
+        /// Compara dois objetos de valor e indica se ambos são iguais.
+        /// </summary>
+        /// <param name="objetoDeValor">Objeto de valor para comparar com o objeto de valor atual.</param>
+        /// <returns>Verdadeiro se ambos os objetos de valor forem iguais; caso contrário, falso.</returns>
+        public override sealed bool Equals(IObjetoDeValor objetoDeValor)
         {
-            throw new NotImplementedException();
+            var iof = objetoDeValor as IIof;
+
+            return iof != null && iof.ValorApurado.Equals(ValorApurado);
+        }
+
+        #endregion
+
+        #region Membros de ObjetoDeValor
+
+        protected override sealed int GetHashCode(int hashCode)
+        {
+            unchecked
+            {
+                return (hashCode * hashCodeSalt)
+                    ^ (hashCode * hashCodeSalt ^ ValorApurado.GetHashCode())
+                    ^ (hashCode * hashCodeSalt ^ TaxaDiaria.GetHashCode())
+                    ^ (hashCode * hashCodeSalt ^ TaxaNoPeriodo.GetHashCode())
+                    ^ (hashCode * hashCodeSalt ^ IofNoPeriodo.GetHashCode())
+                    ^ (hashCode * hashCodeSalt ^ IofAdicional.GetHashCode());
+            }
         }
 
         #endregion
 
         #region Membros de Object
-
-        public override sealed bool Equals(object obj)
-        {
-            return base.Equals(obj);
-        }
-
-        public override sealed int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
 
         public override sealed string ToString()
         {

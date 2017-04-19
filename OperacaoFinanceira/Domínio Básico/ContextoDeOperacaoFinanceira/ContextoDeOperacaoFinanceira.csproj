@@ -48,7 +48,7 @@
     <Compile Include="Fabricas\Classes\FabricaDeParcela.cs" />
     <Compile Include="Fabricas\IFabricaDeOperacao.cs" />
     <Compile Include="Fabricas\IFabricaDeParcela.cs" />
-    <Compile Include="ObjetosDeValor\ImpostosPorOperacao.cs" />
+    <Compile Include="Servicos\ServicoDeImpostosPorOperacao.cs" />
     <Compile Include="ObjetosDeValor\TipoDeOperacaoFinanceira.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,5 +1,5 @@
 ﻿using ContextoDeOperacaoFinanceira.Agregacoes.Entidades;
-using ContextoDeOperacaoFinanceira.ObjetosDeValor;
+using ContextoDeOperacaoFinanceira.Servicos;
 using Impostos.Fabricas;
 using System;
 using System.Collections.Generic;
@@ -40,7 +40,7 @@ namespace ContextoDeOperacaoFinanceira.Fabricas
         /// <returns>Parcela criada.</returns>
         public IParcela CriarParcela(IOperacao operacao, decimal valorDaParcela, DateTime dataDeVencimento)
         {
-            return new Parcela(operacao, valorDaParcela, dataDeVencimento, new ImpostosPorOperacao(_fabricaDeImpostos, operacao.TipoDeOperacao));
+            return new Parcela(operacao, valorDaParcela, dataDeVencimento, new ServicoDeImpostosPorOperacao(_fabricaDeImpostos, operacao.TipoDeOperacao));
         }
     }
 }

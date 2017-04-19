@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ContextoDeImpostos;
 using Impostos.Fabricas;
-using ContextoDeOperacaoFinanceira.ObjetosDeValor;
+using ContextoDeOperacaoFinanceira.Servicos;
 using DominioGenerico;
 
 namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
@@ -25,14 +25,14 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// <param name="operacao">Operação a qual a parcela está vinculada.</param>
         /// <param name="valorDaParcela">Valor da parcela.</param>
         /// <param name="dataDeVencimento">Data de vencimento da parcela.</param>
-        /// <param name="impostos">Impostos por tipo de operação da parcela.</param>
-        public Parcela(IOperacao operacao, decimal valorDaParcela, DateTime dataDeVencimento, ImpostosPorOperacao impostos)
+        /// <param name="servicoDeImpostosPorOperacao">Serviço responsável por criar os objetos de imposto por tipo de operação da parcela.</param>
+        public Parcela(IOperacao operacao, decimal valorDaParcela, DateTime dataDeVencimento, ServicoDeImpostosPorOperacao servicoDeImpostosPorOperacao)
         {
             _operacao = operacao;
 
             Valor = valorDaParcela;
             DataDeVencimento = dataDeVencimento;
-            ImpostosIncidentes = impostos.Impostos;
+            ImpostosIncidentes = servicoDeImpostosPorOperacao.Impostos;
         }
 
         #endregion
@@ -117,6 +117,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
             unchecked
             {
                 return (hashCode * hashCodeSalt)
+                    ^ (hashCode * hashCodeSalt ^ _operacao.GetHashCode())
                     ^ (hashCode * hashCodeSalt ^ Valor.GetHashCode())
                     ^ (hashCode * hashCodeSalt ^ DataDeVencimento.GetHashCode())
                     ^ (hashCode * hashCodeSalt ^ Prazo.GetHashCode());

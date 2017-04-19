@@ -1,5 +1,5 @@
 ﻿using ContextoDeOperacaoFinanceira.Agregacoes.Entidades;
-using ContextoDeOperacaoFinanceira.ObjetosDeValor;
+using ContextoDeOperacaoFinanceira.Servicos;
 using System;
 using System.Collections.Generic;
 using System.Linq;

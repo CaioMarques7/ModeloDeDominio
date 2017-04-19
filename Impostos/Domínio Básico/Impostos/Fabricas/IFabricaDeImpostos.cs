@@ -9,6 +9,6 @@ namespace Impostos.Fabricas
 {
     public interface IFabricaDeImpostos
     {
-        T CriarImposto<T>() where T : IImposto;
+        IFabricaDeImpostos CriarImposto<T>(ICollection<IImposto> colecaoDeImpostos) where T : IImposto, new();
     }
 }

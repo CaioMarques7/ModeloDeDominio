@@ -6,7 +6,7 @@ namespace ContextoDeImpostos.Impostos
     /// <summary>
     /// Definição do imposto de Programas de Integração Social e de Formação do Patrimônio do Servidor Público.
     /// </summary>
-    internal sealed class Pis : IObjetoDeValor, IPis
+    public sealed class Pis : ObjetoDeValor, IPis
     {
         private decimal _valorApurado;
         private readonly decimal _valorBase;
@@ -17,7 +17,7 @@ namespace ContextoDeImpostos.Impostos
         /// <summary>
         /// Cria uma nova instância de <see cref="Pis"/>.
         /// </summary>
-        internal Pis()
+        public Pis()
             : this(0m)
         {
 
@@ -66,26 +66,37 @@ namespace ContextoDeImpostos.Impostos
 
         #endregion
 
-        #region Membros de IObjetoDeValor
+        #region Membros de IEquatable<T>
 
-        public bool Equals(IObjetoDeValor other)
+        /// <summary>
+        /// Compara dois objetos de valor e indica se ambos são iguais.
+        /// </summary>
+        /// <param name="objetoDeValor">Objeto de valor para comparar com o objeto de valor atual.</param>
+        /// <returns>Verdadeiro se ambos os objetos de valor forem iguais; caso contrário, falso.</returns>
+        public override sealed bool Equals(IObjetoDeValor objetoDeValor)
         {
-            throw new NotImplementedException();
+            var pis = objetoDeValor as IPis;
+
+            return pis != null && pis.ValorApurado.Equals(ValorApurado);
+        }
+
+        #endregion
+
+        #region Membros de ObjetoDeValor
+
+        protected override sealed int GetHashCode(int hashCode)
+        {
+            unchecked
+            {
+                return (hashCode * hashCodeSalt)
+                    ^ (hashCode * hashCodeSalt ^ ValorApurado.GetHashCode());
+            }
         }
 
         #endregion
 
         #region Membros de Object
 
-        public override sealed bool Equals(object obj)
-        {
-            return base.Equals(obj);
-        }
-
-        public override sealed int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
         public override sealed string ToString()
         {
             return "PIS - Imposto de Programas de Integração Social e de Formação do Patrimônio do Servidor Público.";

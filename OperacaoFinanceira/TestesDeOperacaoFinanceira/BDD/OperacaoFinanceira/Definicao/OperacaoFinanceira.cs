@@ -29,7 +29,7 @@ namespace TestesDeOperacaoFinanceira.BDD.OperacaoFinanceira.Definicao
         }
 
         [Given(@"que o tipo dessa operação é (.*)")]
-        public void EQueADataDessaOperacao(TipoDeOperacaoFinanceira tipoDeOperacaoFinanceira)
+        public void EQueOTipoDessaOperacao(TipoDeOperacaoFinanceira tipoDeOperacaoFinanceira)
         {
             _tipoDeOperacaoFinanceira = tipoDeOperacaoFinanceira;
         }

@@ -10,33 +10,11 @@ namespace Impostos.Fabricas
 {
     internal class FabricaDeImpostos : IFabricaDeImpostos
     {
-        public T CriarImposto<T>() where T : IImposto
+        public IFabricaDeImpostos CriarImposto<T>(ICollection<IImposto> colecaoDeImpostos) where T : IImposto, new()
         {
-            if (typeof(T) == typeof(IIof))
-                return (T)Teste1();
+            colecaoDeImpostos.Add(new T());
 
-            if (typeof(T) == typeof(IPis))
-                return (T)Teste2();
-
-            if (typeof(T) == typeof(ICofins))
-                return (T)Teste3();
-
-            throw new ArgumentException();
-        }
-
-        private IIof Teste1()
-        {
-            return new Iof();
-        }
-
-        private IPis Teste2()
-        {
-            return new Pis();
-        }
-
-        private ICofins Teste3()
-        {
-            return new Cofins();
+            return this;
         }
     }
 }

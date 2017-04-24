@@ -25,7 +25,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// <summary>
         /// Prazo da parcela.
         /// </summary>
-        int Prazo { get; }
+        short Prazo { get; }
 
         /// <summary>
         /// Coleção de impostos que incidem sobre a parcela.

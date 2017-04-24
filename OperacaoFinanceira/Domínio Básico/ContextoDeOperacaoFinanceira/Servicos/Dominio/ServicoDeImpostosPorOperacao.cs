@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContextoDeOperacaoFinanceira.Servicos
+namespace ContextoDeOperacaoFinanceira.Servicos.Dominio
 {
     /// <summary>
     /// Classe responsável por encapsular a lógica de criação de impostos por tipo de operação financeira.

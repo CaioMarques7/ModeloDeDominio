@@ -1,5 +1,5 @@
 ﻿using ContextoDeOperacaoFinanceira.Agregacoes.Entidades;
-using ContextoDeOperacaoFinanceira.Servicos;
+using ContextoDeOperacaoFinanceira.Servicos.Dominio;
 using Impostos.Fabricas;
 using System;
 using System.Collections.Generic;

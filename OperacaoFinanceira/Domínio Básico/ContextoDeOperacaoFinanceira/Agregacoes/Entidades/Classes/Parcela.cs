@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ContextoDeImpostos;
 using Impostos.Fabricas;
-using ContextoDeOperacaoFinanceira.Servicos;
+using ContextoDeOperacaoFinanceira.Servicos.Dominio;
 using DominioGenerico;
 
 namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
@@ -52,7 +52,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// <summary>
         /// Prazo da parcela.
         /// </summary>
-        public int Prazo => (DataDeVencimento - _operacao.DataDaOperacao).Days;
+        public short Prazo => (short)((DataDeVencimento - _operacao.DataDaOperacao).Days);
 
         /// <summary>
         /// Coleção de impostos que incidem sobre a parcela.

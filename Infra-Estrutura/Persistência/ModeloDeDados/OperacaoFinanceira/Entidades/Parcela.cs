@@ -19,6 +19,21 @@ namespace ModeloDeDados.OperacaoFinanceira.Entidades
         public decimal Valor { get; set; }
 
         /// <summary>
+        /// Valor de IOF da parcela.
+        /// </summary>
+        public decimal ValorDeIof { get; set; }
+
+        /// <summary>
+        /// Valor de PIS da parcela.
+        /// </summary>
+        public decimal ValorDePis { get; set; }
+
+        /// <summary>
+        /// Valor de COFINS da parcela.
+        /// </summary>
+        public decimal ValorDeCofins { get; set; }
+
+        /// <summary>
         /// Data de vencimento da parcela.
         /// </summary>
         public DateTime DataDeVencimento { get; set; }

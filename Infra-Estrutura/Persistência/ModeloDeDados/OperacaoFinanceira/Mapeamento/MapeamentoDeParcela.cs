@@ -17,6 +17,9 @@ namespace ModeloDeDados.OperacaoFinanceira.Mapeamento
             Property(parcela => parcela.Valor).IsRequired().HasPrecision(8, 2);
             Property(parcela => parcela.DataDeVencimento).IsRequired();
             Property(parcela => parcela.Prazo).IsRequired();
+            Property(parcela => parcela.ValorDeIof).IsRequired().HasPrecision(6, 2);
+            Property(parcela => parcela.ValorDePis).IsRequired().HasPrecision(6, 2);
+            Property(parcela => parcela.ValorDeCofins).IsRequired().HasPrecision(6, 2);
 
             ToTable("ParcelaDeOperacao");
             HasKey(parcela => new { parcela.IdDaOperacao, parcela.DataDeVencimento, parcela.Valor });

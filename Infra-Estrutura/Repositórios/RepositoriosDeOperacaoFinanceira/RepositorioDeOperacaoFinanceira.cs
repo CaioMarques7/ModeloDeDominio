@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ContextoDeOperacaoFinanceira.Agregacoes.Entidades;
 using ModeloDeDadosDeOperacaoFinanceira = ModeloDeDados.OperacaoFinanceira.Entidades;
 using BancoDeDados.EF6;
+using ContextoDeImpostos;
 
 namespace RepositoriosDeOperacaoFinanceira
 {
@@ -48,19 +49,28 @@ namespace RepositoriosDeOperacaoFinanceira
 
         private ModeloDeDadosDeOperacaoFinanceira.Operacao TransformarEntidadeDeDominioEmEntidadeDoBancoDeDados(IOperacao operacao)
         {
+            var colecaoDeParcelas = new HashSet<ModeloDeDadosDeOperacaoFinanceira.Parcela>(
+                    operacao.Parcelas.Select(parcela => new ModeloDeDadosDeOperacaoFinanceira.Parcela()
+                    {
+                        DataDeVencimento = parcela.DataDeVencimento,
+                        Prazo = parcela.Prazo,
+                        Valor = parcela.Valor,
+                        ValorDeIof = parcela.ImpostosIncidentes.OfType<IIof>().Sum(iof => iof.ValorApurado),
+                        ValorDePis = parcela.ImpostosIncidentes.OfType<IPis>().Sum(pis => pis.ValorApurado),
+                        ValorDeCofins = parcela.ImpostosIncidentes.OfType<ICofins>().Sum(cofins => cofins.ValorApurado)
+                    }));
+
             return new ModeloDeDadosDeOperacaoFinanceira.Operacao()
             {
                 Id = operacao.Id,
                 DataDaOperacao = operacao.DataDaOperacao,
                 TaxaDeIof = operacao.TaxaDeIof,
                 TipoDeOperacao = (byte)operacao.TipoDeOperacao,
-                Parcelas = new HashSet<ModeloDeDadosDeOperacaoFinanceira.Parcela>(
-                    operacao.Parcelas.Select(parcela => new ModeloDeDadosDeOperacaoFinanceira.Parcela()
-                    {
-                        DataDeVencimento = parcela.DataDeVencimento,
-                        Prazo = parcela.Prazo,
-                        Valor = parcela.Valor
-                    }))
+                Parcelas = colecaoDeParcelas,
+                Valor = colecaoDeParcelas.Sum(parcela => parcela.Valor),
+                ValorDeIof = colecaoDeParcelas.Sum(parcela => parcela.ValorDeIof),
+                ValorDePis = colecaoDeParcelas.Sum(parcela => parcela.ValorDePis),
+                ValorDeCofins = colecaoDeParcelas.Sum(parcela => parcela.ValorDeCofins)
             };
         }
     }

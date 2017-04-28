@@ -17,6 +17,10 @@ namespace ModeloDeDados.OperacaoFinanceira.Mapeamento
             Property(operacao => operacao.TipoDeOperacao).IsRequired();
             Property(operacao => operacao.DataDaOperacao).IsRequired();
             Property(operacao => operacao.TaxaDeIof).IsRequired().HasPrecision(3, 2);
+            Property(operacao => operacao.Valor).IsRequired().HasPrecision(8, 2);
+            Property(operacao => operacao.ValorDeIof).IsRequired().HasPrecision(6, 2);
+            Property(operacao => operacao.ValorDePis).IsRequired().HasPrecision(6, 2);
+            Property(operacao => operacao.ValorDeCofins).IsRequired().HasPrecision(6, 2);
 
             ToTable("Operacao");
             HasKey(operacao => operacao.Id);

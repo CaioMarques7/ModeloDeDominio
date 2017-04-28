@@ -53,6 +53,10 @@
       <Project>{ec968e6f-05a5-4480-bad7-33a5c91f3748}</Project>
       <Name>DominioGenerico</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Impostos\Domínio Básico\Impostos\ContextoDeImpostos.csproj">
+      <Project>{7eb2b82a-6c4c-4848-bf15-8289349c8088}</Project>
+      <Name>ContextoDeImpostos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\OperacaoFinanceira\Domínio Básico\ContextoDeOperacaoFinanceira\ContextoDeOperacaoFinanceira.csproj">
       <Project>{6d2a5ad5-2d0c-40b2-b3a5-9a0521c1958c}</Project>
       <Name>ContextoDeOperacaoFinanceira</Name>

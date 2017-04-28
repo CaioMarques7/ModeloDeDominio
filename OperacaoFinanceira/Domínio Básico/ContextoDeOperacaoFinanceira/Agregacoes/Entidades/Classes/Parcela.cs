@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ContextoDeImpostos;
-using Impostos.Fabricas;
+using ContextoDeImpostos.Fabricas;
 using ContextoDeOperacaoFinanceira.Servicos.Dominio;
 using DominioGenerico;
 

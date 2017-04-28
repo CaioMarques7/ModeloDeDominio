@@ -24,7 +24,7 @@ namespace TestesDeOperacaoFinanceira.TDD
         [SetUp]
         protected void Inicializar()
         {
-            _fabricaDeOperacao = new FabricaDeOperacao(new Impostos.Fabricas.FabricaDeImpostos());
+            _fabricaDeOperacao = new FabricaDeOperacao(new ContextoDeImpostos.Fabricas.FabricaDeImpostos());
             _repositorio = new RepositorioDeOperacaoFinanceira(new ContextoDeBancoDeDados());
         }
 

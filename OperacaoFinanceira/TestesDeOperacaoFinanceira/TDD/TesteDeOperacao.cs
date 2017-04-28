@@ -14,7 +14,7 @@ namespace TestesDeOperacaoFinanceira.TDD
     public class TesteDeOperacao
     {
         private readonly ICollection<IOperacao> _operacoes = new HashSet<IOperacao>();
-        private readonly IFabricaDeOperacao _fabricaDeOperacao = new FabricaDeOperacao(new Impostos.Fabricas.FabricaDeImpostos());
+        private readonly IFabricaDeOperacao _fabricaDeOperacao = new FabricaDeOperacao(new ContextoDeImpostos.Fabricas.FabricaDeImpostos());
         
 
         [SetUp]

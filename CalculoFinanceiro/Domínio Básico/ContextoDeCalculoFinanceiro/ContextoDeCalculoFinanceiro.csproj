@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7EB2B82A-6C4C-4848-BF15-8289349C8088}</ProjectGuid>
+    <ProjectGuid>{BBF87891-A478-4386-BB9A-8A25C7FEEDA6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ContextoDeImpostos</RootNamespace>
-    <AssemblyName>ContextoDeImpostos</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>ContextoDeCalculoFinanceiro</RootNamespace>
+    <AssemblyName>ContextoDeCalculoFinanceiro</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -40,23 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fabricas\Classes\FabricaDeImpostos.cs" />
-    <Compile Include="Fabricas\IFabricaDeImpostos.cs" />
-    <Compile Include="ICofins.cs" />
-    <Compile Include="IIof.cs" />
-    <Compile Include="IPis.cs" />
-    <Compile Include="ObjetosDeValor\Cofins.cs" />
-    <Compile Include="IImposto.cs" />
-    <Compile Include="ObjetosDeValor\Iof.cs" />
-    <Compile Include="ObjetosDeValor\Pis.cs" />
+    <Compile Include="Fabricas\FabricaDeCalculos.cs" />
+    <Compile Include="ObjetosDeValor\CalculoExponencial.cs" />
+    <Compile Include="ObjetosDeValor\CalculoLinear.cs" />
+    <Compile Include="ObjetosDeValor\Capitalizacao\CapitalizacaoComposta.cs" />
+    <Compile Include="ObjetosDeValor\Capitalizacao\CapitalizacaoSimples.cs" />
+    <Compile Include="ObjetosDeValor\Periodicidade\PeriodoDeCapitalizacao.cs" />
+    <Compile Include="ObjetosDeValor\Periodicidade\Periodicidade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\DominioGenerico\DominioGenerico.csproj">
-      <Project>{EC968E6F-05A5-4480-BAD7-33A5C91F3748}</Project>
-      <Name>DominioGenerico</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,7 +1,7 @@
 ﻿using ContextoDeOperacaoFinanceira.Fabricas;
 using ContextoDeOperacaoFinanceira.Servicos;
 using DominioGenerico;
-using Impostos.Fabricas;
+using ContextoDeImpostos.Fabricas;
 using System;
 using System.Collections.Generic;
 using System.Linq;

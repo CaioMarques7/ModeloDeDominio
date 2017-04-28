@@ -20,7 +20,7 @@ namespace TestesDeOperacaoFinanceira.BDD.OperacaoFinanceira.Definicao
         private decimal _taxaDeIof;
         private DateTime _dataDaOperacao;
         private TipoDeOperacaoFinanceira _tipoDeOperacaoFinanceira;
-        private readonly IFabricaDeOperacao _fabricaDeOperacao = new FabricaDeOperacao(new Impostos.Fabricas.FabricaDeImpostos());
+        private readonly IFabricaDeOperacao _fabricaDeOperacao = new FabricaDeOperacao(new ContextoDeImpostos.Fabricas.FabricaDeImpostos());
 
         [Given(@"que as parcelas abaixo fazem parte de uma operação financeira")]
         public void DadoQueAsParcelasFazemParteDeUmaOperacaoFinanceira(Table parcelasDaOperacao)

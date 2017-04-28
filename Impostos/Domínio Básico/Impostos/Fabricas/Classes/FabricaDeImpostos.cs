@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ContextoDeImpostos;
 using ContextoDeImpostos.Impostos;
 
-namespace Impostos.Fabricas
+namespace ContextoDeImpostos.Fabricas
 {
     internal class FabricaDeImpostos : IFabricaDeImpostos
     {

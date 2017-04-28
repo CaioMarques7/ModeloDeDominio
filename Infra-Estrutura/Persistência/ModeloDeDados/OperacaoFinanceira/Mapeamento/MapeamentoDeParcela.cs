@@ -14,12 +14,12 @@ namespace ModeloDeDados.OperacaoFinanceira.Mapeamento
         public MapeamentoDeParcela()
         {
             Property(parcela => parcela.IdDaOperacao).IsRequired();
-            Property(parcela => parcela.Valor).IsRequired().HasPrecision(8, 2);
+            Property(parcela => parcela.Valor).IsRequired();
             Property(parcela => parcela.DataDeVencimento).IsRequired();
             Property(parcela => parcela.Prazo).IsRequired();
-            Property(parcela => parcela.ValorDeIof).IsRequired().HasPrecision(6, 2);
-            Property(parcela => parcela.ValorDePis).IsRequired().HasPrecision(6, 2);
-            Property(parcela => parcela.ValorDeCofins).IsRequired().HasPrecision(6, 2);
+            Property(parcela => parcela.ValorDeIof).IsRequired();
+            Property(parcela => parcela.ValorDePis).IsRequired();
+            Property(parcela => parcela.ValorDeCofins).IsRequired();
 
             ToTable("ParcelaDeOperacao");
             HasKey(parcela => new { parcela.IdDaOperacao, parcela.DataDeVencimento, parcela.Valor });

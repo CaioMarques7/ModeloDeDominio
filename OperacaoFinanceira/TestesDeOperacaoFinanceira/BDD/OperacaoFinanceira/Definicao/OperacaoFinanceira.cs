@@ -53,7 +53,7 @@ namespace TestesDeOperacaoFinanceira.BDD.OperacaoFinanceira.Definicao
             foreach (var parcela in _parcelasDaOperacao.Rows.Select(row => new { Valor = Convert.ToDecimal(row.ElementAt(0).Value), Vencimento = Convert.ToDateTime(row.ElementAt(1).Value) }))
                 _operacao.IncluirParcela(parcela.Valor, parcela.Vencimento);
 
-            _operacao.CalcularImpostos();
+            _operacao.CalcularOperacao();
         }
 
         [Then(@"o valor de IOF apurado deve ser de R\$ (.*)")]

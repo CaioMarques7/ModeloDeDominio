@@ -11,7 +11,7 @@ namespace ModeloDeDados.OperacaoFinanceira.Entidades
         /// <summary>
         /// Identificador único da operação.
         /// </summary>
-        public long IdDaOperacao { get; set; }
+        internal long IdDaOperacao { get; set; }
 
         /// <summary>
         /// Valor da Parcela.
@@ -43,9 +43,22 @@ namespace ModeloDeDados.OperacaoFinanceira.Entidades
         /// </summary>
         public short Prazo { get; set; }
 
+        #region Propriedade de Verificação de Concorrência
+
+        /// <summary>
+        /// Token de Concorrência.
+        /// </summary>
+        internal byte[] RowVersion { get; set; }
+
+        #endregion
+
+        #region Propriedades de Navegação
+
         /// <summary>
         /// Operação da parcela.
         /// </summary>
-        public Operacao Operacao { get; set; }
+        internal Operacao Operacao { get; set; }
+
+        #endregion
     }
 }

@@ -92,12 +92,13 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         }
 
         /// <summary>
-        /// Calcula os impostos que incidem sobre a operação.
+        /// Calcula os valores que incidem sobre a operação.
         /// </summary>
-        public void CalcularImpostos()
+        public void CalcularOperacao()
         {
             foreach (var parcela in Parcelas)
-                parcela.CalcularImpostos();
+                parcela.CalcularImpostos()
+                       .CalcularJuros();
         }
 
         #endregion

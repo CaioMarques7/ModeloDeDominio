@@ -52,7 +52,7 @@ namespace TestesDeOperacaoFinanceira.TDD
             for (int i = 0; i < 10000; i++)
                 operacao.IncluirParcela(Math.Round((decimal)(r.Next(1, 32767) * 13 / 11), 2), DateTime.Today.AddDays(r.Next(1, 32767)));
             
-            operacao.CalcularImpostos();
+            operacao.CalcularOperacao();
 
             Console.WriteLine(DateTime.Now);
 

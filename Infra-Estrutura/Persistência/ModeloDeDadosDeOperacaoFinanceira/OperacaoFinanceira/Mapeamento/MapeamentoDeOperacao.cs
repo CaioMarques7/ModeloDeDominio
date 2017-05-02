@@ -21,6 +21,7 @@ namespace ModeloDeDados.OperacaoFinanceira.Mapeamento
             Property(operacao => operacao.ValorDeIof).IsRequired();
             Property(operacao => operacao.ValorDePis).IsRequired();
             Property(operacao => operacao.ValorDeCofins).IsRequired();
+            Property(operacao => operacao.RowVersion).IsRowVersion();
 
             ToTable("Operacao");
             HasKey(operacao => operacao.Id);

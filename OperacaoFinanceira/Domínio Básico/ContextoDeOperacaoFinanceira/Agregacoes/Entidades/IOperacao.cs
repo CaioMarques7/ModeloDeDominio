@@ -45,8 +45,8 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         void IncluirParcela(decimal valorDaParcela, DateTime dataDeVencimento);
 
         /// <summary>
-        /// Calcula os impostos que incidem sobre a operação.
+        /// Calcula os valores que incidem sobre a operação.
         /// </summary>
-        void CalcularImpostos();
+        void CalcularOperacao();
     }
 }

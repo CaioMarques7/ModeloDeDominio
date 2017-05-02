@@ -60,13 +60,25 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         public IEnumerable<IImposto> ImpostosIncidentes { get; }
 
         /// <summary>
+        /// Calcula os juros que incidem sobre a parcela.
+        /// </summary>
+        /// <returns>Parcela com juros calculados.</returns>
+        public IParcela CalcularJuros()
+        {
+            return this;
+        }
+
+        /// <summary>
         /// Calcula os impostos que incidem sobre a parcela.
         /// </summary>
-        public void CalcularImpostos()
+        /// <returns>Parcela com impostos calculados.</returns>
+        public IParcela CalcularImpostos()
         {
             CalcularIof();
             CalcularPis();
             CalcularCofins();
+
+            return this;
         }
 
         #endregion

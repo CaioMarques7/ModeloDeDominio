@@ -65,9 +65,9 @@
       <Project>{86583d60-fb7b-4b2b-84d2-797d59dd8aa9}</Project>
       <Name>BancoDeDados</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Persistência\ModeloDeDados\ModeloDeDados.csproj">
+    <ProjectReference Include="..\..\Persistência\ModeloDeDadosDeOperacaoFinanceira\ModeloDeDadosDeOperacaoFinanceira.csproj">
       <Project>{82b4394a-206b-417e-b03a-43bf85626791}</Project>
-      <Name>ModeloDeDados</Name>
+      <Name>ModeloDeDadosDeOperacaoFinanceira</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

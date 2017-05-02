@@ -52,9 +52,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ModeloDeDados\ModeloDeDados.csproj">
+    <ProjectReference Include="..\ModeloDeDadosDeOperacaoFinanceira\ModeloDeDadosDeOperacaoFinanceira.csproj">
       <Project>{82b4394a-206b-417e-b03a-43bf85626791}</Project>
-      <Name>ModeloDeDados</Name>
+      <Name>ModeloDeDadosDeOperacaoFinanceira</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

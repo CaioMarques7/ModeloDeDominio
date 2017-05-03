@@ -1,6 +1,4 @@
-﻿using ModeloDeDados.OperacaoFinanceira.Entidades;
-using ModeloDeDados.OperacaoFinanceira.Mapeamento;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -11,20 +9,19 @@ namespace BancoDeDados.EF6
 {
     public class ContextoDeBancoDeDados : DbContext
     {
-        public ContextoDeBancoDeDados()
+        private readonly IConstrutorDeModeloDeDados _construtorDeModeloDeDados;
+
+        public ContextoDeBancoDeDados(IConstrutorDeModeloDeDados construtorDeModeloDeDados)
             : base(nameOrConnectionString: "data source=localhost;initial catalog=Estudos;persist security info=True;Integrated Security=true;MultipleActiveResultSets=True;App=EntityFramework")
         {
-
+            _construtorDeModeloDeDados = construtorDeModeloDeDados;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new MapeamentoDeOperacao());
-            modelBuilder.Configurations.Add(new MapeamentoDeParcela());
+            _construtorDeModeloDeDados.ConstruirModeloDeDados(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
         }
-        
-        public DbSet<Operacao> Operacoes { get; set; }
     }
 }

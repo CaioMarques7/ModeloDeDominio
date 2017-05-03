@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModeloDeDados.OperacaoFinanceira.Entidades
 {
-    public class Parcela
+    public class Parcela : EntidadeBase
     {
         /// <summary>
         /// Identificador único da operação.

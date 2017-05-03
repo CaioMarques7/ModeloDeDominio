@@ -31,7 +31,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Genérico", "Genérico", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DominioGenerico", "DominioGenerico\DominioGenerico.csproj", "{EC968E6F-05A5-4480-BAD7-33A5C91F3748}"
 	ProjectSection(ProjectDependencies) = postProject
-		{82B4394A-206B-417E-B03A-43BF85626791} = {82B4394A-206B-417E-B03A-43BF85626791}
 		{86583D60-FB7B-4B2B-84D2-797D59DD8AA9} = {86583D60-FB7B-4B2B-84D2-797D59DD8AA9}
 	EndProjectSection
 EndProject
@@ -58,6 +57,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestesDeCalculoFinanceiro",
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModeloDeDadosDeOperacaoFinanceira", "Infra-Estrutura\Persistência\ModeloDeDadosDeOperacaoFinanceira\ModeloDeDadosDeOperacaoFinanceira.csproj", "{82B4394A-206B-417E-B03A-43BF85626791}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModeloDeDados", "Infra-Estrutura\Persistência\ModeloDeDados\ModeloDeDados.csproj", "{0AFADD24-14CD-4A8D-A32D-0A01BA5658C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +106,10 @@ Global
 		{82B4394A-206B-417E-B03A-43BF85626791}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82B4394A-206B-417E-B03A-43BF85626791}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82B4394A-206B-417E-B03A-43BF85626791}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AFADD24-14CD-4A8D-A32D-0A01BA5658C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AFADD24-14CD-4A8D-A32D-0A01BA5658C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AFADD24-14CD-4A8D-A32D-0A01BA5658C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AFADD24-14CD-4A8D-A32D-0A01BA5658C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,5 +130,6 @@ Global
 		{BBF87891-A478-4386-BB9A-8A25C7FEEDA6} = {52190486-ADB0-419B-AA20-0C517F4BF8EC}
 		{6A2280E6-661B-4D02-8382-F60C840A9F87} = {16080D57-FB00-4DEF-9B9F-C5A12C4CAFB2}
 		{82B4394A-206B-417E-B03A-43BF85626791} = {091195E6-4C01-4319-8F78-86B866185EAC}
+		{0AFADD24-14CD-4A8D-A32D-0A01BA5658C4} = {091195E6-4C01-4319-8F78-86B866185EAC}
 	EndGlobalSection
 EndGlobal

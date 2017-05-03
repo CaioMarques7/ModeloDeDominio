@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ModeloDeDados.OperacaoFinanceira.Mapeamento
 {
-    public class MapeamentoDeOperacao : EntityTypeConfiguration<Operacao>
+    internal class MapeamentoDeOperacao : EntityTypeConfiguration<Operacao>
     {
         public MapeamentoDeOperacao()
         {

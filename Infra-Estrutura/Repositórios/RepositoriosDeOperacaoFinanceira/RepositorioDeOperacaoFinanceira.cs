@@ -5,19 +5,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ContextoDeOperacaoFinanceira.Agregacoes.Entidades;
-using ModeloDeDadosDeOperacaoFinanceira = ModeloDeDados.OperacaoFinanceira.Entidades;
+using ModeloDeOperacaoFinanceira = ModeloDeDados.OperacaoFinanceira.Entidades;
 using BancoDeDados.EF6;
 using ContextoDeImpostos;
+using System.Data.Entity;
+using ModeloDeDados;
 
 namespace RepositoriosDeOperacaoFinanceira
 {
     public class RepositorioDeOperacaoFinanceira : IRepositorioDeCriacaoDeOperacaoFinanceira
     {
         private readonly ContextoDeBancoDeDados _contexto;
+        private readonly DbSet<ModeloDeOperacaoFinanceira.Operacao> _set;
 
         public RepositorioDeOperacaoFinanceira(ContextoDeBancoDeDados contexto)
         {
             _contexto = contexto;
+            _set = _contexto.Set<ModeloDeOperacaoFinanceira.Operacao>();
         }
 
         /// <summary>
@@ -32,7 +36,7 @@ namespace RepositoriosDeOperacaoFinanceira
 
             var operacaoDoBanco = TransformarEntidadeDeDominioEmEntidadeDoBancoDeDados(operacao);
 
-            _contexto.Operacoes.Add(operacaoDoBanco);
+            _set.Add(operacaoDoBanco);
             _contexto.SaveChanges();
         }
 
@@ -47,10 +51,10 @@ namespace RepositoriosDeOperacaoFinanceira
             validarOperacao.Invoke(operacao);
         }
 
-        private ModeloDeDadosDeOperacaoFinanceira.Operacao TransformarEntidadeDeDominioEmEntidadeDoBancoDeDados(IOperacao operacao)
+        private ModeloDeOperacaoFinanceira.Operacao TransformarEntidadeDeDominioEmEntidadeDoBancoDeDados(IOperacao operacao)
         {
-            var colecaoDeParcelas = new HashSet<ModeloDeDadosDeOperacaoFinanceira.Parcela>(
-                    operacao.Parcelas.Select(parcela => new ModeloDeDadosDeOperacaoFinanceira.Parcela()
+            var parcelasDaOperacao = new HashSet<ModeloDeOperacaoFinanceira.Parcela>(
+                    operacao.Parcelas.Select(parcela => new ModeloDeOperacaoFinanceira.Parcela()
                     {
                         DataDeVencimento = parcela.DataDeVencimento,
                         Prazo = parcela.Prazo,
@@ -60,17 +64,16 @@ namespace RepositoriosDeOperacaoFinanceira
                         ValorDeCofins = parcela.ImpostosIncidentes.OfType<ICofins>().Sum(cofins => cofins.ValorApurado)
                     }));
 
-            return new ModeloDeDadosDeOperacaoFinanceira.Operacao()
+            return new ModeloDeOperacaoFinanceira.Operacao()
             {
-                Id = operacao.Id,
                 DataDaOperacao = operacao.DataDaOperacao,
                 TaxaDeIof = operacao.TaxaDeIof,
                 TipoDeOperacao = (byte)operacao.TipoDeOperacao,
-                Parcelas = colecaoDeParcelas,
-                Valor = colecaoDeParcelas.Sum(parcela => parcela.Valor),
-                ValorDeIof = colecaoDeParcelas.Sum(parcela => parcela.ValorDeIof),
-                ValorDePis = colecaoDeParcelas.Sum(parcela => parcela.ValorDePis),
-                ValorDeCofins = colecaoDeParcelas.Sum(parcela => parcela.ValorDeCofins)
+                Parcelas = parcelasDaOperacao,
+                Valor = parcelasDaOperacao.Sum(parcela => parcela.Valor),
+                ValorDeIof = parcelasDaOperacao.Sum(parcela => parcela.ValorDeIof),
+                ValorDePis = parcelasDaOperacao.Sum(parcela => parcela.ValorDePis),
+                ValorDeCofins = parcelasDaOperacao.Sum(parcela => parcela.ValorDeCofins)
             };
         }
     }

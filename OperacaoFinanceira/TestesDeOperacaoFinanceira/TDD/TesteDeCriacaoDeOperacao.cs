@@ -4,6 +4,7 @@ using ContextoDeOperacaoFinanceira.Agregacoes.Entidades;
 using ContextoDeOperacaoFinanceira.Fabricas;
 using ContextoDeOperacaoFinanceira.Repositorios;
 using FluentAssertions;
+using ModeloDeDadosDeOperacaoFinanceira.OperacaoFinanceira.Mapeamento;
 using Moq;
 using NUnit.Framework;
 using RepositoriosDeOperacaoFinanceira;
@@ -25,7 +26,7 @@ namespace TestesDeOperacaoFinanceira.TDD
         protected void Inicializar()
         {
             _fabricaDeOperacao = new FabricaDeOperacao(new ContextoDeImpostos.Fabricas.FabricaDeImpostos());
-            _repositorio = new RepositorioDeOperacaoFinanceira(new ContextoDeBancoDeDados());
+            _repositorio = new RepositorioDeOperacaoFinanceira(new ContextoDeBancoDeDados(new MapeamentoDeOperacaoFinanceira()));
         }
 
         [Test]

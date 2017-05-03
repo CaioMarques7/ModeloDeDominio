@@ -69,6 +69,10 @@
       <Project>{82b4394a-206b-417e-b03a-43bf85626791}</Project>
       <Name>ModeloDeDadosDeOperacaoFinanceira</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Persistência\ModeloDeDados\ModeloDeDados.csproj">
+      <Project>{0AFADD24-14CD-4A8D-A32D-0A01BA5658C4}</Project>
+      <Name>ModeloDeDados</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

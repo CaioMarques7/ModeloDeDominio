@@ -46,16 +46,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EF6\ContextoDeBancoDeDados.cs" />
+    <Compile Include="EF6\IConstrutorDeModeloDeDados.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ModeloDeDadosDeOperacaoFinanceira\ModeloDeDadosDeOperacaoFinanceira.csproj">
-      <Project>{82b4394a-206b-417e-b03a-43bf85626791}</Project>
-      <Name>ModeloDeDadosDeOperacaoFinanceira</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

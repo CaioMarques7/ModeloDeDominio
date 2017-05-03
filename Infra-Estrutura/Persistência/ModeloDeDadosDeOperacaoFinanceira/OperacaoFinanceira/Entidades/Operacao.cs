@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModeloDeDados.OperacaoFinanceira.Entidades
 {
-    public class Operacao
+    public class Operacao : EntidadeBase
     {
         /// <summary>
         /// Identificador único da operação.

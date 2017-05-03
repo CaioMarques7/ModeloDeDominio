@@ -112,6 +112,10 @@
       <Project>{86583D60-FB7B-4B2B-84D2-797D59DD8AA9}</Project>
       <Name>BancoDeDados</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Infra-Estrutura\Persistência\ModeloDeDadosDeOperacaoFinanceira\ModeloDeDadosDeOperacaoFinanceira.csproj">
+      <Project>{82b4394a-206b-417e-b03a-43bf85626791}</Project>
+      <Name>ModeloDeDadosDeOperacaoFinanceira</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Infra-Estrutura\Repositórios\RepositoriosDeOperacaoFinanceira\RepositoriosDeOperacaoFinanceira.csproj">
       <Project>{90229D38-6DCC-4905-9F56-E7E3DD4CF2D4}</Project>
       <Name>RepositoriosDeOperacaoFinanceira</Name>

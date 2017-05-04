@@ -13,7 +13,7 @@ namespace ModeloDeDados
         /// <summary>
         /// Token de Concorrência.
         /// </summary>
-        public byte[] RowVersion { get; set; }
+        public byte[] RowVersion { get; internal set; }
 
         #endregion
     }

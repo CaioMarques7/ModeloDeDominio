@@ -10,18 +10,15 @@ using BancoDeDados.EF6;
 using ContextoDeImpostos;
 using System.Data.Entity;
 using ModeloDeDados;
+using Repositorios;
 
 namespace RepositoriosDeOperacaoFinanceira
 {
-    public class RepositorioDeOperacaoFinanceira : IRepositorioDeCriacaoDeOperacaoFinanceira
+    public class RepositorioDeOperacaoFinanceira : RepositorioGenerico<ModeloDeOperacaoFinanceira.Operacao>, IRepositorioDeCriacaoDeOperacaoFinanceira
     {
-        private readonly ContextoDeBancoDeDados _contexto;
-        private readonly DbSet<ModeloDeOperacaoFinanceira.Operacao> _set;
-
-        public RepositorioDeOperacaoFinanceira(ContextoDeBancoDeDados contexto)
+        public RepositorioDeOperacaoFinanceira(IContextoDeBancoDeDados contexto) : base(contexto)
         {
-            _contexto = contexto;
-            _set = _contexto.Set<ModeloDeOperacaoFinanceira.Operacao>();
+            
         }
 
         /// <summary>
@@ -36,8 +33,8 @@ namespace RepositoriosDeOperacaoFinanceira
 
             var operacaoDoBanco = TransformarEntidadeDeDominioEmEntidadeDoBancoDeDados(operacao);
 
-            _set.Add(operacaoDoBanco);
-            _contexto.SaveChanges();
+            Entidades.Add(operacaoDoBanco);
+            Contexto.PersistirModeloDeDados();
         }
 
         private void IdentificarOperacaoValida(IOperacao operacao)

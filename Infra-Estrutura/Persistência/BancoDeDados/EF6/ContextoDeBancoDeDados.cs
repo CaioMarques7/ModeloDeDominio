@@ -7,15 +7,36 @@ using System.Threading.Tasks;
 
 namespace BancoDeDados.EF6
 {
-    public class ContextoDeBancoDeDados : DbContext
+    public abstract class ContextoDeBancoDeDados : DbContext, IContextoDeBancoDeDados
     {
         private readonly IConstrutorDeModeloDeDados _construtorDeModeloDeDados;
 
-        public ContextoDeBancoDeDados(IConstrutorDeModeloDeDados construtorDeModeloDeDados)
-            : base(nameOrConnectionString: "data source=localhost;initial catalog=Estudos;persist security info=True;Integrated Security=true;MultipleActiveResultSets=True;App=EntityFramework")
+        protected ContextoDeBancoDeDados(string dadosDeConexao, IConstrutorDeModeloDeDados construtorDeModeloDeDados)
+            : base(nameOrConnectionString: dadosDeConexao)
         {
             _construtorDeModeloDeDados = construtorDeModeloDeDados;
         }
+
+        #region Membros de IContextoDeBancoDeDados
+
+        public DbSet<TEntity> Entidades<TEntity>() where TEntity : class
+        {
+            return Set<TEntity>();
+        }
+
+        public int PersistirModeloDeDados()
+        {
+            return SaveChanges();
+        }
+
+        public Task<int> PersistirModeloDeDadosAssincrono()
+        {
+            return SaveChangesAsync();
+        }
+
+        #endregion
+
+        #region Membros de DbContext
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -23,5 +44,7 @@ namespace BancoDeDados.EF6
 
             base.OnModelCreating(modelBuilder);
         }
+
+        #endregion
     }
 }

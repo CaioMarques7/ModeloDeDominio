@@ -9,7 +9,7 @@ using ModeloDeDados.OperacaoFinanceira.Mapeamento;
 
 namespace ModeloDeDadosDeOperacaoFinanceira.OperacaoFinanceira.Mapeamento
 {
-    public class MapeamentoDeOperacaoFinanceira : IConstrutorDeModeloDeDados
+    internal class MapeamentoDeOperacaoFinanceira : IConstrutorDeModeloDeDados
     {
         public void ConstruirModeloDeDados(DbModelBuilder modelBuilder)
         {

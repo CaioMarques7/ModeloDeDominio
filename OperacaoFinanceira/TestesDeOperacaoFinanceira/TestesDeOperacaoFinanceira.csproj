@@ -120,6 +120,10 @@
       <Project>{90229D38-6DCC-4905-9F56-E7E3DD4CF2D4}</Project>
       <Name>RepositoriosDeOperacaoFinanceira</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Infra-Estrutura\Repositórios\Repositorios\Repositorios.csproj">
+      <Project>{85645995-8380-4fa8-91ba-bd44fd14691b}</Project>
+      <Name>Repositorios</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domínio Básico\ContextoDeOperacaoFinanceira\ContextoDeOperacaoFinanceira.csproj">
       <Project>{6D2A5AD5-2D0C-40B2-B3A5-9A0521C1958C}</Project>
       <Name>ContextoDeOperacaoFinanceira</Name>

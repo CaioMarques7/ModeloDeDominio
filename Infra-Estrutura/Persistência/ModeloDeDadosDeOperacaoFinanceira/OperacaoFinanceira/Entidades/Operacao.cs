@@ -11,7 +11,7 @@ namespace ModeloDeDados.OperacaoFinanceira.Entidades
         /// <summary>
         /// Identificador único da operação.
         /// </summary>
-        public long Id { get; set; }
+        public long Id { get; internal set; }
 
         /// <summary>
         /// Tipo de operação.

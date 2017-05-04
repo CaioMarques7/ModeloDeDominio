@@ -73,6 +73,10 @@
       <Project>{0AFADD24-14CD-4A8D-A32D-0A01BA5658C4}</Project>
       <Name>ModeloDeDados</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Repositorios\Repositorios.csproj">
+      <Project>{85645995-8380-4fa8-91ba-bd44fd14691b}</Project>
+      <Name>Repositorios</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

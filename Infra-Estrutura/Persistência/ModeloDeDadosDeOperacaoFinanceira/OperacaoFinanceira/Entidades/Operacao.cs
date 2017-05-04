@@ -48,21 +48,12 @@ namespace ModeloDeDados.OperacaoFinanceira.Entidades
         /// </summary>
         public decimal ValorDeCofins { get; set; }
 
-        #region Propriedade de Verificação de Concorrência
-
-        /// <summary>
-        /// Token de Concorrência.
-        /// </summary>
-        internal byte[] RowVersion { get; set; }
-
-        #endregion
-
         #region Propriedades de Navegação
 
         /// <summary>
         /// Coleção de parcelas da operação.
         /// </summary>
-        public ICollection<Parcela> Parcelas { get; set; }
+        public virtual ICollection<Parcela> Parcelas { get; set; }
 
         #endregion
     }

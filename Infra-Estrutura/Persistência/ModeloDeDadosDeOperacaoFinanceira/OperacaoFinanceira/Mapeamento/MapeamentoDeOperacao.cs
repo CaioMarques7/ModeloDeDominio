@@ -15,7 +15,7 @@ namespace ModeloDeDados.OperacaoFinanceira.Mapeamento
         {
             Property(operacao => operacao.Id).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(operacao => operacao.TipoDeOperacao).IsRequired();
-            Property(operacao => operacao.DataDaOperacao).IsRequired();
+            Property(operacao => operacao.DataDaOperacao).HasColumnType("date").IsRequired();
             Property(operacao => operacao.TaxaDeIof).IsRequired().HasPrecision(3, 2);
             Property(operacao => operacao.Valor).IsRequired();
             Property(operacao => operacao.ValorDeIof).IsRequired();

@@ -62,7 +62,7 @@
       <Name>BancoDeDados</Name>
     </ProjectReference>
     <ProjectReference Include="..\ModeloDeDados\ModeloDeDados.csproj">
-      <Project>{0AFADD24-14CD-4A8D-A32D-0A01BA5658C4}</Project>
+      <Project>{0afadd24-14cd-4a8d-a32d-0a01ba5658c4}</Project>
       <Name>ModeloDeDados</Name>
     </ProjectReference>
   </ItemGroup>

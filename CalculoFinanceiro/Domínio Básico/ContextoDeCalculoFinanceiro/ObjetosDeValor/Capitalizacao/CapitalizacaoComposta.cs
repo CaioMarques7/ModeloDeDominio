@@ -43,7 +43,7 @@ namespace ContextoDeCalculoFinanceiro.Capitalizacao
 
         private double PercentualDeCapitalizacao()
         {
-            return Convert.ToDouble(_taxa / 100m);
+            return Convert.ToDouble(1 + _taxa / 100m);
         }
     }
 }

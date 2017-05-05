@@ -80,7 +80,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
                 _fabricaDeCalculosFinanceiros.CriarCalculoComCorrecaoExponencial(Valor, _operacao.TaxaDeJuros, Prazo, Periodicidade.Mensal);
 
 
-            ValorDeJuros = calculoFinanceiro.ValorCalculado();
+            ValorDeJuros = calculoFinanceiro.ValorCalculado() - Valor;
 
             return this;
         }

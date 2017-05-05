@@ -8,8 +8,8 @@ namespace ContextoDeCalculoFinanceiro.Fabricas
 {
     public interface IFabricaDeCalculosFinanceiros
     {
-        CalculoLinear CriarCalculoComCorrecaoLinear(decimal valorPresente, decimal taxaDeJuros, int diasDeApropriacao, Periodicidade periodicidade);
+        ICalculoFinanceiro CriarCalculoComCorrecaoLinear(decimal valorPresente, decimal taxaDeJuros, int diasDeApropriacao, Periodicidade periodicidade);
 
-        CalculoExponencial CriarCalculoComCorrecaoExponencial(decimal valorPresente, decimal taxaDeJuros, int diasDeApropriacao, Periodicidade periodicidade);
+        ICalculoFinanceiro CriarCalculoComCorrecaoExponencial(decimal valorPresente, decimal taxaDeJuros, int diasDeApropriacao, Periodicidade periodicidade);
     }
 }

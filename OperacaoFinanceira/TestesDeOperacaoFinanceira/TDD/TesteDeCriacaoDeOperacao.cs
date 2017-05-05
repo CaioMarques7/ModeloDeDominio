@@ -47,13 +47,13 @@ namespace TestesDeOperacaoFinanceira.TDD
         [Test]
         public void SalvarNovaOperacaoNoBancoDeDados()
         {
-            var operacao = _fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo0, DateTime.Today, 0.9472m, 5.25m);
+            var operacao = _fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo0, DateTime.Today, 0.9472m, 1.00m);
 
             Random r = new Random();
 
             for (int i = 0; i < 10000; i++)
                 operacao.IncluirParcela(Math.Round((decimal)(r.Next(1, 32767) * 13 / 11), 2), DateTime.Today.AddDays(r.Next(1, 32767)));
-            
+
             operacao.CalcularOperacao();
 
             Console.WriteLine(DateTime.Now);

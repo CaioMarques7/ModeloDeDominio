@@ -9,7 +9,7 @@ namespace ContextoDeCalculoFinanceiro.Fabricas.Classes
 {
     internal class FabricaDeCalculosFinanceiros : IFabricaDeCalculosFinanceiros
     {
-        public CalculoLinear CriarCalculoComCorrecaoLinear(decimal valorPresente, decimal taxaDeJuros, int diasDeApropriacao, Periodicidade periodicidade)
+        public ICalculoFinanceiro CriarCalculoComCorrecaoLinear(decimal valorPresente, decimal taxaDeJuros, int diasDeApropriacao, Periodicidade periodicidade)
         {
             var periodoDeCapitalizacao = new PeriodoDeCapitalizacao(diasDeApropriacao, periodicidade);
             var capitalizacaoComposta = new CapitalizacaoComposta(taxaDeJuros, periodoDeCapitalizacao.PeriodosInteiros);
@@ -18,7 +18,7 @@ namespace ContextoDeCalculoFinanceiro.Fabricas.Classes
             return new CalculoLinear(valorPresente, capitalizacaoComposta, capitalizacaoSimples);
         }
 
-        public CalculoExponencial CriarCalculoComCorrecaoExponencial(decimal valorPresente, decimal taxaDeJuros, int diasDeApropriacao, Periodicidade periodicidade)
+        public ICalculoFinanceiro CriarCalculoComCorrecaoExponencial(decimal valorPresente, decimal taxaDeJuros, int diasDeApropriacao, Periodicidade periodicidade)
         {
             var periodoDeCapitalizacao = new PeriodoDeCapitalizacao(diasDeApropriacao, periodicidade);
             var capitalizacaoComposta = new CapitalizacaoComposta(taxaDeJuros, periodoDeCapitalizacao.PeriodoTotal);

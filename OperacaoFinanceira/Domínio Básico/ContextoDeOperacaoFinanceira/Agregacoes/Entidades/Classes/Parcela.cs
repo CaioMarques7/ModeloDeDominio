@@ -75,11 +75,12 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// <returns>Parcela com juros calculados.</returns>
         public IParcela CalcularJuros()
         {
-            _fabricaDeCalculosFinanceiros.CriarCalculoComCorrecaoLinear(Valor, _operacao.TaxaDeJuros, Prazo, Periodicidade.Mensal);
-            _fabricaDeCalculosFinanceiros.CriarCalculoComCorrecaoExponencial(Valor, _operacao.TaxaDeJuros, Prazo, Periodicidade.Mensal);
+            var calculoFinanceiro = Prazo <= 30 ?
+                _fabricaDeCalculosFinanceiros.CriarCalculoComCorrecaoLinear(Valor, _operacao.TaxaDeJuros, Prazo, Periodicidade.Mensal) :
+                _fabricaDeCalculosFinanceiros.CriarCalculoComCorrecaoExponencial(Valor, _operacao.TaxaDeJuros, Prazo, Periodicidade.Mensal);
 
 
-            ValorDeJuros = 0m;
+            ValorDeJuros = calculoFinanceiro.ValorCalculado();
 
             return this;
         }

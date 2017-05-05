@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ContextoDeCalculoFinanceiro
 {
-    public struct CalculoExponencial
+    internal struct CalculoExponencial : ICalculoFinanceiro
     {
         private readonly decimal _valorPresente;
         private readonly CapitalizacaoComposta _capitalizacaoComposta;

@@ -18,7 +18,7 @@ namespace ContextoDeCalculoFinanceiro.Capitalizacao
 
         public decimal ObterFatorDeCorrecao()
         {
-            return 1m + PercentualDeCapitalizacao();
+            return PercentualDeCapitalizacao();
         }
 
         #region Operadores

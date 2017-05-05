@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Fabricas\Classes\FabricaDeCalculosFinanceiros.cs" />
     <Compile Include="Fabricas\IFabricaDeCalculosFinanceiros.cs" />
+    <Compile Include="ICalculoFinanceiro.cs" />
     <Compile Include="ObjetosDeValor\CalculoExponencial.cs" />
     <Compile Include="ObjetosDeValor\CalculoLinear.cs" />
     <Compile Include="ObjetosDeValor\Capitalizacao\CapitalizacaoComposta.cs" />

@@ -19,6 +19,11 @@ namespace ModeloDeDados.OperacaoFinanceira.Entidades
         public decimal Valor { get; set; }
 
         /// <summary>
+        /// Valor de Juros.
+        /// </summary>
+        public decimal ValorDeJuros { get; set; }
+
+        /// <summary>
         /// Valor de IOF da parcela.
         /// </summary>
         public decimal ValorDeIof { get; set; }

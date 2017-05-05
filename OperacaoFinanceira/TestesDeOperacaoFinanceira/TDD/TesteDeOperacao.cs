@@ -14,18 +14,18 @@ namespace TestesDeOperacaoFinanceira.TDD
     public class TesteDeOperacao
     {
         private readonly ICollection<IOperacao> _operacoes = new HashSet<IOperacao>();
-        private readonly IFabricaDeOperacao _fabricaDeOperacao = new FabricaDeOperacao(new ContextoDeImpostos.Fabricas.FabricaDeImpostos());
+        private readonly IFabricaDeOperacao _fabricaDeOperacao = new FabricaDeOperacao(new ContextoDeImpostos.Fabricas.FabricaDeImpostos(), new ContextoDeCalculoFinanceiro.Fabricas.Classes.FabricaDeCalculosFinanceiros());
         
 
         [SetUp]
         protected void Inicializar()
         {
-            _operacoes.Add(_fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo0, DateTime.Today, 1.5m));
-            _operacoes.Add(_fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo1, DateTime.Today, 0.25m));
-            _operacoes.Add(_fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo2, DateTime.Today, 3.1m));
-            _operacoes.Add(_fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo2, DateTime.Today, 0.75m));
-            _operacoes.Add(_fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo1, DateTime.Today, 2.74m));
-            _operacoes.Add(_fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo0, DateTime.Today, 1.47m));
+            _operacoes.Add(_fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo0, DateTime.Today, 1.5m, 3.14m));
+            _operacoes.Add(_fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo1, DateTime.Today, 0.25m, 14.287m));
+            _operacoes.Add(_fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo2, DateTime.Today, 3.1m, 0.25m));
+            _operacoes.Add(_fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo2, DateTime.Today, 0.75m, 1.99m));
+            _operacoes.Add(_fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo1, DateTime.Today, 2.74m, 24.5674m));
+            _operacoes.Add(_fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo0, DateTime.Today, 1.47m, 2.3147m));
         }
 
         [TearDown]
@@ -47,7 +47,7 @@ namespace TestesDeOperacaoFinanceira.TDD
         [Test]
         public void CompararOperacoes()
         {
-            var operacao = _fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo1, DateTime.Today.AddDays(-30), 7.77m);
+            var operacao = _fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo1, DateTime.Today.AddDays(-30), 7.77m, 3.14m);
 
             _operacoes.Contains(operacao).Should().BeFalse();
         }
@@ -55,7 +55,7 @@ namespace TestesDeOperacaoFinanceira.TDD
         [Test]
         public void ImpedirParcelaIgualNaMesmaOperacao()
         {
-            var operacao = _fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo0, DateTime.Today, 4.374m);
+            var operacao = _fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo0, DateTime.Today, 4.374m, 9.124m);
 
             operacao.IncluirParcela(428.74m, DateTime.Today.AddDays(60));
             operacao.IncluirParcela(428.74m, DateTime.Today.AddDays(60));

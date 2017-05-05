@@ -18,6 +18,11 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         decimal Valor { get; }
 
         /// <summary>
+        /// Valor de Juros.
+        /// </summary>
+        decimal ValorDeJuros { get; }
+
+        /// <summary>
         /// Data de vencimento da parcela.
         /// </summary>
         DateTime DataDeVencimento { get; }

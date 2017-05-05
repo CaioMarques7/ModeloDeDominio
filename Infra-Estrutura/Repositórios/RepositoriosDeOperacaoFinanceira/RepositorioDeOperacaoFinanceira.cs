@@ -18,7 +18,7 @@ namespace RepositoriosDeOperacaoFinanceira
     {
         public RepositorioDeOperacaoFinanceira(IContextoDeBancoDeDados contexto) : base(contexto)
         {
-            
+
         }
 
         /// <summary>
@@ -56,6 +56,7 @@ namespace RepositoriosDeOperacaoFinanceira
                         DataDeVencimento = parcela.DataDeVencimento,
                         Prazo = parcela.Prazo,
                         Valor = parcela.Valor,
+                        ValorDeJuros = parcela.ValorDeJuros,
                         ValorDeIof = parcela.ImpostosIncidentes.OfType<IIof>().Sum(iof => iof.ValorApurado),
                         ValorDePis = parcela.ImpostosIncidentes.OfType<IPis>().Sum(pis => pis.ValorApurado),
                         ValorDeCofins = parcela.ImpostosIncidentes.OfType<ICofins>().Sum(cofins => cofins.ValorApurado)
@@ -65,9 +66,11 @@ namespace RepositoriosDeOperacaoFinanceira
             {
                 DataDaOperacao = operacao.DataDaOperacao,
                 TaxaDeIof = operacao.TaxaDeIof,
+                TaxaDeJuros = operacao.TaxaDeJuros,
                 TipoDeOperacao = (byte)operacao.TipoDeOperacao,
                 Parcelas = parcelasDaOperacao,
                 Valor = parcelasDaOperacao.Sum(parcela => parcela.Valor),
+                ValorDeJuros = parcelasDaOperacao.Sum(parcela => parcela.ValorDeJuros),
                 ValorDeIof = parcelasDaOperacao.Sum(parcela => parcela.ValorDeIof),
                 ValorDePis = parcelasDaOperacao.Sum(parcela => parcela.ValorDePis),
                 ValorDeCofins = parcelasDaOperacao.Sum(parcela => parcela.ValorDeCofins)

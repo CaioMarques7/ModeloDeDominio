@@ -29,9 +29,19 @@ namespace ModeloDeDados.OperacaoFinanceira.Entidades
         public decimal TaxaDeIof { get; set; }
 
         /// <summary>
+        /// Taxa de juros.
+        /// </summary>
+        public decimal TaxaDeJuros { get; set; }
+
+        /// <summary>
         /// Valor da operação.
         /// </summary>
         public decimal Valor { get; set; }
+
+        /// <summary>
+        /// Valor de juros da operação.
+        /// </summary>
+        public decimal ValorDeJuros { get; set; }
 
         /// <summary>
         /// Valor de IOF da operação.

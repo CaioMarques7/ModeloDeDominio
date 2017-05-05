@@ -26,7 +26,7 @@ namespace TestesDeOperacaoFinanceira.TDD
         [SetUp]
         protected void Inicializar()
         {
-            _fabricaDeOperacao = new FabricaDeOperacao(new ContextoDeImpostos.Fabricas.FabricaDeImpostos());
+            _fabricaDeOperacao = new FabricaDeOperacao(new ContextoDeImpostos.Fabricas.FabricaDeImpostos(), new ContextoDeCalculoFinanceiro.Fabricas.Classes.FabricaDeCalculosFinanceiros());
             _repositorio = new RepositorioDeOperacaoFinanceira(new ContextoDeBancoDeDadosDeOperacaoFinanceira());
         }
 
@@ -39,7 +39,7 @@ namespace TestesDeOperacaoFinanceira.TDD
         [Test]
         public void DisparaExcecaoDeOperacaoInvalidaQuandoNaoExistemParcelasNaOperacao()
         {
-            var operacao = _fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo0, DateTime.Today, 0.4852m);
+            var operacao = _fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo0, DateTime.Today, 0.4852m, 5.25m);
 
             Assert.Throws<InvalidOperationException>(() => _repositorio.CriarNovaOperacaoFinanceira(operacao));
         }
@@ -47,7 +47,7 @@ namespace TestesDeOperacaoFinanceira.TDD
         [Test]
         public void SalvarNovaOperacaoNoBancoDeDados()
         {
-            var operacao = _fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo0, DateTime.Today, 0.9472m);
+            var operacao = _fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo0, DateTime.Today, 0.9472m, 5.25m);
 
             Random r = new Random();
 

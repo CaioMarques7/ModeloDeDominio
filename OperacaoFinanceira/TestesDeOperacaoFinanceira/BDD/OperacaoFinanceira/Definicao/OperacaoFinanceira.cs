@@ -17,10 +17,10 @@ namespace TestesDeOperacaoFinanceira.BDD.OperacaoFinanceira.Definicao
     {
         private Table _parcelasDaOperacao;
         private IOperacao _operacao;
-        private decimal _taxaDeIof;
+        private decimal _taxaDeIof, _taxaDeJuros;
         private DateTime _dataDaOperacao;
         private TipoDeOperacaoFinanceira _tipoDeOperacaoFinanceira;
-        private readonly IFabricaDeOperacao _fabricaDeOperacao = new FabricaDeOperacao(new ContextoDeImpostos.Fabricas.FabricaDeImpostos());
+        private readonly IFabricaDeOperacao _fabricaDeOperacao = new FabricaDeOperacao(new ContextoDeImpostos.Fabricas.FabricaDeImpostos(), new ContextoDeCalculoFinanceiro.Fabricas.Classes.FabricaDeCalculosFinanceiros());
 
         [Given(@"que as parcelas abaixo fazem parte de uma operação financeira")]
         public void DadoQueAsParcelasFazemParteDeUmaOperacaoFinanceira(Table parcelasDaOperacao)
@@ -46,10 +46,16 @@ namespace TestesDeOperacaoFinanceira.BDD.OperacaoFinanceira.Definicao
             _taxaDeIof = taxaDeIof;
         }
 
+        [Given(@"a taxa de juros dessa operação é(.*)%")]
+        public void EATaxaDeJurosE(decimal taxaDeJuros)
+        {
+            _taxaDeJuros = taxaDeJuros;
+        }
+
         [When(@"eu calcular os impostos da operação")]
         public void QuandoCalcularOsImpostosDaOperacao()
         {
-            _operacao = _fabricaDeOperacao.CriarOperacao(_tipoDeOperacaoFinanceira, _dataDaOperacao, _taxaDeIof);
+            _operacao = _fabricaDeOperacao.CriarOperacao(_tipoDeOperacaoFinanceira, _dataDaOperacao, _taxaDeIof, _taxaDeJuros);
             foreach (var parcela in _parcelasDaOperacao.Rows.Select(row => new { Valor = Convert.ToDecimal(row.ElementAt(0).Value), Vencimento = Convert.ToDateTime(row.ElementAt(1).Value) }))
                 _operacao.IncluirParcela(parcela.Valor, parcela.Vencimento);
 

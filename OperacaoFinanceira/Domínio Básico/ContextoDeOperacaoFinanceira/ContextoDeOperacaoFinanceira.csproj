@@ -55,6 +55,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\..\..\CalculoFinanceiro\Domínio Básico\ContextoDeCalculoFinanceiro\ContextoDeCalculoFinanceiro.csproj">
+      <Project>{bbf87891-a478-4386-bb9a-8a25c7feeda6}</Project>
+      <Name>ContextoDeCalculoFinanceiro</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\DominioGenerico\DominioGenerico.csproj">
       <Project>{EC968E6F-05A5-4480-BAD7-33A5C91F3748}</Project>
       <Name>DominioGenerico</Name>

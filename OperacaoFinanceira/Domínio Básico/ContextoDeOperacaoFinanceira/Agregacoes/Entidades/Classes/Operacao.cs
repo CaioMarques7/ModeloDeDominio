@@ -26,8 +26,8 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// <param name="tipoDeOperacao">Tipo de operação financeira.</param>
         /// <param name="dataDaOperacao">Data da operação.</param>
         /// <param name="taxaDeIof">Taxa de IOF.</param>
-        public Operacao(IFabricaDeParcela fabricaDeParcela, TipoDeOperacaoFinanceira tipoDeOperacao, DateTime dataDaOperacao, decimal taxaDeIof)
-            : this(fabricaDeParcela, tipoDeOperacao, dataDaOperacao, taxaDeIof, fabricaDeParcela.CriarColecaoVaziaDeParcelas())
+        public Operacao(IFabricaDeParcela fabricaDeParcela, TipoDeOperacaoFinanceira tipoDeOperacao, DateTime dataDaOperacao, decimal taxaDeIof, decimal taxaDeJuros)
+            : this(fabricaDeParcela, tipoDeOperacao, dataDaOperacao, taxaDeIof, taxaDeJuros, fabricaDeParcela.CriarColecaoVaziaDeParcelas())
         {
             
         }
@@ -39,8 +39,9 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// <param name="tipoDeOperacao">Tipo de operação financeira.</param>
         /// <param name="dataDaOperacao">Data da operação.</param>
         /// <param name="taxaDeIof">Taxa de IOF.</param>
+        /// <param name="taxaDeJuros">Taxa de Juros.</param>
         /// <param name="parcelas">Parcelas da operação.</param>
-        public Operacao(IFabricaDeParcela fabricaDeParcela, TipoDeOperacaoFinanceira tipoDeOperacao, DateTime dataDaOperacao, decimal taxaDeIof, ICollection<IParcela> parcelas)
+        public Operacao(IFabricaDeParcela fabricaDeParcela, TipoDeOperacaoFinanceira tipoDeOperacao, DateTime dataDaOperacao, decimal taxaDeIof, decimal taxaDeJuros, ICollection<IParcela> parcelas)
         {
             _fabricaDeParcela = fabricaDeParcela;
 
@@ -48,6 +49,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
             TipoDeOperacao = tipoDeOperacao;
             DataDaOperacao = dataDaOperacao;
             TaxaDeIof = taxaDeIof;
+            TaxaDeJuros = taxaDeJuros;
         }
 
         #endregion
@@ -68,6 +70,11 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// Data da operação.
         /// </summary>
         public DateTime DataDaOperacao { get; }
+
+        /// <summary>
+        /// Taxa de juros.
+        /// </summary>
+        public decimal TaxaDeJuros { get; }
 
         /// <summary>
         /// Taxa de IOF.

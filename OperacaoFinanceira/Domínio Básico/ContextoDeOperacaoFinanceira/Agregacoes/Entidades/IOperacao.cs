@@ -28,6 +28,11 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         DateTime DataDaOperacao { get; }
 
         /// <summary>
+        /// Taxa de juros.
+        /// </summary>
+        decimal TaxaDeJuros { get; }
+
+        /// <summary>
         /// Taxa de IOF.
         /// </summary>
         decimal TaxaDeIof { get; }

@@ -83,19 +83,19 @@ namespace TestesDeOperacaoFinanceira.BDD.OperacaoFinanceira.Funcionalidade
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Calculando os impostos que incidem sobre a operação financeira")]
-        [NUnit.Framework.TestCaseAttribute("03/04/2017", "0", "1,5", "1460,18", "25,08", "115,53", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("03/04/2017", "1", "1,5", "1460,18", "25,08", "0,00", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("03/04/2017", "2", "1,5", "0,00", "25,08", "115,53", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("10/09/2017", "0", "0,61", "195,32", "25,08", "115,53", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("10/09/2017", "1", "0,61", "195,32", "25,08", "0,00", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("10/09/2017", "2", "0,61", "0,00", "25,08", "115,53", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("01/10/2017", "0", "1,2", "268,36", "25,08", "115,53", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("01/10/2017", "1", "1,2", "268,36", "25,08", "0,00", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("01/10/2017", "2", "1,2", "0,00", "25,08", "115,53", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("09/07/2017", "0", "0,24", "150,86", "25,08", "115,53", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("09/07/2017", "1", "0,24", "150,86", "25,08", "0,00", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("09/07/2017", "2", "0,24", "0,00", "25,08", "115,53", new string[0])]
-        public virtual void CalculandoOsImpostosQueIncidemSobreAOperacaoFinanceira(string dataDaOperacao, string tipoDaOperacao, string taxaDeIOF, string iOFApurado, string pISApurado, string cOFINSApurado, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("03/04/2017", "0", "1,5", "14,2441", "1460,18", "25,08", "115,53", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("03/04/2017", "1", "1,5", "13,2581", "1460,18", "25,08", "0,00", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("03/04/2017", "2", "1,5", "10,5410", "0,00", "25,08", "115,53", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("10/09/2017", "0", "0,61", "9,1447", "195,32", "25,08", "115,53", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("10/09/2017", "1", "0,61", "3,14", "195,32", "25,08", "0,00", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("10/09/2017", "2", "0,61", "0,71", "0,00", "25,08", "115,53", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("01/10/2017", "0", "1,2", "1,99", "268,36", "25,08", "115,53", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("01/10/2017", "1", "1,2", "24,5617", "268,36", "25,08", "0,00", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("01/10/2017", "2", "1,2", "5,29", "0,00", "25,08", "115,53", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("09/07/2017", "0", "0,24", "34,21", "150,86", "25,08", "115,53", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("09/07/2017", "1", "0,24", "1,55", "150,86", "25,08", "0,00", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("09/07/2017", "2", "0,24", "7,9854", "0,00", "25,08", "115,53", new string[0])]
+        public virtual void CalculandoOsImpostosQueIncidemSobreAOperacaoFinanceira(string dataDaOperacao, string tipoDaOperacao, string taxaDeIOF, string taxaDeJuros, string iOFApurado, string pISApurado, string cOFINSApurado, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculando os impostos que incidem sobre a operação financeira", exampleTags);
 #line 9
@@ -109,12 +109,14 @@ this.FeatureBackground();
 #line 12
  testRunner.And(string.Format("a taxa de IOF dessa operação é {0}%", taxaDeIOF), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line 13
- testRunner.When("eu calcular os impostos da operação", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+ testRunner.And(string.Format("a taxa de juros dessa operação é {0}%", taxaDeJuros), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line 14
- testRunner.Then(string.Format("o valor de IOF apurado deve ser de R$ {0}", iOFApurado), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+ testRunner.When("eu calcular os impostos da operação", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line 15
- testRunner.And(string.Format("o valor de PIS apurado deve ser de R$ {0}", pISApurado), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.Then(string.Format("o valor de IOF apurado deve ser de R$ {0}", iOFApurado), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line 16
+ testRunner.And(string.Format("o valor de PIS apurado deve ser de R$ {0}", pISApurado), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line 17
  testRunner.And(string.Format("o valor de COFINS apurado deve ser de R$ {0}", cOFINSApurado), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             this.ScenarioCleanup();

@@ -100,6 +100,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CalculoFinanceiro\Domínio Básico\ContextoDeCalculoFinanceiro\ContextoDeCalculoFinanceiro.csproj">
+      <Project>{bbf87891-a478-4386-bb9a-8a25c7feeda6}</Project>
+      <Name>ContextoDeCalculoFinanceiro</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\DominioGenerico\DominioGenerico.csproj">
       <Project>{ec968e6f-05a5-4480-bad7-33a5c91f3748}</Project>
       <Name>DominioGenerico</Name>

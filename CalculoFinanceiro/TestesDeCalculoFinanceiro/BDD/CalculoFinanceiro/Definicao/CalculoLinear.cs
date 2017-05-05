@@ -1,5 +1,5 @@
 ﻿using ContextoDeCalculoFinanceiro;
-using ContextoDeCalculoFinanceiro.Fabricas;
+using ContextoDeCalculoFinanceiro.Fabricas.Classes;
 using FluentAssertions;
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace TestesDeCalculoFinanceiro.BDD.CalculoFinanceiro.Definicao
         private int _diasDeApropriacao;
         private Periodicidade _periodicidade;
         private decimal _valorDaParcela, _taxaDeJuros, _valorCalculado;
-        private readonly FabricaDeCalculos _fabricaDeCalculos = new FabricaDeCalculos();
+        private readonly FabricaDeCalculosFinanceiros _fabricaDeCalculos = new FabricaDeCalculosFinanceiros();
 
         [Given(@"que o valor de uma parcela para correção linear é R\$ (.*)")]
         public void DadoQueOValorDeUmaParcelaParaCorrecaoLinear(decimal valorDaParcela)

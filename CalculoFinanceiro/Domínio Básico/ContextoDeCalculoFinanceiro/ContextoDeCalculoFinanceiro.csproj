@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ContextoDeCalculoFinanceiro</RootNamespace>
     <AssemblyName>ContextoDeCalculoFinanceiro</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,7 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fabricas\FabricaDeCalculos.cs" />
+    <Compile Include="Fabricas\Classes\FabricaDeCalculosFinanceiros.cs" />
+    <Compile Include="Fabricas\IFabricaDeCalculosFinanceiros.cs" />
     <Compile Include="ObjetosDeValor\CalculoExponencial.cs" />
     <Compile Include="ObjetosDeValor\CalculoLinear.cs" />
     <Compile Include="ObjetosDeValor\Capitalizacao\CapitalizacaoComposta.cs" />

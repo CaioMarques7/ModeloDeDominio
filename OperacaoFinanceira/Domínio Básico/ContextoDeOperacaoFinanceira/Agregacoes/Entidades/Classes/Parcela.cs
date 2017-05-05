@@ -7,6 +7,8 @@ using ContextoDeImpostos;
 using ContextoDeImpostos.Fabricas;
 using ContextoDeOperacaoFinanceira.Servicos.Dominio;
 using DominioGenerico;
+using ContextoDeCalculoFinanceiro.Fabricas;
+using ContextoDeCalculoFinanceiro;
 
 namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
 {
@@ -16,6 +18,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
     internal class Parcela : Entidade, IParcela
     {
         private readonly IOperacao _operacao;
+        private readonly IFabricaDeCalculosFinanceiros _fabricaDeCalculosFinanceiros;
 
         #region Construtores
 
@@ -26,9 +29,11 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// <param name="valorDaParcela">Valor da parcela.</param>
         /// <param name="dataDeVencimento">Data de vencimento da parcela.</param>
         /// <param name="servicoDeImpostosPorOperacao">Serviço responsável por criar os objetos de imposto por tipo de operação da parcela.</param>
-        public Parcela(IOperacao operacao, decimal valorDaParcela, DateTime dataDeVencimento, ServicoDeImpostosPorOperacao servicoDeImpostosPorOperacao)
+        /// <param name="fabricaDeCalculosFinanceiros">Objeto responsável por criar os cálculos financeiros que serão aplicados a parcela.</param>
+        public Parcela(IOperacao operacao, decimal valorDaParcela, DateTime dataDeVencimento, ServicoDeImpostosPorOperacao servicoDeImpostosPorOperacao, IFabricaDeCalculosFinanceiros fabricaDeCalculosFinanceiros)
         {
             _operacao = operacao;
+            _fabricaDeCalculosFinanceiros = fabricaDeCalculosFinanceiros;
 
             Valor = valorDaParcela;
             DataDeVencimento = dataDeVencimento;
@@ -43,6 +48,11 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// Valor da Parcela.
         /// </summary>
         public decimal Valor { get; }
+
+        /// <summary>
+        /// Valor de Juros.
+        /// </summary>
+        public decimal ValorDeJuros { get; private set; }
 
         /// <summary>
         /// Data de vencimento da parcela.
@@ -65,6 +75,12 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// <returns>Parcela com juros calculados.</returns>
         public IParcela CalcularJuros()
         {
+            _fabricaDeCalculosFinanceiros.CriarCalculoComCorrecaoLinear(Valor, _operacao.TaxaDeJuros, Prazo, Periodicidade.Mensal);
+            _fabricaDeCalculosFinanceiros.CriarCalculoComCorrecaoExponencial(Valor, _operacao.TaxaDeJuros, Prazo, Periodicidade.Mensal);
+
+
+            ValorDeJuros = 0m;
+
             return this;
         }
 

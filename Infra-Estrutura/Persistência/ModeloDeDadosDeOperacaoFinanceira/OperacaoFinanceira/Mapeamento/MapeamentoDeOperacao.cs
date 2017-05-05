@@ -17,7 +17,9 @@ namespace ModeloDeDados.OperacaoFinanceira.Mapeamento
             Property(operacao => operacao.TipoDeOperacao).IsRequired();
             Property(operacao => operacao.DataDaOperacao).HasColumnType("date").IsRequired();
             Property(operacao => operacao.TaxaDeIof).IsRequired().HasPrecision(7, 4);
+            Property(operacao => operacao.TaxaDeJuros).IsRequired().HasPrecision(7, 4);
             Property(operacao => operacao.Valor).IsRequired();
+            Property(operacao => operacao.ValorDeJuros).IsRequired();
             Property(operacao => operacao.ValorDeIof).IsRequired();
             Property(operacao => operacao.ValorDePis).IsRequired();
             Property(operacao => operacao.ValorDeCofins).IsRequired();

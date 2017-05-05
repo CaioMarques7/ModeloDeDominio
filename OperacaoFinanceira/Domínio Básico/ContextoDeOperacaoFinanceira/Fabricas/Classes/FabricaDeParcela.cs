@@ -6,20 +6,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ContextoDeCalculoFinanceiro.Fabricas;
 
 namespace ContextoDeOperacaoFinanceira.Fabricas
 {
     internal class FabricaDeParcela : IFabricaDeParcela
     {
         private readonly IFabricaDeImpostos _fabricaDeImpostos;
+        private readonly IFabricaDeCalculosFinanceiros _fabricaDeCalculosFinanceiros;
 
         /// <summary>
         /// Cria uma nova instância de <see cref="FabricaDeParcela"/>.
         /// </summary>
         /// <param name="fabricaDeImpostos">Fábrica de impostos incidentes na parcela.</param>
-        public FabricaDeParcela(IFabricaDeImpostos fabricaDeImpostos)
+        public FabricaDeParcela(IFabricaDeImpostos fabricaDeImpostos, IFabricaDeCalculosFinanceiros fabricaDeCalculosFinanceiros)
         {
             _fabricaDeImpostos = fabricaDeImpostos;
+            _fabricaDeCalculosFinanceiros = fabricaDeCalculosFinanceiros;
         }
 
         /// <summary>
@@ -40,7 +43,7 @@ namespace ContextoDeOperacaoFinanceira.Fabricas
         /// <returns>Parcela criada.</returns>
         public IParcela CriarParcela(IOperacao operacao, decimal valorDaParcela, DateTime dataDeVencimento)
         {
-            return new Parcela(operacao, valorDaParcela, dataDeVencimento, new ServicoDeImpostosPorOperacao(_fabricaDeImpostos, operacao.TipoDeOperacao));
+            return new Parcela(operacao, valorDaParcela, dataDeVencimento, new ServicoDeImpostosPorOperacao(_fabricaDeImpostos, operacao.TipoDeOperacao), _fabricaDeCalculosFinanceiros);
         }
     }
 }

@@ -15,6 +15,7 @@ namespace ModeloDeDados.OperacaoFinanceira.Mapeamento
         {
             Property(parcela => parcela.IdDaOperacao).IsRequired();
             Property(parcela => parcela.Valor).IsRequired();
+            Property(parcela => parcela.ValorDeJuros).IsRequired();
             Property(parcela => parcela.DataDeVencimento).HasColumnType("date").IsRequired();
             Property(parcela => parcela.Prazo).IsRequired();
             Property(parcela => parcela.ValorDeIof).IsRequired();

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContextoDeCalculoFinanceiro.Fabricas
+namespace ContextoDeCalculoFinanceiro.Fabricas.Classes
 {
-    public class FabricaDeCalculos
+    internal class FabricaDeCalculosFinanceiros : IFabricaDeCalculosFinanceiros
     {
         public CalculoLinear CriarCalculoComCorrecaoLinear(decimal valorPresente, decimal taxaDeJuros, int diasDeApropriacao, Periodicidade periodicidade)
         {

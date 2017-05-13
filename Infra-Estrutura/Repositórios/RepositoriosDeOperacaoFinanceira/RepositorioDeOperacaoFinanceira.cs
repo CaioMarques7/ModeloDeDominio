@@ -57,9 +57,9 @@ namespace RepositoriosDeOperacaoFinanceira
                         Prazo = parcela.Prazo,
                         Valor = parcela.Valor,
                         ValorDeJuros = parcela.ValorDeJuros,
-                        ValorDeIof = parcela.ImpostosIncidentes.OfType<IIof>().Sum(iof => iof.ValorApurado),
-                        ValorDePis = parcela.ImpostosIncidentes.OfType<IPis>().Sum(pis => pis.ValorApurado),
-                        ValorDeCofins = parcela.ImpostosIncidentes.OfType<ICofins>().Sum(cofins => cofins.ValorApurado)
+                        ValorDeIof = parcela.ValorApuradoPorImposto<IIof>(),
+                        ValorDePis = parcela.ValorApuradoPorImposto<IPis>(),
+                        ValorDeCofins = parcela.ValorApuradoPorImposto<ICofins>()
                     }));
 
             return new ModeloDeOperacaoFinanceira.Operacao()

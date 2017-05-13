@@ -18,6 +18,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
     internal class Parcela : Entidade, IParcela
     {
         private readonly IOperacao _operacao;
+        private readonly ICollection<IImposto> _impostosIncidentes;
         private readonly IFabricaDeCalculosFinanceiros _fabricaDeCalculosFinanceiros;
 
         #region Construtores
@@ -33,11 +34,11 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         public Parcela(IOperacao operacao, decimal valorDaParcela, DateTime dataDeVencimento, ServicoDeImpostosPorOperacao servicoDeImpostosPorOperacao, IFabricaDeCalculosFinanceiros fabricaDeCalculosFinanceiros)
         {
             _operacao = operacao;
+            _impostosIncidentes = servicoDeImpostosPorOperacao.Impostos;
             _fabricaDeCalculosFinanceiros = fabricaDeCalculosFinanceiros;
 
             Valor = valorDaParcela;
             DataDeVencimento = dataDeVencimento;
-            ImpostosIncidentes = servicoDeImpostosPorOperacao.Impostos;
         }
 
         #endregion
@@ -63,12 +64,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// Prazo da parcela.
         /// </summary>
         public short Prazo => (short)((DataDeVencimento - _operacao.DataDaOperacao).Days);
-
-        /// <summary>
-        /// Coleção de impostos que incidem sobre a parcela.
-        /// </summary>
-        public IEnumerable<IImposto> ImpostosIncidentes { get; }
-
+        
         /// <summary>
         /// Calcula os juros que incidem sobre a parcela.
         /// </summary>
@@ -96,6 +92,16 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
             CalcularCofins();
 
             return this;
+        }
+
+        /// <summary>
+        /// Retorna o valor apurado por imposto incidente na parcela.
+        /// </summary>
+        /// <typeparam name="TImposto">Imposto que será avaliado.</typeparam>
+        /// <returns>Valor total de imposto apurado.</returns>
+        public decimal ValorApuradoPorImposto<TImposto>() where TImposto : IImposto
+        {
+            return _impostosIncidentes.OfType<TImposto>().Sum(imposto => imposto.ValorApurado);
         }
 
         #endregion
@@ -162,62 +168,35 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         
         private void CalcularIof()
         {
-            var iof = ObterImposto<IIof>();
-
-            if (iof != null)
-            {
-                iof = iof.ObterIof(Valor, _operacao.TaxaDeIof, Prazo);
-                iof.CalcularValorDeImposto();
-
-                AdicionarImposto(iof);
-            }
+            AdicionarImposto(ObterImposto<IIof>()?.ObterIof(Valor, _operacao.TaxaDeIof, Prazo));
         }
 
         private void CalcularPis()
         {
-            var pis = ObterImposto<IPis>();
-
-            if (pis != null)
-            {
-                pis = pis.ObterPis(Valor);
-                pis.CalcularValorDeImposto();
-
-                AdicionarImposto(pis);
-            }
+            AdicionarImposto(ObterImposto<IPis>()?.ObterPis(Valor));
         }
 
         private void CalcularCofins()
         {
-            var cofins = ObterImposto<ICofins>();
-
-            if (cofins != null)
-            {
-                cofins = cofins.ObterCofins(Valor);
-                cofins.CalcularValorDeImposto();
-
-                AdicionarImposto(cofins);
-            }
+            AdicionarImposto(ObterImposto<ICofins>()?.ObterCofins(Valor));
         }
 
         private T ObterImposto<T>() where T : IImposto
         {
-            T imposto = ImpostosIncidentes.OfType<T>().FirstOrDefault();
-            RemoverImposto(imposto);
+            T imposto = _impostosIncidentes.OfType<T>().FirstOrDefault();
+            _impostosIncidentes.Remove(imposto);
             return imposto;
         }
 
         private void AdicionarImposto<T>(T imposto) where T : IImposto
         {
-            var impostos = ImpostosIncidentes as ICollection<IImposto>;
-            impostos.Add(imposto);
+            if (imposto != null)
+            {
+                imposto.CalcularValorDeImposto();
+                _impostosIncidentes.Add(imposto);
+            }
         }
-
-        private void RemoverImposto<T>(T imposto) where T : IImposto
-        {
-            var impostos = ImpostosIncidentes as ICollection<IImposto>;
-            impostos.Remove(imposto);
-        }
-
+        
         #endregion
     }
 }

@@ -65,9 +65,7 @@ namespace TestesDeOperacaoFinanceira.BDD.OperacaoFinanceira.Definicao
         [Then(@"o valor de IOF apurado deve ser de R\$ (.*)")]
         public void EntaoOValorDeIofApuradoDeveSerDe(decimal valorDeIof)
         {
-            var valorApurado = _operacao.Parcelas
-                .Select(parcela => parcela.ImpostosIncidentes.OfType<IIof>().FirstOrDefault())
-                .Sum(iof => iof?.ValorApurado);
+            var valorApurado = _operacao.Parcelas.Sum(parcela => parcela.ValorApuradoPorImposto<IIof>());
 
             valorApurado.Should().Be(valorDeIof);
         }
@@ -75,9 +73,7 @@ namespace TestesDeOperacaoFinanceira.BDD.OperacaoFinanceira.Definicao
         [Then(@"o valor de PIS apurado deve ser de R\$ (.*)")]
         public void EOValorDePisApuradoDeveSerDe(decimal valorDePis)
         {
-            var valorApurado = _operacao.Parcelas
-                .Select(parcela => parcela.ImpostosIncidentes.OfType<IPis>().FirstOrDefault())
-                .Sum(pis => pis?.ValorApurado);
+            var valorApurado = _operacao.Parcelas.Sum(parcela => parcela.ValorApuradoPorImposto<IPis>());
 
             valorApurado.Should().Be(valorDePis);
         }
@@ -85,9 +81,7 @@ namespace TestesDeOperacaoFinanceira.BDD.OperacaoFinanceira.Definicao
         [Then(@"o valor de COFINS apurado deve ser de R\$ (.*)")]
         public void EOValorDeCofinsApuradoDeveSerDe(decimal valorDeCofins)
         {
-            var valorApurado = _operacao.Parcelas
-                .Select(parcela => parcela.ImpostosIncidentes.OfType<ICofins>().FirstOrDefault())
-                .Sum(cofins => cofins?.ValorApurado);
+            var valorApurado = _operacao.Parcelas.Sum(parcela => parcela.ValorApuradoPorImposto<ICofins>());
 
             valorApurado.Should().Be(valorDeCofins);
         }

@@ -33,11 +33,6 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         short Prazo { get; }
 
         /// <summary>
-        /// Coleção de impostos que incidem sobre a parcela.
-        /// </summary>
-        IEnumerable<IImposto> ImpostosIncidentes { get; }
-
-        /// <summary>
         /// Calcula os juros que incidem sobre a parcela.
         /// </summary>
         /// <returns>Parcela com juros calculados.</returns>
@@ -48,5 +43,12 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// </summary>
         /// <returns>Parcela com impostos calculados.</returns>
         IParcela CalcularImpostos();
+
+        /// <summary>
+        /// Retorna o valor apurado por imposto incidente na parcela.
+        /// </summary>
+        /// <typeparam name="TImposto">Imposto que será avaliado.</typeparam>
+        /// <returns>Valor total de imposto apurado.</returns>
+        decimal ValorApuradoPorImposto<TImposto>() where TImposto : IImposto;
     }
 }

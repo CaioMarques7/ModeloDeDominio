@@ -119,7 +119,7 @@ namespace ContextoDeImpostos.Impostos
 
         private decimal TaxaNoPeriodo => TaxaDiaria * _prazoEmDias;
 
-        private decimal IofNoPeriodo => TaxaNoPeriodo * _valorBase;
+        private decimal IofNoPeriodo => Math.Round(TaxaNoPeriodo * _valorBase / 100, 2);
 
         private decimal IofAdicional => _valorBase * _aliquota;
 

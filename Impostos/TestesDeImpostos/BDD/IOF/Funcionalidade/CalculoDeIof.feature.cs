@@ -43,7 +43,7 @@ namespace TestesDeImpostos.BDD.IOF.Funcionalidade
 
 	Passo 1: Divida a taxa de IOF informada por 365 dias e arredonde o resultado final em 4 casas decimais. Dessa forma será obtida a taxa diária.
 	Passo 2: Multiplique a taxa diária pelo prazo em dias que foi informado. Dessa forma será obtida a taxa de IOF no período.
-	Passo 3: Multiplique o valor base da operação pela taxa de IOF no período. Dessa forma será obtido o valor de IOF no período.
+	Passo 3: Multiplique o valor base da operação pela taxa de IOF no período e divida o resultado por 100. Dessa forma será obtido o valor de IOF no período.
 	Passo 4: Multiplique o valor base da operação pela alíquota. Dessa forma será obtido o valor de IOF adicional.
 	Passo 5: Some o valor de IOF no período com o valor de IOF adicional. Dessa forma será obtido o valor de IOF a ser cobrado.", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
@@ -79,8 +79,8 @@ namespace TestesDeImpostos.BDD.IOF.Funcionalidade
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Cálculo de IOF")]
-        [NUnit.Framework.TestCaseAttribute("2491,32", "105", "1,31", "951,19", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("413,47", "57", "0,5", "34,57", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("2491,32", "105", "1,31", "18,89", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("413,47", "57", "0,5", "1,90", new string[0])]
         public virtual void CalculoDeIOF(string valorDaOperacao, string prazo, string taxa, string iOFCalculado, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Cálculo de IOF", exampleTags);

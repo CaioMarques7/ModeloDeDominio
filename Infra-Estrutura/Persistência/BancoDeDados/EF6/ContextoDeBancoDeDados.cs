@@ -47,9 +47,14 @@ namespace BancoDeDados.EF6
 
         public override int SaveChanges()
         {
+            var entidadesParaNotificar = ChangeTracker.Entries<IEntidadeRaizDeAgregacao>()
+                .Where(e => e.State == EntityState.Added)
+                .Select(e => e.Entity)
+                .ToList();
+
             var i = base.SaveChanges();
 
-            foreach (var entidade in ChangeTracker.Entries<IEntidadeRaizDeAgregacao>().Select(e => e.Entity))
+            foreach (var entidade in entidadesParaNotificar)
                 entidade.NotificarModeloDeDominio();
 
             return i;

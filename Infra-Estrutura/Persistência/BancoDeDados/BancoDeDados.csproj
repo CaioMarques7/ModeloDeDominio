@@ -49,6 +49,8 @@
     <Compile Include="EF6\ContextoDeBancoDeDados.cs" />
     <Compile Include="EF6\IConstrutorDeModeloDeDados.cs" />
     <Compile Include="EF6\IContextoDeBancoDeDados.cs" />
+    <Compile Include="Entidades\IEntidadeConcorrente.cs" />
+    <Compile Include="Entidades\IEntidadeRaizDeAgregacao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

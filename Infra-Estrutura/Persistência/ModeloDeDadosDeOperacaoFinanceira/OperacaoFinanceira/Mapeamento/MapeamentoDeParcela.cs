@@ -21,7 +21,6 @@ namespace ModeloDeDados.OperacaoFinanceira.Mapeamento
             Property(parcela => parcela.ValorDeIof).IsRequired();
             Property(parcela => parcela.ValorDePis).IsRequired();
             Property(parcela => parcela.ValorDeCofins).IsRequired();
-            Property(parcela => parcela.RowVersion).IsRowVersion();
 
             ToTable("ParcelaDeOperacao");
             HasKey(parcela => new { parcela.IdDaOperacao, parcela.DataDeVencimento, parcela.Valor });

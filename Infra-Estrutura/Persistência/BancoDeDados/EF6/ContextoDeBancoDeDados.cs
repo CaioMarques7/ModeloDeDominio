@@ -45,6 +45,16 @@ namespace BancoDeDados.EF6
             base.OnModelCreating(modelBuilder);
         }
 
+        public override int SaveChanges()
+        {
+            var i = base.SaveChanges();
+
+            foreach (var entidade in ChangeTracker.Entries<IEntidadeRaizDeAgregacao>().Select(e => e.Entity))
+                entidade.NotificarModeloDeDominio();
+
+            return i;
+        }
+
         #endregion
     }
 }

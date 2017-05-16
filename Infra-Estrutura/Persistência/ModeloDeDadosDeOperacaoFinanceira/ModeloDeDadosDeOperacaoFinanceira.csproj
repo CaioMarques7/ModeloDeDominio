@@ -55,6 +55,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\DominioGenerico\DominioGenerico.csproj">
+      <Project>{ec968e6f-05a5-4480-bad7-33a5c91f3748}</Project>
+      <Name>DominioGenerico</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Impostos\Domínio Básico\Impostos\ContextoDeImpostos.csproj">
+      <Project>{7EB2B82A-6C4C-4848-BF15-8289349C8088}</Project>
+      <Name>ContextoDeImpostos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\OperacaoFinanceira\Domínio Básico\ContextoDeOperacaoFinanceira\ContextoDeOperacaoFinanceira.csproj">
       <Project>{6d2a5ad5-2d0c-40b2-b3a5-9a0521c1958c}</Project>
       <Name>ContextoDeOperacaoFinanceira</Name>
@@ -62,10 +70,6 @@
     <ProjectReference Include="..\BancoDeDados\BancoDeDados.csproj">
       <Project>{86583d60-fb7b-4b2b-84d2-797d59dd8aa9}</Project>
       <Name>BancoDeDados</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ModeloDeDados\ModeloDeDados.csproj">
-      <Project>{0afadd24-14cd-4a8d-a32d-0a01ba5658c4}</Project>
-      <Name>ModeloDeDados</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

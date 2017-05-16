@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BancoDeDados;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,15 @@ using System.Threading.Tasks;
 
 namespace ModeloDeDados.OperacaoFinanceira.Entidades
 {
-    public class Parcela : EntidadeBase
+    public class Parcela
     {
+        protected Parcela() { }
+
+        internal Parcela(Operacao operacao)
+        {
+            Operacao = operacao;
+        }
+
         /// <summary>
         /// Identificador único da operação.
         /// </summary>

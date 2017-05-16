@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BancoDeDados;
+using ContextoDeImpostos;
+using ContextoDeOperacaoFinanceira.Agregacoes.Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +9,44 @@ using System.Threading.Tasks;
 
 namespace ModeloDeDados.OperacaoFinanceira.Entidades
 {
-    public class Operacao : EntidadeBase
+    public class Operacao : IEntidadeRaizDeAgregacao, IEntidadeConcorrente
     {
+        private readonly IOperacao _operacao;
+
+        #region Construtores
+
+        protected Operacao() { }
+
+        public Operacao(IOperacao operacao)
+        {
+            _operacao = operacao;
+
+            var parcelasDaOperacao = new HashSet<Parcela>(
+                    operacao.Parcelas.Select(parcela => new Parcela(this)
+                    {
+                        DataDeVencimento = parcela.DataDeVencimento,
+                        Prazo = parcela.Prazo,
+                        Valor = parcela.Valor,
+                        ValorDeJuros = parcela.ValorDeJuros,
+                        ValorDeIof = parcela.ValorApuradoPorImposto<IIof>(),
+                        ValorDePis = parcela.ValorApuradoPorImposto<IPis>(),
+                        ValorDeCofins = parcela.ValorApuradoPorImposto<ICofins>()
+                    }));
+
+            DataDaOperacao = operacao.DataDaOperacao;
+            TaxaDeIof = operacao.TaxaDeIof;
+            TaxaDeJuros = operacao.TaxaDeJuros;
+            TipoDeOperacao = (byte)operacao.TipoDeOperacao;
+            Parcelas = parcelasDaOperacao;
+            Valor = parcelasDaOperacao.Sum(parcela => parcela.Valor);
+            ValorDeJuros = parcelasDaOperacao.Sum(parcela => parcela.ValorDeJuros);
+            ValorDeIof = parcelasDaOperacao.Sum(parcela => parcela.ValorDeIof);
+            ValorDePis = parcelasDaOperacao.Sum(parcela => parcela.ValorDePis);
+            ValorDeCofins = parcelasDaOperacao.Sum(parcela => parcela.ValorDeCofins);
+        }
+
+        #endregion
+
         /// <summary>
         /// Identificador único da operação.
         /// </summary>
@@ -58,6 +97,11 @@ namespace ModeloDeDados.OperacaoFinanceira.Entidades
         /// </summary>
         public decimal ValorDeCofins { get; set; }
 
+        /// <summary>
+        /// Token de Concorrência.
+        /// </summary>
+        public byte[] RowVersion { get; internal set; }
+
         #region Propriedades de Navegação
 
         /// <summary>
@@ -66,5 +110,10 @@ namespace ModeloDeDados.OperacaoFinanceira.Entidades
         public virtual ICollection<Parcela> Parcelas { get; set; }
 
         #endregion
+
+        public void NotificarModeloDeDominio()
+        {
+            _operacao?.DefinirId(Id);
+        }
     }
 }

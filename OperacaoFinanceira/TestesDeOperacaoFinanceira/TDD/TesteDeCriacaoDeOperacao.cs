@@ -55,12 +55,10 @@ namespace TestesDeOperacaoFinanceira.TDD
                 operacao.IncluirParcela(Math.Round((decimal)(r.Next(1, 32767) * 13 / 11), 2), DateTime.Today.AddDays(r.Next(1, 32767)));
 
             operacao.CalcularOperacao();
-
-            Console.WriteLine(DateTime.Now);
-
+            
             _repositorio.CriarNovaOperacaoFinanceira(operacao);
 
-            Console.WriteLine(DateTime.Now);
+            operacao.Id.Should().BeGreaterThan(0L);
         }
     }
 }

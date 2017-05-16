@@ -15,6 +15,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
     /// </summary>
     internal class Operacao : Entidade, IOperacao
     {
+        private long _id;
         private readonly IFabricaDeParcela _fabricaDeParcela;
 
         #region Construtores
@@ -59,7 +60,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// <summary>
         /// Identificador único da operação.
         /// </summary>
-        public long Id { get; }
+        public long Id => _id;
 
         /// <summary>
         /// Tipo de operação.
@@ -85,6 +86,15 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// Coleção de parcelas da operação.
         /// </summary>
         public IEnumerable<IParcela> Parcelas { get; }
+
+        /// <summary>
+        /// Define o identificador único para o valor informado.
+        /// </summary>
+        /// <param name="id">Valor para o identificador único.</param>
+        public void DefinirId(long id)
+        {
+            _id = id;
+        }
 
         /// <summary>
         /// Inclui uma nova parcela na operação.
@@ -169,7 +179,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         {
             return ServicoDeComparacaoDeObjetos.OperandosIguais<IEntidade>(operacao, this) || (operacao != null && Id.Equals(operacao.Id));
         }
-
+        
         #endregion
     }
 }

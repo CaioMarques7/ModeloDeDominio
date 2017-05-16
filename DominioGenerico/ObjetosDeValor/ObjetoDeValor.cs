@@ -1,4 +1,4 @@
-﻿using DominioGenerico.Servicos;
+﻿using DominioGenerico;
 using System;
 using System.Collections.Generic;
 using System.Linq;

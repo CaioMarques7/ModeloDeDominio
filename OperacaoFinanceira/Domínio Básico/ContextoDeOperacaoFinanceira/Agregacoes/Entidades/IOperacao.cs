@@ -1,4 +1,5 @@
 ﻿using DominioGenerico;
+using DominioGenerico.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,8 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
     /// <summary>
     /// Definição de operação financeira.
     /// </summary>
-    public interface IOperacao
+    public interface IOperacao : IRaizDeAgregacao
     {
-        /// <summary>
-        /// Identificador único da operação.
-        /// </summary>
-        long Id { get; }
-
         /// <summary>
         /// Tipo de operação.
         /// </summary>

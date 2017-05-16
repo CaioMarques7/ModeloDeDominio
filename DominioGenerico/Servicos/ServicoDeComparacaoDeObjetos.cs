@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DominioGenerico.Servicos
+namespace DominioGenerico
 {
     public class ServicoDeComparacaoDeObjetos
     {

@@ -55,9 +55,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\DominioGenerico\DominioGenerico.csproj">
-      <Project>{EC968E6F-05A5-4480-BAD7-33A5C91F3748}</Project>
-      <Name>DominioGenerico</Name>
+    <ProjectReference Include="..\..\..\OperacaoFinanceira\Domínio Básico\ContextoDeOperacaoFinanceira\ContextoDeOperacaoFinanceira.csproj">
+      <Project>{6d2a5ad5-2d0c-40b2-b3a5-9a0521c1958c}</Project>
+      <Name>ContextoDeOperacaoFinanceira</Name>
     </ProjectReference>
     <ProjectReference Include="..\BancoDeDados\BancoDeDados.csproj">
       <Project>{86583d60-fb7b-4b2b-84d2-797d59dd8aa9}</Project>

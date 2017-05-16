@@ -14,7 +14,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContextoDeImpostos", "Impostos\Domínio Básico\Impostos\ContextoDeImpostos.csproj", "{7EB2B82A-6C4C-4848-BF15-8289349C8088}"
 	ProjectSection(ProjectDependencies) = postProject
 		{EC968E6F-05A5-4480-BAD7-33A5C91F3748} = {EC968E6F-05A5-4480-BAD7-33A5C91F3748}
-		{85645995-8380-4FA8-91BA-BD44FD14691B} = {85645995-8380-4FA8-91BA-BD44FD14691B}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestesDeImpostos", "Impostos\TestesDeImpostos\TestesDeImpostos.csproj", "{AA26A952-3734-47EF-9567-BFB14FC71797}"
@@ -31,10 +30,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Genérico", "Genérico", "{BCCDA7BD-9472-49EF-A25A-BC5106FA4368}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DominioGenerico", "DominioGenerico\DominioGenerico.csproj", "{EC968E6F-05A5-4480-BAD7-33A5C91F3748}"
-	ProjectSection(ProjectDependencies) = postProject
-		{86583D60-FB7B-4B2B-84D2-797D59DD8AA9} = {86583D60-FB7B-4B2B-84D2-797D59DD8AA9}
-		{85645995-8380-4FA8-91BA-BD44FD14691B} = {85645995-8380-4FA8-91BA-BD44FD14691B}
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra-Estrutura", "Infra-Estrutura", "{01E24397-9594-4C8A-89DF-D8EF581916C9}"
 EndProject
@@ -47,10 +42,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BancoDeDados", "Infra-Estrutura\Persistência\BancoDeDados\BancoDeDados.csproj", "{86583D60-FB7B-4B2B-84D2-797D59DD8AA9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContextoDeCalculoFinanceiro", "CalculoFinanceiro\Domínio Básico\ContextoDeCalculoFinanceiro\ContextoDeCalculoFinanceiro.csproj", "{BBF87891-A478-4386-BB9A-8A25C7FEEDA6}"
-	ProjectSection(ProjectDependencies) = postProject
-		{82B4394A-206B-417E-B03A-43BF85626791} = {82B4394A-206B-417E-B03A-43BF85626791}
-		{86583D60-FB7B-4B2B-84D2-797D59DD8AA9} = {86583D60-FB7B-4B2B-84D2-797D59DD8AA9}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestesDeCalculoFinanceiro", "CalculoFinanceiro\TestesDeCalculoFinanceiro\TestesDeCalculoFinanceiro.csproj", "{6A2280E6-661B-4D02-8382-F60C840A9F87}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -59,6 +50,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestesDeCalculoFinanceiro",
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModeloDeDadosDeOperacaoFinanceira", "Infra-Estrutura\Persistência\ModeloDeDadosDeOperacaoFinanceira\ModeloDeDadosDeOperacaoFinanceira.csproj", "{82B4394A-206B-417E-B03A-43BF85626791}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EC968E6F-05A5-4480-BAD7-33A5C91F3748} = {EC968E6F-05A5-4480-BAD7-33A5C91F3748}
+		{6D2A5AD5-2D0C-40B2-B3A5-9A0521C1958C} = {6D2A5AD5-2D0C-40B2-B3A5-9A0521C1958C}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModeloDeDados", "Infra-Estrutura\Persistência\ModeloDeDados\ModeloDeDados.csproj", "{0AFADD24-14CD-4A8D-A32D-0A01BA5658C4}"
 	ProjectSection(ProjectDependencies) = postProject

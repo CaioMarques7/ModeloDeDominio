@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BancoDeDados
 {
+    /// <summary>
+    /// Interface para definir que uma entidade possui verificação de concorrência.
+    /// </summary>
     public interface IEntidadeConcorrente
     {
         /// <summary>

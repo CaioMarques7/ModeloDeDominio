@@ -9,14 +9,25 @@ using System.Threading.Tasks;
 
 namespace ModeloDeDados.OperacaoFinanceira.Entidades
 {
+    /// <summary>
+    /// Entidade que representa a tabela de operação.
+    /// </summary>
     public class Operacao : IEntidadeRaizDeAgregacao, IEntidadeConcorrente
     {
         private readonly IOperacao _operacao;
 
         #region Construtores
 
+        /// <summary>
+        /// Cria uma nova instância de <see cref="Operacao"/>.
+        /// </summary>
+        /// <remarks>Sobrecarga existente para atender as necessidades do Entity Framework.</remarks>
         protected Operacao() { }
 
+        /// <summary>
+        /// Cria uma nova instância de <see cref="Operacao"/> a partir dos dados do modelo de domínio.
+        /// </summary>
+        /// <param name="operacao">Entidade de domínio.</param>
         public Operacao(IOperacao operacao)
         {
             _operacao = operacao;
@@ -46,11 +57,8 @@ namespace ModeloDeDados.OperacaoFinanceira.Entidades
         }
 
         #endregion
-
-        /// <summary>
-        /// Identificador único da operação.
-        /// </summary>
-        public long Id { get; internal set; }
+        
+        #region Membros de Operacao
 
         /// <summary>
         /// Tipo de operação.
@@ -96,11 +104,8 @@ namespace ModeloDeDados.OperacaoFinanceira.Entidades
         /// Valor de COFINS da operação.
         /// </summary>
         public decimal ValorDeCofins { get; set; }
-
-        /// <summary>
-        /// Token de Concorrência.
-        /// </summary>
-        public byte[] RowVersion { get; internal set; }
+        
+        #endregion
 
         #region Propriedades de Navegação
 
@@ -111,9 +116,30 @@ namespace ModeloDeDados.OperacaoFinanceira.Entidades
 
         #endregion
 
+        #region Membros de IEntidadeRaizDeAgregacao
+
+        /// <summary>
+        /// Identificador único da operação.
+        /// </summary>
+        public long Id { get; internal set; }
+
+        /// <summary>
+        /// Notifica o modelo de domínio sobre alteração na entidade raiz.
+        /// </summary>
         public void NotificarModeloDeDominio()
         {
             _operacao?.DefinirId(Id);
         }
+
+        #endregion
+
+        #region Membros de IEntidadeConcorrente
+
+        /// <summary>
+        /// Token de Concorrência.
+        /// </summary>
+        public byte[] RowVersion { get; internal set; }
+
+        #endregion
     }
 }

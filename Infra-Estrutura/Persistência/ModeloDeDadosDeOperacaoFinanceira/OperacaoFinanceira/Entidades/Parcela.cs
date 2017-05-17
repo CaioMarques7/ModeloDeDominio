@@ -7,14 +7,31 @@ using System.Threading.Tasks;
 
 namespace ModeloDeDados.OperacaoFinanceira.Entidades
 {
+    /// <summary>
+    /// Entidade que representa a tabela de parcela.
+    /// </summary>
     public class Parcela
     {
+        #region Construtores
+
+        /// <summary>
+        /// Cria uma nova instância de <see cref="Parcela"/>.
+        /// </summary>
+        /// <remarks>Sobrecarga existente para atender as necessidades do Entity Framework.</remarks>
         protected Parcela() { }
 
+        /// <summary>
+        /// Cria uma nova instância de <see cref="Parcela"/>.
+        /// </summary>
+        /// <param name="operacao">Operação na qual a parcela será vinculada.</param>
         internal Parcela(Operacao operacao)
         {
             Operacao = operacao;
         }
+
+        #endregion
+
+        #region Membros de Parcela
 
         /// <summary>
         /// Identificador único da operação.
@@ -62,6 +79,8 @@ namespace ModeloDeDados.OperacaoFinanceira.Entidades
         /// Operação da parcela.
         /// </summary>
         internal virtual Operacao Operacao { get; set; }
+
+        #endregion
 
         #endregion
     }

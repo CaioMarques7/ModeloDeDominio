@@ -19,16 +19,29 @@ namespace BancoDeDados.EF6
 
         #region Membros de IContextoDeBancoDeDados
 
+        /// <summary>
+        /// Cria uma coleção de entidades de acordo com o tipo informado.
+        /// </summary>
+        /// <typeparam name="TEntity">Tipo da entidade.</typeparam>
+        /// <returns>Coleção de entidades.</returns>
         public DbSet<TEntity> Entidades<TEntity>() where TEntity : class
         {
             return Set<TEntity>();
         }
 
+        /// <summary>
+        /// Persiste o modelo de dados do contexto atual no banco de dados.
+        /// </summary>
+        /// <returns>Número de registros afetados.</returns>
         public int PersistirModeloDeDados()
         {
             return SaveChanges();
         }
 
+        /// <summary>
+        /// Persiste o modelo de dados do contexto atual no banco de dados de maneira assíncrona.
+        /// </summary>
+        /// <returns>Número de registros afetados.</returns>
         public Task<int> PersistirModeloDeDadosAssincrono()
         {
             return SaveChangesAsync();
@@ -47,10 +60,8 @@ namespace BancoDeDados.EF6
 
         public override int SaveChanges()
         {
-            var entidadesParaNotificar = ChangeTracker.Entries<IEntidadeRaizDeAgregacao>()
-                .Where(e => e.State == EntityState.Added)
-                .Select(e => e.Entity)
-                .ToList();
+            IndicarPropriedadesModificadas();
+            var entidadesParaNotificar = ObterEntidadesParaNotificar();
 
             var i = base.SaveChanges();
 
@@ -60,6 +71,34 @@ namespace BancoDeDados.EF6
             return i;
         }
 
+        #endregion
+
+        #region Métodos Privados
+
+        /// <summary>
+        /// Indica as propriedades modificadas em entidades para atualização.
+        /// Isso impede que seja disparado um update em todas as colunas da tabela.
+        /// </summary>
+        private void IndicarPropriedadesModificadas()
+        {
+            foreach (var entidade in ChangeTracker.Entries().Where(entry => entry.State == EntityState.Modified))
+            {
+                Parallel.ForEach(entidade.CurrentValues.PropertyNames, (nomeDaPropriedade) => 
+                {
+                    entidade.Property(nomeDaPropriedade).IsModified = 
+                        entidade.Property(nomeDaPropriedade).OriginalValue != entidade.Property(nomeDaPropriedade).CurrentValue;
+                });
+            }
+        }
+
+        private IEnumerable<IEntidadeRaizDeAgregacao> ObterEntidadesParaNotificar()
+        {
+            return ChangeTracker.Entries<IEntidadeRaizDeAgregacao>()
+                .Where(entry => entry.State == EntityState.Added)
+                .Select(entry => entry.Entity)
+                .ToList();
+        }
+        
         #endregion
     }
 }

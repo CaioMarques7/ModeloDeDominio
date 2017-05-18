@@ -1,4 +1,5 @@
 ﻿using ContextoDeOperacaoFinanceira.Agregacoes.Entidades;
+using DominioGenerico;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace ContextoDeOperacaoFinanceira.Repositorios
 {
-    public interface IRepositorioDeCriacaoDeOperacaoFinanceira
+    /// <summary>
+    /// Define métodos para acesso aos dados de operações financeiras.
+    /// </summary>
+    public interface IRepositorioDeOperacaoFinanceira : IUnidadeDeTrabalho
     {
         /// <summary>
         /// Persiste uma nova operação financeira no repositório de dados.

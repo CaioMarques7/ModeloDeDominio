@@ -49,7 +49,7 @@
     <Compile Include="Fabricas\Classes\FabricaDeParcela.cs" />
     <Compile Include="Fabricas\IFabricaDeOperacao.cs" />
     <Compile Include="Fabricas\IFabricaDeParcela.cs" />
-    <Compile Include="Repositorios\IRepositorioDeCriacaoDeOperacaoFinanceira.cs" />
+    <Compile Include="Repositorios\IRepositorioDeOperacaoFinanceira.cs" />
     <Compile Include="Servicos\Dominio\ServicoDeImpostosPorOperacao.cs" />
     <Compile Include="ObjetosDeValor\TipoDeOperacaoFinanceira.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -11,10 +11,11 @@ using ContextoDeImpostos;
 using System.Data.Entity;
 using ModeloDeDados;
 using Repositorios;
+using DominioGenerico;
 
 namespace RepositoriosDeOperacaoFinanceira
 {
-    public class RepositorioDeOperacaoFinanceira : RepositorioGenerico<ModeloDeOperacaoFinanceira.Operacao>, IRepositorioDeCriacaoDeOperacaoFinanceira
+    public class RepositorioDeOperacaoFinanceira : RepositorioGenerico<ModeloDeOperacaoFinanceira.Operacao>, IRepositorioDeOperacaoFinanceira
     {
         public RepositorioDeOperacaoFinanceira(IContextoDeBancoDeDados contexto) : base(contexto)
         {
@@ -32,7 +33,11 @@ namespace RepositoriosDeOperacaoFinanceira
             IdentificarOperacaoValida(operacao);
             
             Entidades.Add(new ModeloDeOperacaoFinanceira.Operacao(operacao));
-            Contexto.PersistirModeloDeDados();
+        }
+
+        public int PersistirModeloDeDados()
+        {
+            return Contexto.PersistirModeloDeDados();
         }
 
         private void IdentificarOperacaoValida(IOperacao operacao)

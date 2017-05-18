@@ -21,7 +21,7 @@ namespace TestesDeOperacaoFinanceira.TDD
     public class TesteDeCriacaoDeOperacao
     {
         private IFabricaDeOperacao _fabricaDeOperacao;
-        private IRepositorioDeCriacaoDeOperacaoFinanceira _repositorio;
+        private IRepositorioDeOperacaoFinanceira _repositorio;
         
         [SetUp]
         protected void Inicializar()
@@ -57,6 +57,7 @@ namespace TestesDeOperacaoFinanceira.TDD
             operacao.CalcularOperacao();
             
             _repositorio.CriarNovaOperacaoFinanceira(operacao);
+            _repositorio.PersistirModeloDeDados();
 
             operacao.Id.Should().BeGreaterThan(0L);
         }

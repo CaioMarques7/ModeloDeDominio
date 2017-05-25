@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entidades\Entidade.cs" />
+    <Compile Include="Entidades\IEntidadeValidavel.cs" />
     <Compile Include="Entidades\IRaizDeAgregacao.cs" />
     <Compile Include="ObjetosDeValor\ObjetoDeValor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

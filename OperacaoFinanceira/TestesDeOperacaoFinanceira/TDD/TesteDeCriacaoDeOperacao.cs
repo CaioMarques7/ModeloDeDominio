@@ -37,14 +37,6 @@ namespace TestesDeOperacaoFinanceira.TDD
         }
 
         [Test]
-        public void DisparaExcecaoDeOperacaoInvalidaQuandoNaoExistemParcelasNaOperacao()
-        {
-            var operacao = _fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo0, DateTime.Today, 0.4852m, 5.25m);
-
-            Assert.Throws<InvalidOperationException>(() => _repositorio.CriarNovaOperacaoFinanceira(operacao));
-        }
-
-        [Test]
         public void SalvarNovaOperacaoNoBancoDeDados()
         {
             var operacao = _fabricaDeOperacao.CriarOperacao(TipoDeOperacaoFinanceira.Tipo0, DateTime.Today, 0.9472m, 1.00m);

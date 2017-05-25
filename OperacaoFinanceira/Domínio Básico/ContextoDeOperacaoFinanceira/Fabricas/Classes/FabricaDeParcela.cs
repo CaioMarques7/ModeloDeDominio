@@ -43,7 +43,10 @@ namespace ContextoDeOperacaoFinanceira.Fabricas
         /// <returns>Parcela criada.</returns>
         public IParcela CriarParcela(IOperacao operacao, decimal valorDaParcela, DateTime dataDeVencimento)
         {
-            return new Parcela(operacao, valorDaParcela, dataDeVencimento, new ServicoDeImpostosPorOperacao(_fabricaDeImpostos, operacao.TipoDeOperacao), _fabricaDeCalculosFinanceiros);
+            var parcela = new Parcela(operacao, valorDaParcela, dataDeVencimento, new ServicoDeImpostosPorOperacao(_fabricaDeImpostos, operacao.TipoDeOperacao), _fabricaDeCalculosFinanceiros);
+            parcela.ValidarEntidade();
+
+            return parcela;
         }
     }
 }

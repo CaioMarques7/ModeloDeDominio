@@ -14,6 +14,7 @@ namespace DominioGenerico
         /// </summary>
         protected const int hashCodeSalt = 104723;
         private readonly ServicoDeComparacaoDeObjetos _servicoDeComparacaoDeObjetos;
+        protected readonly ICollection<string> _errosDeValidacao = new HashSet<string>();
 
         #region Construtores
 
@@ -84,6 +85,12 @@ namespace DominioGenerico
         /// <param name="hashCode">Valor base para o cálculo</param>
         /// <returns>Valor calculado.</returns>
         protected abstract int GetHashCode(int hashCode);
+
+        protected void Validar<TEntidade>(TEntidade entidade, Func<TEntidade, bool> validacao, string mensagemDeErro) where TEntidade : IEntidade
+        {
+            if (validacao.Invoke(entidade))
+                _errosDeValidacao.Add(mensagemDeErro);
+        }
 
         #endregion
     }

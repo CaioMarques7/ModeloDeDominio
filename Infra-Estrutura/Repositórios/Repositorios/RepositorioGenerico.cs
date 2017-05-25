@@ -39,10 +39,10 @@ namespace Repositorios
         {
             if (!_recursoLiberado && liberarRecursosGerenciados)
             {
+                _recursoLiberado = true;
+
                 ((DbContext)_contexto).Dispose();
             }
-
-            _recursoLiberado = true;
         }
 
         #endregion

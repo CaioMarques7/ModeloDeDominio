@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BancoDeDados.EF6
@@ -60,10 +61,20 @@ namespace BancoDeDados.EF6
 
         public override int SaveChanges()
         {
+            return SaveChangesAsync().Result;
+        }
+
+        public override Task<int> SaveChangesAsync()
+        {
+            return SaveChangesAsync(CancellationToken.None);
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        {
             IndicarPropriedadesModificadas();
             var entidadesParaNotificar = ObterEntidadesParaNotificar();
 
-            var i = base.SaveChanges();
+            var i = await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
             foreach (var entidade in entidadesParaNotificar)
                 entidade.NotificarModeloDeDominio();
@@ -98,7 +109,7 @@ namespace BancoDeDados.EF6
                 .Select(entry => entry.Entity)
                 .ToList();
         }
-        
+
         #endregion
     }
 }

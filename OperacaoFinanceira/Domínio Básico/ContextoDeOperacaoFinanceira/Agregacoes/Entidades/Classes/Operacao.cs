@@ -88,6 +88,16 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         public IEnumerable<IParcela> Parcelas { get; }
 
         /// <summary>
+        /// Indica se a parcela possui ou não erros de validação.
+        /// </summary>
+        public bool EntidadeValida => _errosDeValidacao.Count.Equals(0);
+
+        /// <summary>
+        /// Lista de erros de validação que foram identificados na parcela.
+        /// </summary>
+        public IEnumerable<string> ErrosDeValidacao => _errosDeValidacao;
+
+        /// <summary>
         /// Define o identificador único para o valor informado.
         /// </summary>
         /// <param name="id">Valor para o identificador único.</param>
@@ -116,6 +126,14 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
             foreach (var parcela in Parcelas)
                 parcela.CalcularImpostos()
                        .CalcularJuros();
+        }
+
+        /// <summary>
+        /// Realiza validações na operação.
+        /// </summary>
+        public void ValidarEntidade()
+        {
+            Validar(this, operacao => !operacao.Parcelas.Any(), "Operação não possui parcelas.");
         }
 
         #endregion

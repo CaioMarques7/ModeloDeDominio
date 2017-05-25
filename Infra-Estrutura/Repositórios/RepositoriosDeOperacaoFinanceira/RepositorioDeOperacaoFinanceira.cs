@@ -45,7 +45,7 @@ namespace RepositoriosDeOperacaoFinanceira
             Action<IOperacao> validarOperacao = (o) =>
             {
                 if (o == null) throw new ArgumentNullException("o", "Operação informada não é válida.");
-                if (o.Parcelas.Count().Equals(0)) throw new InvalidOperationException("Operação não possui parcelas.");
+                o.ValidarEntidade();
             };
 
             validarOperacao.Invoke(operacao);

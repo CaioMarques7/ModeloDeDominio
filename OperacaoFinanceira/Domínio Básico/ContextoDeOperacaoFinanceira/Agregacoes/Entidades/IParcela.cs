@@ -1,4 +1,5 @@
 ﻿using ContextoDeImpostos;
+using DominioGenerico.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
     /// <summary>
     /// Definição de parcela da operação.
     /// </summary>
-    public interface IParcela
+    public interface IParcela : IEntidadeValidavel
     {
         /// <summary>
         /// Valor da Parcela.

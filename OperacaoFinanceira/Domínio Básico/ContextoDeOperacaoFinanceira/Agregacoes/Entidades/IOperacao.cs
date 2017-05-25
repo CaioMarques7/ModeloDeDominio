@@ -11,7 +11,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
     /// <summary>
     /// Definição de operação financeira.
     /// </summary>
-    public interface IOperacao : IRaizDeAgregacao
+    public interface IOperacao : IRaizDeAgregacao, IEntidadeValidavel
     {
         /// <summary>
         /// Tipo de operação.

@@ -33,7 +33,9 @@ namespace ModeloDeDados.OperacaoFinanceira.Entidades
             _operacao = operacao;
 
             var parcelasDaOperacao = new HashSet<Parcela>(
-                    operacao.Parcelas.Select(parcela => new Parcela(this)
+                    operacao.Parcelas
+                    .Where(parcela => parcela.EntidadeValida)
+                    .Select(parcela => new Parcela(this)
                     {
                         DataDeVencimento = parcela.DataDeVencimento,
                         Prazo = parcela.Prazo,

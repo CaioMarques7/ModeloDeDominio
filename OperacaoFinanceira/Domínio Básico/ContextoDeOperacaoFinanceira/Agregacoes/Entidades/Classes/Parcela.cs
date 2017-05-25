@@ -64,7 +64,17 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         /// Prazo da parcela.
         /// </summary>
         public short Prazo => (short)((DataDeVencimento - _operacao.DataDaOperacao).Days);
-        
+
+        /// <summary>
+        /// Indica se a parcela possui ou não erros de validação.
+        /// </summary>
+        public bool EntidadeValida => _errosDeValidacao.Count.Equals(0);
+
+        /// <summary>
+        /// Lista de erros de validação que foram identificados na parcela.
+        /// </summary>
+        public IEnumerable<string> ErrosDeValidacao => _errosDeValidacao;
+
         /// <summary>
         /// Calcula os juros que incidem sobre a parcela.
         /// </summary>
@@ -102,6 +112,15 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
         public decimal ValorApuradoPorImposto<TImposto>() where TImposto : IImposto
         {
             return _impostosIncidentes.OfType<TImposto>().Sum(imposto => imposto.ValorApurado);
+        }
+
+        /// <summary>
+        /// Realiza validações na parcela.
+        /// </summary>
+        public void ValidarEntidade()
+        {
+            Validar(this, parcela => parcela.Valor <= 0m, "Valor da parcela deve ser maior que zero.");
+            Validar(this, parcela => parcela.Prazo < 0, "Data de vencimento da parcela deve ser maior que a data da operação.");
         }
 
         #endregion
@@ -196,7 +215,7 @@ namespace ContextoDeOperacaoFinanceira.Agregacoes.Entidades
                 _impostosIncidentes.Add(imposto);
             }
         }
-        
+
         #endregion
     }
 }
